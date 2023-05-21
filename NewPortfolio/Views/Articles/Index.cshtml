@@ -29,7 +29,7 @@
                     @if (User.IsInRole("admin"))
                     {
                     <p>
-                        <a class="btn-use btn-detail" asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id">Detaily</a>
+                        <a class="btn-use btn-detail" asp-controller="Articles" asp-action="Edit" asp-route-id="@item.Id">Editovat</a>
                         <a class="btn-use btn-danger" asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id">Odstranit</a>
                     </p>
                     }
