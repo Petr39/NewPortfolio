@@ -1,0 +1,18 @@
+﻿@model NewPortfolio.Models.Article
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<section class="section-index">
+    <div class="section-hero">
+
+        <p class="p-index">Opravdu chcete vymazat článek <b>@Model.Title</b>?</p>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit" class="btn-use btn-danger">Odstranit</button>
+            <a class="btn-use btn-detail" asp-action="Index">Zpět na seznam</a>
+        </form>
+    </div>
+</section>

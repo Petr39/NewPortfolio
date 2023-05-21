@@ -1,0 +1,22 @@
+﻿@model NewPortfolio.Models.Article
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<section class="section-index">
+    <div class="section-hero">
+
+
+        <p></p>
+        <p class="p-index">
+            @Html.Raw(Model.Title+" - "+ Model.Description) <br />
+            @Html.Raw(Model.Content)
+        </p>
+        <hr />
+        <a class="btn-use btn-detail" asp-action="Index">Zpět na seznam</a>
+
+
+    </div>
+</section>

@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - PortfolioProject</title>
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Pangolin&family=Poppins:ital,wght@0,200;0,500;0,700;1,300;1,500&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+    <header>
+        <div>
+            <a class="logo" href="">IDontCry<small>.CZ</small></a>
+            <i class="ri-youtube-line"></i>
+        </div>
+
+        <ul class="navlist">
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a asp-area="" asp-controller="Articles" asp-action="Index">Articles</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Experience">Experience</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="/Account/Administration">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span> @User.Identity.Name </span>
+                    }
+                    else
+                    {
+                        <span>Účet</span>
+                    }
+                </a>
+            </li>
+          
+        </ul>
+        <div class="bx bx-menu" id="menu-icon"></div>
+    </header>
+
+    <main>
+
+
+        @RenderBody()
+    </main>
+    <footer>
+        <div>
+            &copy; @DateTime.Now.Year IDontCry.cz <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

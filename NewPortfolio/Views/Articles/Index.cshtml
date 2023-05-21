@@ -1,0 +1,41 @@
+﻿@model IEnumerable<NewPortfolio.Models.Article>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<section class="section-show-table">
+    <ul class="ul-index" id="clanky">
+
+        <div class="ul-index-info">
+            <p class="p-index">  Počet příspěvků: @Model.Count() </p>
+            @if (User.IsInRole("admin"))
+            {
+                <p>
+                    <a class="btn-use btn-succes" asp-action="Create">Vytvořit nový</a>
+                </p>
+            }
+        </div>
+        <div class="section-hero">
+
+            @foreach (var item in Model)
+            {
+            <li>
+                <a class="p-index title" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+
+                <p class="p-index">@item.Description</p>
+                <hr class="hr" />
+
+                    @if (User.IsInRole("admin"))
+                    {
+                    <p>
+                        <a class="btn-use btn-detail" asp-controller="Articles" asp-action="Details" asp-route-id="@item.Id">Detaily</a>
+                        <a class="btn-use btn-danger" asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id">Odstranit</a>
+                    </p>
+                    }
+                <br />
+            </li>
+            }
+    </ul>
+    </div>
+</section>
