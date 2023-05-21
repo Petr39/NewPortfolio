@@ -1,103 +1,134 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NewPortfolio.Models;
 
 namespace NewPortfolio.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
 
-        public AccountController(UserManager<AppUser> userManager,SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
 
-
-        private IActionResult RedirectToLocal(string? returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
-        }
-
-
+       
         [HttpGet]
-        public IActionResult Login(string? returnUrl = null)
+        [AllowAnonymous]
+        public IActionResult Login(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
+    
+
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string? navratovaURL = null)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
-            ViewData["ReturnUrl"] = navratovaURL;
-            if (ModelState.IsValid)
+            ViewData["ReturnUrl"] = returnUrl;
+
+            // kontrola na straně serveru, zda jsou všechny odeslané údaje obsažené ve viewmodelu v pořádku
+            if (!ModelState.IsValid)
+                return View(model);
+
+            // pokus o přihlášení uživatele na základě zadaných údajů
+            var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+
+            // pokud byly odeslány neplatné údaje, vrátíme uživatele k přihlašovacímu formuláři
+            if (result.Succeeded)
             {
-                var vysledekOvereni = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
-                if (vysledekOvereni.Succeeded)
-                {
-                    return RedirectToLocal(navratovaURL);
-                }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "Neplatné přihlašovací údaje.");
-                    return View(model);
-                }
+                return string.IsNullOrWhiteSpace(returnUrl) ?
+                    RedirectToAction("Administration") :
+                    RedirectToLocal(returnUrl);
             }
 
-            // Pokud byly odeslány neplatné údaje, vrátíme uživatele k přihlašovacímu formuláři
+            ModelState.AddModelError(string.Empty, "Neplatné přihlašovací údaje");
             return View(model);
         }
-        public async Task<IActionResult> Logout()
+      
+
+
+        public async Task<IActionResult> LogOut()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction("Index", "Home");
         }
-
 
         [HttpGet]
-        public IActionResult Register(string? returnUrl = null)
+        [AllowAnonymous]
+        public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+
             return View();
         }
+       
+
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string? returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = model.Email, Email = model.Email };
-                var result = await userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (await userManager.FindByEmailAsync(model.Email) is null)
                 {
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToLocal(returnUrl);
+                    // vytvoříme nový objekt typu ApplicationUser (uživatel), přidáme ho do databáze a přihlásíme ho
+                    var user = new AppUser { UserName = model.Email, Email = model.Email };
+                    var result = await userManager.CreateAsync(user, model.Password);
+
+                    if (result.Succeeded)
+                    {
+                        await signInManager.SignInAsync(user, isPersistent: false);
+
+                        return string.IsNullOrWhiteSpace(returnUrl) ?
+                            RedirectToAction("Index", "Home") :
+                            RedirectToLocal(returnUrl);
+                    }
+
+                    AddErrors(result);
                 }
 
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+                AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Email {model.Email} je již zaregistrován" }));
             }
 
             return View(model);
         }
+
+
+        [Authorize]
         public IActionResult Administration()
         {
             return View();
         }
+        #region Helpers
+
+
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            return Url.IsLocalUrl(returnUrl) ?
+                Redirect(returnUrl) :
+                RedirectToAction("Index", "Home");
+        }
+     
+
         
-      
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+                ModelState.AddModelError(string.Empty, error.Description);
+        }
+
+        #endregion
+  
     }
 }

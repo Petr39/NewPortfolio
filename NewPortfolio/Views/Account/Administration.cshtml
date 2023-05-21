@@ -1,4 +1,6 @@
-﻿@{
+﻿
+
+@{
     ViewData["Title"] = "Administrace účtu";
 }
 
@@ -7,19 +9,11 @@
         <h2 class="site-heading">Administrace účtu</h2>
 
         <div class="d-flex flex-wrap gap-3 mb-3">
-            <a asp-action="Edit" class="btn-use btn-edit">
-                Správa údajů
-            </a>
-
-            <a asp-action="ChangePassword" class="btn-use btn-edit">
-                Změna hesla
-            </a>
-
-            <a asp-controller="Account" asp-action="LogOut" class="btn-use btn-edit">
+            <a asp-action="LogOut" class="btn-use btn-edit">
                 Odhlásit se
             </a>
         </div>
-        @if (this.Context.User.IsInRole("Admin"))
+        @if (this.Context.User.IsInRole("admin"))
         {
 
             <div>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +11,8 @@ using NewPortfolio.Models;
 
 namespace NewPortfolio.Controllers
 {
+
+    [Authorize(Roles ="admin")]
     public class ArticlesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -19,6 +22,7 @@ namespace NewPortfolio.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         // GET: Articles
         public async Task<IActionResult> Index()
         {
@@ -27,6 +31,7 @@ namespace NewPortfolio.Controllers
                           Problem("Entity set 'ApplicationDbContext.Article'  is null.");
         }
 
+        [AllowAnonymous]
         // GET: Articles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
