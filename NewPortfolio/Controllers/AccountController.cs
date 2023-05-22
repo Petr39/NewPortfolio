@@ -110,14 +110,14 @@ namespace NewPortfolio.Controllers
         {
             return View();
         }
+
+
         #region Helpers
 
 
         private IActionResult RedirectToLocal(string returnUrl)
         {
-            return Url.IsLocalUrl(returnUrl) ?
-                Redirect(returnUrl) :
-                RedirectToAction("Index", "Home");
+            return Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : RedirectToAction("Index", "Home");
         }
      
 
@@ -127,8 +127,6 @@ namespace NewPortfolio.Controllers
             foreach (var error in result.Errors)
                 ModelState.AddModelError(string.Empty, error.Description);
         }
-
         #endregion
-  
     }
 }

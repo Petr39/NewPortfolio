@@ -69,8 +69,6 @@ namespace NewPortfolio
                 AppUser uzivatel = spravceUzivatelu.FindByEmailAsync("admin@seznam.cz").Result;
                 spravceUzivatelu.AddToRoleAsync(uzivatel, "admin").Wait();
             }
-     
-
             app.Run();
         }
     }

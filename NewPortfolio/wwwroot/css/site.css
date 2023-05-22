@@ -60,6 +60,8 @@ header {
             text-shadow: 0 0 3px cyan;
         }
 
+
+
 .link {
     color: white;
 }
@@ -89,7 +91,7 @@ header {
     position: absolute;
     padding: 0 19%;
     display: flex;
-    top:25px;
+    margin-top:25px;
     width: 100%;
     height: 100%;
     min-height: 100vh;
@@ -252,6 +254,13 @@ footer {
 
 /* Zde jsou styly pro tabulku*/
 
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+
+
 .p-index {
     color: white;
     font-weight: 100;
@@ -319,7 +328,8 @@ footer {
 
 @media (max-width: 1460px) {
 
-    .section-index {
+    .section-index,
+    .section-index-tiny{
         margin-top: 100px;
         padding: 1% 12%;
         width: 100%;
@@ -335,7 +345,8 @@ footer {
 
 
 
-    .section-index {
+    .section-index,
+    .section-index-tiny {
         position: absolute;
         margin-top: 100px;
         padding: 1% 10%;
@@ -361,7 +372,8 @@ footer {
 @media (max-width: 1195px) {
 
 
-    .section-index {
+    .section-index,
+    .section-index-tiny {
         position: absolute;
         margin-top: 100px;
         padding: 1% 5%;
@@ -379,7 +391,8 @@ footer {
             height: auto;
         }
 
-    .section-index {
+    .section-index,
+    .section-index-tiny {
         flex-direction: column;
         gap: 1rem;
     }
@@ -390,7 +403,8 @@ footer {
         display: block;
     }
 
-    .section-index {
+    .section-index¨,
+    .section-index-tiny {
         position: absolute;
         margin-top: 100px;
         padding: 1% 1%;
@@ -440,7 +454,8 @@ footer {
         height: auto;
     }
 
-    .section-index {
+    .section-index,
+    .section-index-tiny {
         position: absolute;
         margin-top: 100px;
         flex-direction: column;

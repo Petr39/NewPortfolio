@@ -18,14 +18,22 @@
             }
         </div>
 
+
+
+
             @foreach (var item in Model)
             {
-            <li>
+
+             
+                  
+                                  
                 <a class="p-index title" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+           
 
                 <p class="p-index">@item.Description</p>
+            
                 <hr class="hr" />
-
+             
                     @if (User.IsInRole("admin"))
                     {
                     <p>
@@ -33,9 +41,11 @@
                         <a class="btn-use btn-danger" asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id">Odstranit</a>
                     </p>
                     }
-                <br />
-            </li>
+
+            
+            
             }
+        </table>
     </ul>
     </div>
 </section>

@@ -27,15 +27,15 @@
             <li><a asp-area="" asp-controller="Articles" asp-action="Index">Articles</a></li>
             <li><a asp-area="" asp-controller="Home" asp-action="Experience">Experience</a></li>
             <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Account/Administration">
+            <li>
+                <a href="/Account/Administration">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <span> @User.Identity.Name </span>
+                        <span>Účet</span>
                     }
                     else
                     {
-                        <span>Účet</span>
+                        <span>Přihlásit</span>
                     }
                 </a>
             </li>

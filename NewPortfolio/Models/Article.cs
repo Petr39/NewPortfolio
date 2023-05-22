@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewPortfolio.Models
 {
@@ -25,6 +27,9 @@ namespace NewPortfolio.Models
         /// </summary>
         [Required(ErrorMessage ="Vyplňte popisek")]
         public string Description { get; set; } = string.Empty;
+
+
+     
 
     }
 }
