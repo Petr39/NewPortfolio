@@ -223,11 +223,9 @@ h2 {
 }
 
 .img-sort {
-    background: #01a889;
 }
 
     .img-sort img {
-        margin: 10px;
         width: 300px;
         height: auto;
     }
