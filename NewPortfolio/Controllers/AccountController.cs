@@ -34,14 +34,13 @@ namespace NewPortfolio.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-            // kontrola na straně serveru, zda jsou všechny odeslané údaje obsažené ve viewmodelu v pořádku
+           
             if (!ModelState.IsValid)
                 return View(model);
 
-            // pokus o přihlášení uživatele na základě zadaných údajů
+           
             var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
 
-            // pokud byly odeslány neplatné údaje, vrátíme uživatele k přihlašovacímu formuláři
             if (result.Succeeded)
             {
                 return string.IsNullOrWhiteSpace(returnUrl) ?
@@ -82,7 +81,7 @@ namespace NewPortfolio.Controllers
             {
                 if (await userManager.FindByEmailAsync(model.Email) is null)
                 {
-                    // vytvoříme nový objekt typu ApplicationUser (uživatel), přidáme ho do databáze a přihlásíme ho
+                  
                     var user = new AppUser { UserName = model.Email, Email = model.Email };
                     var result = await userManager.CreateAsync(user, model.Password);
 
