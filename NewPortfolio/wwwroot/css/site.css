@@ -228,6 +228,7 @@ h2 {
     .img-sort img {
         width: 300px;
         height: auto;
+        transition: .6s ease-in-out;
     }
 
         .img-sort img:hover {

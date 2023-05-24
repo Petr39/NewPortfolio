@@ -70,8 +70,6 @@ namespace NewPortfolio.Controllers
 
             if (ModelState.IsValid)
             {
-                
-
                 _context.Add(article);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

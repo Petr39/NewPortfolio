@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using NewPortfolio.Models;
+using NewPortfolio.Models.Humans;
 
 namespace NewPortfolio.Data
 {
@@ -11,5 +12,6 @@ namespace NewPortfolio.Data
         {
         }
         public DbSet<Article>? Article { get; set; }
+    
     }
 }
