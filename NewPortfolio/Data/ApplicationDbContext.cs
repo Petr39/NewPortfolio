@@ -13,5 +13,10 @@ namespace NewPortfolio.Data
         }
         public DbSet<Article>? Article { get; set; }
     
+        public DbSet<Human> Humans { get; set; }    
+
+
+
+
     }
 }

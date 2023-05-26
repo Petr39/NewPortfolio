@@ -2,105 +2,102 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using NewPortfolio.Data;
 using NewPortfolio.Models;
+using NewPortfolio.Models.Humans;
 
 namespace NewPortfolio.Controllers
 {
-
-    //[Authorize(Roles ="admin")]
-    public class ArticlesController : Controller
+    public class HumenController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ArticlesController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+
+       
+
+        public HumenController(ApplicationDbContext context)
         {
             _context = context;
-            _webHostEnvironment = webHostEnvironment;   
+          
         }
 
-        //[AllowAnonymous]
-        // GET: Articles
+        // GET: Humen
         public async Task<IActionResult> Index()
         {
-              return _context.Article != null ? 
-                          View(await _context.Article.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Article'  is null.");
+            var applicationDbContext = _context.Humans.Include(h => h.Article);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        //[AllowAnonymous]
-        // GET: Articles/Details/5
+        // GET: Humen/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Article == null)
+            if (id == null || _context.Humans == null)
             {
                 return NotFound();
             }
 
-            var article = await _context.Article
+            var human = await _context.Humans
+                .Include(h => h.Article)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null)
+            if (human == null)
             {
                 return NotFound();
             }
 
-            return View(article);
+            return View(human);
         }
 
-        // GET: Articles/Create
+        // GET: Humen/Create
         public IActionResult Create()
         {
+            ViewData["ArticleId"] = new SelectList(_context.Article, "Id", "Title");
             return View();
         }
 
-        // POST: Articles/Create
+        // POST: Humen/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] Article article)
+        public async Task<IActionResult> Create([Bind("Id,Name,ArticleId")] Human human)
         {
-
-            if (ModelState.IsValid)
-            {
-                _context.Add(article);
+            //chybí validace
+                _context.Add(human);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(article);
+           
+            //ViewData["ArticleId"] = new SelectList(_context.Article, "Id", "Content", human.ArticleId);
+            return View(human);
         }
 
-        // GET: Articles/Edit/5
+        // GET: Humen/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Article == null)
+            if (id == null || _context.Humans == null)
             {
                 return NotFound();
             }
 
-            var article = await _context.Article.FindAsync(id);
-            if (article == null)
+            var human = await _context.Humans.FindAsync(id);
+            if (human == null)
             {
                 return NotFound();
             }
-            return View(article);
+            ViewData["ArticleId"] = new SelectList(_context.Article, "Id", "Title", human.ArticleId);
+            return View(human);
         }
 
-        // POST: Articles/Edit/5
+        // POST: Humen/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Title,Description")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,ArticleId")] Human human)
         {
-            if (id != article.Id)
+            if (id != human.Id)
             {
                 return NotFound();
             }
@@ -109,12 +106,12 @@ namespace NewPortfolio.Controllers
             {
                 try
                 {
-                    _context.Update(article);
+                    _context.Update(human);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ArticleExists(article.Id))
+                    if (!HumanExists(human.Id))
                     {
                         return NotFound();
                     }
@@ -125,49 +122,51 @@ namespace NewPortfolio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(article);
+            ViewData["ArticleId"] = new SelectList(_context.Article, "Id", "Title", human.ArticleId);
+            return View(human);
         }
 
-        // GET: Articles/Delete/5
+        // GET: Humen/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Article == null)
+            if (id == null || _context.Humans == null)
             {
                 return NotFound();
             }
 
-            var article = await _context.Article
+            var human = await _context.Humans
+                .Include(h => h.Article)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (article == null)
+            if (human == null)
             {
                 return NotFound();
             }
 
-            return View(article);
+            return View(human);
         }
 
-        // POST: Articles/Delete/5
+        // POST: Humen/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Article == null)
+            if (_context.Humans == null)
             {
-                return Problem("Entity set 'ApplicationDbContext.Article'  is null.");
+                return Problem("Entity set 'ApplicationDbContext.Humans'  is null.");
             }
-            var article = await _context.Article.FindAsync(id);
-            if (article != null)
+            var human = await _context.Humans.FindAsync(id);
+            if (human != null)
             {
-                _context.Article.Remove(article);
+                _context.Humans.Remove(human);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ArticleExists(int id)
+        private bool HumanExists(int id)
         {
-          return (_context.Article?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Humans?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
