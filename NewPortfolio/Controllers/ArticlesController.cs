@@ -1,41 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using NewPortfolio.Data;
 using NewPortfolio.Models;
 
 namespace NewPortfolio.Controllers
 {
-
-    //[Authorize(Roles ="admin")]
     public class ArticlesController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IWebHostEnvironment _webHostEnvironment;
-
-        public ArticlesController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
+        private readonly UserManager<AppUser> _userManager;
+        public ArticlesController(ApplicationDbContext context, UserManager<AppUser> userManager)
         {
             _context = context;
-            _webHostEnvironment = webHostEnvironment;   
+            _userManager = userManager;
         }
 
-        //[AllowAnonymous]
         // GET: Articles
         public async Task<IActionResult> Index()
         {
-              return _context.Article != null ? 
-                          View(await _context.Article.ToListAsync()) :
-                          Problem("Entity set 'ApplicationDbContext.Article'  is null.");
+            var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
+            return View(await applicationDbContext.ToListAsync());
         }
 
-        //[AllowAnonymous]
         // GET: Articles/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -45,6 +33,7 @@ namespace NewPortfolio.Controllers
             }
 
             var article = await _context.Article
+                .Include(a => a.ApplicationUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (article == null)
             {
@@ -57,6 +46,7 @@ namespace NewPortfolio.Controllers
         // GET: Articles/Create
         public IActionResult Create()
         {
+            // ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -68,13 +58,27 @@ namespace NewPortfolio.Controllers
         public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] Article article)
         {
 
+            var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
+
             if (ModelState.IsValid)
             {
-                _context.Add(article);
+                var post = new Article();
+                post.Id = article.Id;
+                post.Title = article.Title;
+                post.Description = article.Description;
+                post.AppUserId = userLog.Id;
+                post.NickName = userLog.NickName;
+
+
+                await _context.Article!.AddAsync(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+
             }
-            return View(article);
+
+            return View();
+
+
         }
 
         // GET: Articles/Edit/5
@@ -90,6 +94,7 @@ namespace NewPortfolio.Controllers
             {
                 return NotFound();
             }
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", article.AppUserId);
             return View(article);
         }
 
@@ -98,7 +103,7 @@ namespace NewPortfolio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Title,Description")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Title,Description,AppUserId")] Article article)
         {
             if (id != article.Id)
             {
@@ -125,6 +130,7 @@ namespace NewPortfolio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", article.AppUserId);
             return View(article);
         }
 
@@ -137,6 +143,7 @@ namespace NewPortfolio.Controllers
             }
 
             var article = await _context.Article
+                .Include(a => a.ApplicationUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (article == null)
             {
@@ -160,14 +167,14 @@ namespace NewPortfolio.Controllers
             {
                 _context.Article.Remove(article);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ArticleExists(int id)
         {
-          return (_context.Article?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Article?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

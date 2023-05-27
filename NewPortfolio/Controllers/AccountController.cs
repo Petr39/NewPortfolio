@@ -110,6 +110,20 @@ namespace NewPortfolio.Controllers
             return View();
         }
 
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> Administration(AppUser user)
+        {
+            var log= userManager.Users.FirstOrDefault(x=>x.UserName==User.Identity!.Name);
+                 log.NickName=user.NickName;
+                 if(ModelState.IsValid && log.Credit >=100)
+                 {
+                      log.Credit=log.Credit - 100;
+                      await userManager.UpdateAsync(log);
+                 }
+            return View(user);
+        }
+
 
         #region Helpers
 

@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace NewPortfolio.Data.Migrations
+namespace NewPortfolio.Migrations
 {
-    public partial class addHumansss : Migration
+    public partial class dkgjg : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

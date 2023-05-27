@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace NewPortfolio.Data.Migrations
+namespace NewPortfolio.Migrations
 {
-    public partial class asad : Migration
+    public partial class asdfg : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

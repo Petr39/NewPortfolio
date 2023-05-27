@@ -23,17 +23,32 @@
 
         <ul class="navlist">
             <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-           @* <li><a href="#about">About</a></li>*@
+          
             <li><a asp-area="" asp-controller="Articles" asp-action="Index">Articles</a></li>
             <li><a asp-area="" asp-controller="Home" asp-action="Experience">Experience</a></li>
             <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-            <li><a asp-area="" asp-controller="Humen" asp-action="Index">Human</a></li>
+
+
+
+            <li>
+                <a href="/Account/Administration">
+                @if (User.Identity.IsAuthenticated)
+                {
+                  @*  <a asp-area="" asp-controller="Humen" asp-action="Index">Humans</a>*@
+                }
+
+                else
+                {
+                    <a style="display: none" asp-area="" asp-controller="" asp-action="">Human</a>
+                }
+                </a>
+            </li>
            
             <li>
                 <a href="/Account/Administration">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <span>Účet</span>
+                        <span class="color: black">Účet</span>
                     }
                     else
                     {

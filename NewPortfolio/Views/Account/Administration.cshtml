@@ -1,4 +1,6 @@
-﻿
+﻿@model NewPortfolio.Models.AppUser
+
+
 
 @{
     ViewData["Title"] = "Administrace účtu";
@@ -16,6 +18,19 @@
         @if (this.Context.User.IsInRole("admin"))
         {
 
+           
+
+            <form class="d-flex flex-column gap-2" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NickName"></label>
+                    <input asp-for="NickName" class="form-control" />
+                    <span asp-validation-for="NickName" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn-use btn-succes">Uložit</button>
+            </form>
+
             <div>
                 <a asp-action="Create" asp-controller="Articles" class="btn-use btn-succes">
                     Přidat článek
@@ -27,5 +42,21 @@
             </div>
 
         }
+
+        else
+        {
+            <form class="d-flex flex-column gap-2" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NickName"></label>
+                    <input asp-for="NickName" class="form-control" />
+                    <span asp-validation-for="NickName" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="clanky-tlacitko align-self-start">Registrovat</button>
+            </form>
+        }
+      
+
     </div>
 </section>

@@ -4,34 +4,59 @@
     ViewData["Title"] = "Index";
 }
 
-<section class="section-show-table">
-        <div class="section-hero">
-    <ul class="ul-index" id="clanky">
+<section class="section-index">
 
-        <div class="ul-index-info">
-            <p class="p-index">  Počet příspěvků: @Model.Count() </p>
-            @if (User.IsInRole("admin"))
-            {
-                <p>
-                    <a class="btn-use btn-succes" asp-action="Create">Vytvořit nový</a>
-                </p>
-            }
-        </div>
-
-            @foreach (var item in Model)
-            {
-              <a class="p-index title" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
-              <p class="p-index">@item.Description</p>
-              <hr class="hr" />
-                  @if (User.IsInRole("admin"))
-                  {
-                  <p>
-                      <a class="btn-use btn-detail" asp-controller="Articles" asp-action="Edit" asp-route-id="@item.Id">Editovat</a>
-                      <a class="btn-use btn-danger" asp-controller="Articles" asp-action="Delete" asp-route-id="@item.Id">Odstranit</a>
-                  </p>
-                  }
-            }
-    
-    </ul>
-    </div>
+    <div class="section-hero">
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ApplicationUser)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.NickName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.Id)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.NickName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
 </section>

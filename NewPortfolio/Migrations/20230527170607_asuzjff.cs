@@ -2,25 +2,24 @@
 
 #nullable disable
 
-namespace NewPortfolio.Data.Migrations
+namespace NewPortfolio.Migrations
 {
-    public partial class imagesFile : Migration
+    public partial class asuzjff : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "ImageUrl",
-                table: "Article",
+                name: "NickName",
+                table: "AspNetUsers",
                 type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "ImageUrl",
-                table: "Article");
+                name: "NickName",
+                table: "AspNetUsers");
         }
     }
 }

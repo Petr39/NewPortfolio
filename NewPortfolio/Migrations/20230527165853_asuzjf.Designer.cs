@@ -9,11 +9,11 @@ using NewPortfolio.Data;
 
 #nullable disable
 
-namespace NewPortfolio.Data.Migrations
+namespace NewPortfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230522143241_IFormFileImage")]
-    partial class IFormFileImage
+    [Migration("20230527165853_asuzjf")]
+    partial class asuzjf
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -176,6 +176,12 @@ namespace NewPortfolio.Data.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -230,6 +236,9 @@ namespace NewPortfolio.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -238,12 +247,17 @@ namespace NewPortfolio.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("NameUser")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Article");
                 });
@@ -297,6 +311,15 @@ namespace NewPortfolio.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("NewPortfolio.Models.Article", b =>
+                {
+                    b.HasOne("NewPortfolio.Models.AppUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId");
+
+                    b.Navigation("ApplicationUser");
                 });
 #pragma warning restore 612, 618
         }

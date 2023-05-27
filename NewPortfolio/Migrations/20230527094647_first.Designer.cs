@@ -9,11 +9,11 @@ using NewPortfolio.Data;
 
 #nullable disable
 
-namespace NewPortfolio.Data.Migrations
+namespace NewPortfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230526162133_addHumansssss")]
-    partial class addHumansssss
+    [Migration("20230527094647_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -256,8 +256,7 @@ namespace NewPortfolio.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int?>("ArticleId")
-                        .IsRequired()
+                    b.Property<int>("ArticleId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -325,12 +324,17 @@ namespace NewPortfolio.Data.Migrations
             modelBuilder.Entity("NewPortfolio.Models.Humans.Human", b =>
                 {
                     b.HasOne("NewPortfolio.Models.Article", "Article")
-                        .WithMany()
+                        .WithMany("Humans")
                         .HasForeignKey("ArticleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Article");
+                });
+
+            modelBuilder.Entity("NewPortfolio.Models.Article", b =>
+                {
+                    b.Navigation("Humans");
                 });
 #pragma warning restore 612, 618
         }

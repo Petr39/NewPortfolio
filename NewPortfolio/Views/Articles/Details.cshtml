@@ -4,25 +4,40 @@
     ViewData["Title"] = "Details";
 }
 
-
-@section Scripts
-    {
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.0.3/tinymce.min.js"></script>
-    <script src="@Url.Content("~/js/initTinyMCE.js")"></script>
-}
-
 <section class="section-index">
+
     <div class="section-hero">
-
-
-        <p></p>
-        <p class="p-index">
-            @Html.Raw(Model.Title+" - "+ Model.Description) <br />
-            @Html.Raw(Model.Content)
-        </p>
-        <hr />
-        <a class="btn-use btn-detail" asp-action="Index">Zpět na seznam</a>
-
-
-    </div>
+    <h4>Article</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NickName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NickName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
 </section>
