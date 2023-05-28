@@ -11,24 +11,20 @@
         <h2 class="site-heading">Administrace účtu</h2>
 
         <div class="d-flex flex-wrap gap-3 mb-3">
-            <a asp-action="LogOut" class="btn-use btn-edit">
-                Odhlásit se
-            </a>
+            <a asp-action="LogOut" class="btn-use btn-edit">Odhlásit se</a>
         </div>
         @if (this.Context.User.IsInRole("admin"))
         {
-
-           
-
             <form class="d-flex flex-column gap-2" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
+                   
                     <label asp-for="NickName"></label>
                     <input asp-for="NickName" class="form-control" />
                     <span asp-validation-for="NickName" class="text-danger"></span>
                 </div>
 
-                <button type="submit" class="btn-use btn-succes">Uložit</button>
+                <button type="submit" class="btn-use btn-succes">Změnit</button>
             </form>
 
             <div>
@@ -40,9 +36,7 @@
                     Seznam článků
                 </a>
             </div>
-
         }
-
         else
         {
             <form class="d-flex flex-column gap-2" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
@@ -52,11 +46,8 @@
                     <input asp-for="NickName" class="form-control" />
                     <span asp-validation-for="NickName" class="text-danger"></span>
                 </div>
-
-                <button type="submit" class="clanky-tlacitko align-self-start">Registrovat</button>
+                <button type="submit" class="btn-use btn-succes">Změnit</button>
             </form>
         }
-      
-
     </div>
 </section>

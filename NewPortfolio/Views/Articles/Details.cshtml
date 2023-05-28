@@ -37,7 +37,11 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+        @if (this.Context.User.IsInRole("admin"))
+        {
+          <a class=btn-use btn-edit" asp-action="Edit" asp-route-id="@Model?.Id">Editovat</a> 
+        }
+ 
+       <a class=btn-use btn-edit" asp-action="Index">Zpět</a>
 </div>
 </section>

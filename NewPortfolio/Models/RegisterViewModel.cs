@@ -12,6 +12,13 @@ namespace NewPortfolio.Models
         public string Email { get; set; } = "";
 
         [Required]
+        [Display(Name = "Přezdívka")]       
+        public string NickNameUser { get; set; } = "";
+
+        //public string ImageUser { get; set; } = "";
+
+
+        [Required]
         [StringLength(100, ErrorMessage = "{0} musí mít délku alespoň {2} a nejvíc {1} znaků.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Heslo")]

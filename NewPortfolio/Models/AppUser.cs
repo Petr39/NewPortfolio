@@ -11,10 +11,15 @@ namespace NewPortfolio.Models
 
         
         [Display(Name ="Přezdívka")]
-        public string?NickName { get; set; }
+        public string? NickName { get; set; }
 
         [Display(Name ="Váš kredit")]
         public int Credit { get; set; } = 0; 
+
+
+        //public string? ThumbnailUrl { get; set; } 
+
+        //public IFormFile? Thumnail { get; set; }
 
         List<Article>? Articles { get; set; }
     }

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using NewPortfolio.Data;
 using NewPortfolio.Models;
 
@@ -43,6 +45,8 @@ namespace NewPortfolio.Controllers
             return View(article);
         }
 
+        [Authorize]
+        
         // GET: Articles/Create
         public IActionResult Create()
         {
@@ -53,11 +57,13 @@ namespace NewPortfolio.Controllers
         // POST: Articles/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
+        //[Area("Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] Article article)
         {
-
+            //Najde uzivatele podle id-Name
             var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
 
             if (ModelState.IsValid)
@@ -66,12 +72,14 @@ namespace NewPortfolio.Controllers
                 post.Id = article.Id;
                 post.Title = article.Title;
                 post.Description = article.Description;
+                post.Content = article.Content;
                 post.AppUserId = userLog.Id;
-                post.NickName = userLog.NickName;
-
+                post.NickName = userLog.NickName;//Uloží přezdívku podle id-name
 
                 await _context.Article!.AddAsync(post);
                 await _context.SaveChangesAsync();
+
+
                 return RedirectToAction(nameof(Index));
 
             }
@@ -80,7 +88,8 @@ namespace NewPortfolio.Controllers
 
 
         }
-
+        [Authorize]
+       // [Area("admin")]
         // GET: Articles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -101,10 +110,16 @@ namespace NewPortfolio.Controllers
         // POST: Articles/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
+       // [Area("admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Title,Description,AppUserId")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Title,Description,AppUserId, NickName")] Article article)
         {
+            var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
+
+
+
             if (id != article.Id)
             {
                 return NotFound();
@@ -114,6 +129,8 @@ namespace NewPortfolio.Controllers
             {
                 try
                 {
+                    article.NickName = userLog.NickName;//Uloží přezdívku podle id-name
+
                     _context.Update(article);
                     await _context.SaveChangesAsync();
                 }
@@ -135,6 +152,8 @@ namespace NewPortfolio.Controllers
         }
 
         // GET: Articles/Delete/5
+        [Authorize]
+       // [Area("admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Article == null)
@@ -153,7 +172,9 @@ namespace NewPortfolio.Controllers
             return View(article);
         }
 
-        // POST: Articles/Delete/5
+        
+        [Authorize]
+        //[Area("admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

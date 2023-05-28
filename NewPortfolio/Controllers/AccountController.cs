@@ -10,11 +10,15 @@ namespace NewPortfolio.Controllers
     {
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
+       private readonly IWebHostEnvironment webHostEnvironment;
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
+            IWebHostEnvironment webHostEnvironment)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.webHostEnvironment = webHostEnvironment;
         }
 
        
@@ -81,8 +85,8 @@ namespace NewPortfolio.Controllers
             {
                 if (await userManager.FindByEmailAsync(model.Email) is null)
                 {
-                  
-                    var user = new AppUser { UserName = model.Email, Email = model.Email };
+                    //ThumbnailUrl = UploadImage(model.ImageUser)
+                    var user = new AppUser { UserName = model.Email, Email = model.Email,NickName=model.NickNameUser };
                     var result = await userManager.CreateAsync(user, model.Password);
 
                     if (result.Succeeded)
@@ -122,6 +126,21 @@ namespace NewPortfolio.Controllers
                       await userManager.UpdateAsync(log);
                  }
             return View(user);
+        }
+
+        //Musím dodělat obrázek -  problem je v IFormFile pri vytvareni uctu - napsat nahradni tridu pro nacteni do imageformu
+        private string UploadImage(IFormFile file)
+        {
+            string uniqueFileName = "";
+            var folderPath= Path.Combine(webHostEnvironment.WebRootPath, "ImagesThumb");
+            uniqueFileName= new Guid().ToString()+ "_" + file.FileName;
+            var filePath = Path.Combine(folderPath, uniqueFileName);
+            using(FileStream fs= System.IO.File.Create(filePath))
+            {
+                file.CopyTo(fs);
+            }
+
+            return uniqueFileName;
         }
 
 
