@@ -74,6 +74,7 @@ header {
     color: var(--color-header);
 }
 
+
 .section-index {
     position: absolute;
     padding: 0 19%;
@@ -112,7 +113,15 @@ header {
     justify-content: space-between;
     background: var(--bg-body);
 }
+.articles-tr {
+    background: #49a54e;
+    font-weight: 100;
+}
 
+.articles-tr-down {
+    background: white;
+    margin: 20px;
+}
 
 h3 {
     font-size: 1.5rem;
@@ -127,7 +136,7 @@ h2 {
 .hr {
     margin: 5px 0%;
     color: black;
-    /* background: black;*/
+  
 }
 
 .cleaner {
@@ -135,10 +144,11 @@ h2 {
 }
 
 .registration{
-    background: transparent;
+    background: #2aafd2;
     padding:40px 5px;
     border:1px solid black;
     border-radius: 20px;
+    box-shadow: 3px 3px 8px black;
 }
 
 .section-index p {

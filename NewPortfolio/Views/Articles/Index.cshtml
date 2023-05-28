@@ -7,57 +7,62 @@
 <section class="section-index">
 
     <div class="section-hero">
-<p>
-    <a class="btn-use btn-succes" asp-action="Create">Vytvořit nový</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-      
-            <th>
-                @Html.DisplayNameFor(model => model.NickName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-           
-            <td>
-                @Html.DisplayFor(modelItem => item.NickName)
-            </td>
-            <td>
-              
-            @if (this.Context.User.IsInRole("admin"))
-            {
-               <a class="btn-use btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-               <a class="btn-use btn-edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
-            }
 
-               <a class="btn-use btn-detail" asp-action="Details" asp-route-id="@item.Id">Details</a> 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
-</div>
+        <div class="articles">
+            <table>
+                <thead>
+                    <tr class="articles-tr">
+                        <th width="130px">
+                            Popis
+                        </th>
+                        <th width="130px">
+                            Titulek
+                        </th>
+                        
+                        <th width="130px">
+                            Vytvořil
+                        </th>
+                        @if (this.Context.User.IsInRole("admin"))
+                        {
+                          <th width="120px">
+                           </th>
+                        }
+                       
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model)
+                    {
+                        
+
+                    <tr class="articles-tr-down">
+                            <th>
+                                <a  asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem=>item.Description)</a>
+                        </th>
+                            <th>
+                                @Html.DisplayFor(modelItem => item.Title)
+                        </th>
+                       
+                            <th >
+                                @Html.DisplayFor(modelItem => item.NickName)
+                        </th>
+                       
+                                @if (this.Context.User.IsInRole("admin"))
+                                {
+                                     <th id="btn-hidden" class="nav-list-button">
+                                          <a class="btn-use btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                          <a class="btn-use btn-edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                     </th>
+                                }
+                            
+
+                    </tr>
+                    }
+               </tbody>
+        </table>
+            <a class="btn-use btn-succes" asp-action="Create">Vytvořit nový</a>
+
+        </div>
+    </div>
 </section>
