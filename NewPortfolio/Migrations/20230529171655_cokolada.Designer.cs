@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewPortfolio.Data;
 
@@ -11,9 +12,10 @@ using NewPortfolio.Data;
 namespace NewPortfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230529171655_cokolada")]
+    partial class cokolada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,7 +247,7 @@ namespace NewPortfolio.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -267,8 +269,6 @@ namespace NewPortfolio.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
 
                     b.ToTable("Article");
                 });
@@ -322,15 +322,6 @@ namespace NewPortfolio.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("NewPortfolio.Models.Article", b =>
-                {
-                    b.HasOne("NewPortfolio.Models.AppUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("AppUserId");
-
-                    b.Navigation("ApplicationUser");
                 });
 #pragma warning restore 612, 618
         }

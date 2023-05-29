@@ -22,6 +22,7 @@
                         <th width="130px">
                             Vytvořil
                         </th>
+                       
                         @if (this.Context.User.IsInRole("admin"))
                         {
                           <th width="120px">
@@ -47,6 +48,8 @@
                             <th >
                                 @Html.DisplayFor(modelItem => item.NickName)
                         </th>
+
+                      
                        
                                 @if (this.Context.User.IsInRole("admin"))
                                 {
@@ -55,7 +58,7 @@
                                           <a class="btn-use btn-edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                                      </th>
                                 }
-                            
+                     
 
                     </tr>
                     }

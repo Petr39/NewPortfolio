@@ -22,6 +22,6 @@ namespace NewPortfolio.Models
 
         //public IFormFile? Thumnail { get; set; }
 
-        List<Article>? Articles { get; set; }
+       List<Article>? Articles { get; set; }
     }
 }

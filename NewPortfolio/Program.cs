@@ -60,15 +60,15 @@ namespace NewPortfolio
             //app.MapRazorPages();
 
 
-            //using (var scope = app.Services.CreateScope())
-            //{
-            //    RoleManager<IdentityRole> spravceRoli = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            //    UserManager<AppUser> spravceUzivatelu = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+            using (var scope = app.Services.CreateScope())
+            {
+                RoleManager<IdentityRole> spravceRoli = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                UserManager<AppUser> spravceUzivatelu = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
-            //    spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
-            //    AppUser uzivatel = spravceUzivatelu.FindByEmailAsync("admin@seznam.cz").Result;
-            //    spravceUzivatelu.AddToRoleAsync(uzivatel, "admin").Wait();
-            //}
+                spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
+                AppUser uzivatel = spravceUzivatelu.FindByEmailAsync("admin@seznam.cz").Result;
+                spravceUzivatelu.AddToRoleAsync(uzivatel, "admin").Wait();
+            }
             app.Run();
         }
     }

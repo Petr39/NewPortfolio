@@ -7,7 +7,7 @@ namespace NewPortfolio.Models
 {
     public class Article
     {
-
+        [Key]
         /// <summary>
         /// Id článku
         /// </summary>
