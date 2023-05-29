@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NewPortfolio.Data;
 using NewPortfolio.Models;
 
 namespace NewPortfolio.Controllers
@@ -10,6 +12,7 @@ namespace NewPortfolio.Controllers
     {
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
+
        private readonly IWebHostEnvironment webHostEnvironment;
 
         public AccountController(UserManager<AppUser> userManager,
@@ -81,13 +84,15 @@ namespace NewPortfolio.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-            if (ModelState.IsValid)
+            try
             {
+               string uniqueImageUrl = "";
+               uniqueImageUrl = UploadImage(model);
                 if (await userManager.FindByEmailAsync(model.Email) is null)
                 {
-                    //ThumbnailUrl = UploadImage(model.ImageUser)
-                    var user = new AppUser { UserName = model.Email, Email = model.Email,NickName=model.NickNameUser };
+                    var user = new AppUser { UserName = model.Email, Email = model.Email, NickName = model.NickNameUser, Path = uniqueImageUrl };
                     var result = await userManager.CreateAsync(user, model.Password);
+
 
                     if (result.Succeeded)
                     {
@@ -97,13 +102,16 @@ namespace NewPortfolio.Controllers
                             RedirectToAction("Index", "Home") :
                             RedirectToLocal(returnUrl);
                     }
-
                     AddErrors(result);
-                }
 
+                }
                 AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Email {model.Email} je již zaregistrován" }));
             }
+            catch (Exception ex)
+            {
 
+                ModelState.AddModelError(string.Empty, ex.Message);
+            }
             return View(model);
         }
 
@@ -118,31 +126,48 @@ namespace NewPortfolio.Controllers
         [HttpPost]
         public async Task<IActionResult> Administration(AppUser user)
         {
-            var log= userManager.Users.FirstOrDefault(x=>x.UserName==User.Identity!.Name);
-                 log.NickName=user.NickName;
-                 if(ModelState.IsValid && log.Credit >=100)
+                var log= userManager.Users.FirstOrDefault(x=>x.UserName==User.Identity!.Name);
+          
+
+            //Změna přezdívky s validací
+                 if(ModelState.IsValid && log.Credit >=1000)
                  {
-                      log.Credit=log.Credit - 100;
+                      log.NickName=user.NickName;
+                      log.Credit=log.Credit - 1000;
+                       
                       await userManager.UpdateAsync(log);
+                
+                return View(user);
+
                  }
+            AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Nemáte dostatečný kredit na změnu přezdívky" }));
+
             return View(user);
+
+
         }
 
         //Musím dodělat obrázek -  problem je v IFormFile pri vytvareni uctu - napsat nahradni tridu pro nacteni do imageformu
-        private string UploadImage(IFormFile file)
+        private string UploadImage(RegisterViewModel model)
         {
-            string uniqueFileName = "";
-            var folderPath= Path.Combine(webHostEnvironment.WebRootPath, "ImagesThumb");
-            uniqueFileName= new Guid().ToString()+ "_" + file.FileName;
-            var filePath = Path.Combine(folderPath, uniqueFileName);
-            using(FileStream fs= System.IO.File.Create(filePath))
+            string uniqueFileName = string.Empty;
+            if (model.ImagePath != null)
             {
-                file.CopyTo(fs);
+                string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "images/Avatar/");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImagePath.FileName;
+                string filePath = Path.Combine(uploadFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    model.ImagePath.CopyTo(fileStream);
+                }
             }
+
+
+
 
             return uniqueFileName;
         }
-
 
         #region Helpers
 

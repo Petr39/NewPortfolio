@@ -5,36 +5,11 @@
 }
 
 <section class="section-index">
-
     <div class="section-hero">
-    <h4>Article</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            Článek
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-      @*  <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>*@
-       @* <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>*@
-        @*<dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NickName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NickName)
-        </dd>*@
-    </dl>
+      <dl class="row">
+          <dt class = "col-sm-2">Článek</dt>
+              @Html.DisplayFor(model => model.Content)
+      </dl>
 
         <div>
             <a class="btn-use btn-edit" asp-action="Index">Zpět</a>

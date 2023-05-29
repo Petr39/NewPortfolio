@@ -28,15 +28,19 @@ namespace NewPortfolio.Models
         /// <summary>
         /// Popisek článku
         /// </summary>
-        [Required(ErrorMessage ="Vyplňte popisek")]
+        [Required(ErrorMessage ="Vyplňte popisek článku")]
         [Display(Name ="Popis")]
         public string Description { get; set; } = string.Empty;
 
         public string? AppUserId { get; set; }
 
+
+
         public AppUser? ApplicationUser { get; set; }
 
        
+        public string? ImageUrl { get; set; }   
+
         public string? NickName { get; set; }    
     }
 }

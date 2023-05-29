@@ -7,7 +7,7 @@
 <section class="section-index">
     <div class="section-hero">
         <div class="registration">
-            <form class="d-flex flex-column gap-2" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <form enctype="multipart/form-data"  asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Email"></label>
@@ -20,11 +20,7 @@
                     <span asp-validation-for="NickNameUser" class="text-danger"></span>
                 </div>
 
-               @* <div class="form-group">
-                 <img src="~/ImagesThumb/Sova.png" style="width:30px; height:30px;" />
-                    <input type="file" asp-for="ImageUser" class="form-control" />
-                    
-                </div>*@
+                
                 <div class="form-group">
                     <label asp-for="Password"></label>
                     <input asp-for="Password" class="form-control" />
@@ -36,6 +32,10 @@
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div>
+                        <label asp-for="ImagePath"></label>
+                        <input type="file" asp-for="ImagePath" />
+                </div>                
+                <div>
                 <button type="submit" class="btn-use btn-succes">Registrovat</button>
                 </div>
             </form>
@@ -44,4 +44,27 @@
 </section>
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
+
+
+
 }
+@*
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+
+    </script>*@
+
+//@*@section Script{
+//    <script>
+
+//            $(".custom-file).on("change", function (){
+//        var fileName = $(this).val().split("\\").pop;
+//        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+//        document.getElementById('CoverImageUrl').src = window.URL.createObjectURL(this.files[0])
+//        });
+//    </script>
+
+//}
+//*@

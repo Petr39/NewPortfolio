@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿ 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using NewPortfolio.Data;
 using NewPortfolio.Models;
 
@@ -13,10 +13,17 @@ namespace NewPortfolio.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
-        public ArticlesController(ApplicationDbContext context, UserManager<AppUser> userManager)
+       // public INotyfService notyfService { get; }
+        private IWebHostEnvironment webHostEnvironment;
+        public ArticlesController(ApplicationDbContext context, 
+               UserManager<AppUser> userManager, 
+               IWebHostEnvironment webHostEnvironment
+              )
         {
             _context = context;
             _userManager = userManager;
+            this.webHostEnvironment = webHostEnvironment;
+            //this.notyfService=notyfService;
         }
 
         // GET: Articles
@@ -54,14 +61,45 @@ namespace NewPortfolio.Controllers
             return View();
         }
 
-        // POST: Articles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+
+        //[Authorize]
+        ////[Area("Admin")]
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] Article article)
+        //{
+        //    //Najde uzivatele podle id-Name
+        //    var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        var post = new Article();
+        //        post.Id = article.Id;
+        //        post.Title = article.Title;
+        //        post.Description = article.Description;
+        //        post.Content = article.Content;
+        //        post.AppUserId = userLog.Id;
+        //        post.NickName = userLog.NickName;//Uloží přezdívku podle id-name
+
+        //        await _context.Article!.AddAsync(post);
+        //        await _context.SaveChangesAsync();
+
+
+        //        return RedirectToAction(nameof(Index));
+
+        //    }
+
+        //    return View();
+
+
+        //}
+
         [Authorize]
         //[Area("Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] Article article)
+        public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] CreatePostVM article)
         {
             //Najde uzivatele podle id-Name
             var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
@@ -76,6 +114,16 @@ namespace NewPortfolio.Controllers
                 post.AppUserId = userLog.Id;
                 post.NickName = userLog.NickName;//Uloží přezdívku podle id-name
 
+              //  post.ImageUrl = UploadImage(article.Image);
+
+                //if (article.Image != null)
+                //{
+                //    string folder = "ImagesThumb";
+                //    folder += article.Image.FileName + Guid.NewGuid().ToString();
+                //    string serverFolder = Path.Combine(webHostEnvironment.WebRootPath, folder);
+                //}
+
+
                 await _context.Article!.AddAsync(post);
                 await _context.SaveChangesAsync();
 
@@ -88,8 +136,10 @@ namespace NewPortfolio.Controllers
 
 
         }
+
+
         [Authorize]
-       // [Area("admin")]
+       [Area("admin")]
         // GET: Articles/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -103,7 +153,7 @@ namespace NewPortfolio.Controllers
             {
                 return NotFound();
             }
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", article.AppUserId);
+           // ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id", article.AppUserId);
             return View(article);
         }
 
@@ -111,7 +161,7 @@ namespace NewPortfolio.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize]
-       // [Area("admin")]
+        [Area("admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Title,Description,AppUserId, NickName")] Article article)
@@ -153,7 +203,7 @@ namespace NewPortfolio.Controllers
 
         // GET: Articles/Delete/5
         [Authorize]
-       // [Area("admin")]
+       [Area("admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Article == null)
@@ -174,7 +224,7 @@ namespace NewPortfolio.Controllers
 
         
         [Authorize]
-        //[Area("admin")]
+        [Area("admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -196,6 +246,22 @@ namespace NewPortfolio.Controllers
         private bool ArticleExists(int id)
         {
             return (_context.Article?.Any(e => e.Id == id)).GetValueOrDefault();
+        }
+
+        private string UploadImage(IFormFile file)
+        {
+            string uniqueFileName = "ImagesThumb";
+           
+            var folderPath = Path.Combine(webHostEnvironment.WebRootPath, "ImagesThumb");
+            uniqueFileName = new Guid().ToString() +"_"+ file.FileName;
+            var filePath = Path.Combine(folderPath, uniqueFileName);
+            using (FileStream fs = System.IO.File.Create(filePath))
+            {
+               file.CopyTo(fs);
+                //file.CopyToAsync(fs);
+            }
+
+            return uniqueFileName;
         }
     }
 }

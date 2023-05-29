@@ -13,7 +13,8 @@ namespace NewPortfolio.Data
         }
         public DbSet<Article>? Article { get; set; }
     
-
+        public DbSet<Avatar> Avatars { get; set; }
+      
 
 
 
