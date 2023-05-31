@@ -203,7 +203,7 @@ namespace NewPortfolio.Controllers
 
         private bool ArticleExists(int id)
         {
-            return (_context.Article?.Any(e => e.Id == id)).GetValueOrDefault();
+              return (_context.Article?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
         private string UploadImage(IFormFile file)
@@ -220,6 +220,6 @@ namespace NewPortfolio.Controllers
             }
 
             return uniqueFileName;
-        }
+      }
     }
 }

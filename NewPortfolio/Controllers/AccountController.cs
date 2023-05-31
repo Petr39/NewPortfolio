@@ -127,20 +127,21 @@ namespace NewPortfolio.Controllers
         public async Task<IActionResult> Administration(AppUser user)
         {
                 var log= userManager.Users.FirstOrDefault(x=>x.UserName==User.Identity!.Name);
-          
+
 
             //Změna přezdívky s validací
-                 if(ModelState.IsValid && log.Credit >=1000)
-                 {
-                      log.NickName=user.NickName;
+            if (ModelState.IsValid && log.Credit >= 1000)
+            {
+                log.NickName=user.NickName;
                       log.Credit=log.Credit - 1000;
                        
                       await userManager.UpdateAsync(log);
-                
+
+
                 return View(user);
 
-                 }
-            AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Nemáte dostatečný kredit na změnu přezdívky" }));
+            }
+            //AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Nemáte dostatečný kredit na změnu přezdívky" }));
 
             return View(user);
 

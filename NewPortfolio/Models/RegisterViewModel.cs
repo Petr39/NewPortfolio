@@ -30,6 +30,6 @@ namespace NewPortfolio.Models
 
         [NotMapped]
         [Display(Name = "Vyberte obrázek")]
-        public IFormFile ImagePath { get; set; }
+        public IFormFile? ImagePath { get; set; }
     }
 }

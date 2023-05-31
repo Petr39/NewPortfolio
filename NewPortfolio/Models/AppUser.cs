@@ -15,15 +15,15 @@ namespace NewPortfolio.Models
         public string? NickName { get; set; }
 
         [Display(Name ="Váš kredit")]
-        public int Credit { get; set; } = 0;
+        public int Credit { get; set; }
 
-        public string Path { get; set; }
+        public string? Path { get; set; }
 
 
 
         [NotMapped]
         [Display(Name = "Vyberte obrázek")]
-        public IFormFile ImagePath { get; set; }
+        public IFormFile? ImagePath { get; set; }
 
         List<Article>? Articles { get; set; }
     }
