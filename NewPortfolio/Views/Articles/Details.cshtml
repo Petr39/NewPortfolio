@@ -8,7 +8,8 @@
     <div class="section-hero">
       <dl class="row">
           <dt class = "col-sm-2">Článek</dt>
-              @Html.DisplayFor(model => model.Content)
+                @Html.DisplayFor(model => model.Content)
+
       </dl>
 
         <div>
@@ -16,3 +17,16 @@
         </div>
     </div>
 </section>
+
+@*@section Scripts{
+    @{
+        <script>
+            tinymce.init({
+                selector: 'textarea',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+            });
+        </script>
+    }
+}
+*@

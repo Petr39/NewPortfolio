@@ -42,5 +42,8 @@ namespace NewPortfolio.Models
         public string? ImageUrl { get; set; }   
 
         public string? NickName { get; set; }    
+
+        
+
     }
 }

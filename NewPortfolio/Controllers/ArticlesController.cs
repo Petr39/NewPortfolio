@@ -78,7 +78,7 @@ namespace NewPortfolio.Controllers
                 post.Description = article.Description;
                 post.Content = article.Content;
                 post.AppUserId = userLog.Id;
-                post.NickName = userLog.NickName;//Uloží přezdívku podle id-name
+                post.NickName = userLog.NickName;
                 post.ImageUrl = userLog.Path;
           
 
