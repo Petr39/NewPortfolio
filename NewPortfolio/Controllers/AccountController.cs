@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
+using Microsoft.EntityFrameworkCore;
 using NewPortfolio.Data;
 using NewPortfolio.Models;
+using System.IO.Compression;
 
 namespace NewPortfolio.Controllers
 {
@@ -12,19 +15,15 @@ namespace NewPortfolio.Controllers
     {
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
-       private readonly IWebHostEnvironment webHostEnvironment;
-
-        public AccountController(UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager,
-            IWebHostEnvironment webHostEnvironment)
+        public AccountController(UserManager<AppUser> userManager,SignInManager<AppUser> signInManager,IWebHostEnvironment webHostEnvironment)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.webHostEnvironment = webHostEnvironment;
         }
 
-       
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
@@ -82,15 +81,13 @@ namespace NewPortfolio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
+
+            
             ViewData["ReturnUrl"] = returnUrl;
 
-            try
+            if (await userManager.FindByEmailAsync(model.Email) is null)
             {
-               string uniqueImageUrl = "";
-               uniqueImageUrl = UploadImage(model);
-                if (await userManager.FindByEmailAsync(model.Email) is null)
-                {
-                    var user = new AppUser { UserName = model.Email, Email = model.Email, NickName = model.NickNameUser, Path = uniqueImageUrl };
+                    var user = new AppUser { UserName = model.Email, Email = model.Email, NickName = model.NickNameUser };
                     var result = await userManager.CreateAsync(user, model.Password);
 
 
@@ -102,16 +99,12 @@ namespace NewPortfolio.Controllers
                             RedirectToAction("Index", "Home") :
                             RedirectToLocal(returnUrl);
                     }
+
                     AddErrors(result);
 
                 }
                 AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Email {model.Email} je již zaregistrován" }));
-            }
-            catch (Exception ex)
-            {
-
-                ModelState.AddModelError(string.Empty, ex.Message);
-            }
+          
             return View(model);
         }
 
@@ -124,61 +117,55 @@ namespace NewPortfolio.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Administration(AppUser user)
+        public async Task<IActionResult> Administration(AppUser user, IFormFile? file)
         {
-                var log= userManager.Users.FirstOrDefault(x=>x.UserName==User.Identity!.Name);
+            var log= userManager.Users.FirstOrDefault(x=>x.UserName==User.Identity!.Name);
+
+            string wwwRootPath = webHostEnvironment.WebRootPath;
+            if (file != null)
+            {
+                string fileName= Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                 string avatarPath= Path.Combine(wwwRootPath,@"images\Avatar");
+
+                using (var fileStream = new FileStream(Path.Combine(avatarPath, fileName), FileMode.Create))
+                {
+                    file.CopyToAsync(fileStream);
+
+                }
+
+
+
+                log.Path = @"\images\Avatar\" + fileName;
+                await userManager.UpdateAsync(log);
+                return RedirectToAction("Administration");
+            }
+
 
 
             //Změna přezdívky s validací
-            if (ModelState.IsValid && log.Credit >= 1000)
-            {
-                log.NickName=user.NickName;
-                      log.Credit=log.Credit - 1000;
-                       
-                      await userManager.UpdateAsync(log);
+            //if (ModelState.IsValid)
+            //{
+            //    if(log.Credit >= 1000)
+            //    {
+            //        log.NickName = user.NickName;
+            //        log.Credit = log.Credit - 1000;
+            //        await userManager.UpdateAsync(log);
+            //        return RedirectToAction("Administration");
+            //    }
+            //    AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Nemáte dostatečný kredit na změnu přezdívky" }));
 
-
-                return View(user);
-
-            }
-            //AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Nemáte dostatečný kredit na změnu přezdívky" }));
-
+            //}
             return View(user);
 
-
         }
 
-        //Musím dodělat obrázek -  problem je v IFormFile pri vytvareni uctu - napsat nahradni tridu pro nacteni do imageformu
-        private string UploadImage(RegisterViewModel model)
-        {
-            string uniqueFileName = string.Empty;
-            if (model.ImagePath != null)
-            {
-                string uploadFolder = Path.Combine(webHostEnvironment.WebRootPath, "images/Avatar/");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImagePath.FileName;
-                string filePath = Path.Combine(uploadFolder, uniqueFileName);
 
-                using (var fileStream = new FileStream(filePath, FileMode.Create))
-                {
-                    model.ImagePath.CopyTo(fileStream);
-                }
-            }
-
-
-
-
-            return uniqueFileName;
-        }
 
         #region Helpers
-
-
         private IActionResult RedirectToLocal(string returnUrl)
         {
             return Url.IsLocalUrl(returnUrl) ? Redirect(returnUrl) : RedirectToAction("Index", "Home");
         }
-     
-
         
         private void AddErrors(IdentityResult result)
         {

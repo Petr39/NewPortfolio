@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
@@ -27,6 +28,12 @@ namespace NewPortfolio.Models
         [Display(Name = "Potvrzení hesla")]
         [Compare("Password", ErrorMessage = "Zadaná hesla se musí shodovat.")]
         public string ConfirmPassword { get; set; } = "";
+
+
+        [ValidateNever]
+        public string? Path { get; set; }
+
+
 
         [NotMapped]
         [Display(Name = "Vyberte obrázek")]

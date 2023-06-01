@@ -32,8 +32,8 @@
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div>
+                        <input type="file" name="file" asp-for="ImagePath" />
                         <label asp-for="ImagePath"></label>
-                        <input type="file" asp-for="ImagePath" />
                 </div>                
                 <div>
                 <button type="submit" class="btn-use btn-succes">Registrovat</button>
@@ -45,26 +45,4 @@
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")
 
-
-
 }
-@*
-    <script type="text/javascript">
-        $(".custom-file-input").on("change", function () {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-
-    </script>*@
-
-//@*@section Script{
-//    <script>
-
-//            $(".custom-file).on("change", function (){
-//        var fileName = $(this).val().split("\\").pop;
-//        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-//        document.getElementById('CoverImageUrl').src = window.URL.createObjectURL(this.files[0])
-//        });
-//    </script>
-
-//}
-//*@
