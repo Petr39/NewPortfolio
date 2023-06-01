@@ -143,18 +143,18 @@ namespace NewPortfolio.Controllers
 
 
             //Změna přezdívky s validací
-            //if (ModelState.IsValid)
-            //{
-            //    if(log.Credit >= 1000)
-            //    {
-            //        log.NickName = user.NickName;
-            //        log.Credit = log.Credit - 1000;
-            //        await userManager.UpdateAsync(log);
-            //        return RedirectToAction("Administration");
-            //    }
-            //    AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Nemáte dostatečný kredit na změnu přezdívky" }));
+            if (ModelState.IsValid)
+            {
+                if (log.Credit >= 1000)
+                {
+                    log.NickName = user.NickName;
+                    log.Credit = log.Credit - 1000;
+                    await userManager.UpdateAsync(log);
+                    return RedirectToAction("Administration");
+                }
+                AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Nemáte dostatečný kredit na změnu přezdívky" }));
 
-            //}
+            }
             return View(user);
 
         }

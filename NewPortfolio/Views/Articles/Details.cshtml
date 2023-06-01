@@ -9,8 +9,14 @@
       <dl class="row">
           <dt class = "col-sm-2">Článek</dt>
                 @Html.DisplayFor(model => model.Content)
-
       </dl>
+      <div>
+         <h5>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h5>
+          <h6>@Html.DisplayFor(model=>model.ApplicationUser.Credit) credits</h6> 
+
+          <img src="@Html.DisplayFor(model=>model.ApplicationUser.Path)" width="40" height="40" />
+           
+      </div>
 
         <div>
             <a class="btn-use btn-edit" asp-action="Index">Zpět</a>

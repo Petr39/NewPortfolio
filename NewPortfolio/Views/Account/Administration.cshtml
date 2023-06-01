@@ -28,11 +28,11 @@
            
              <form  asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data">
                <div asp-validation-summary="All" class="text-danger"></div>
-              @*  <div class="form-group">
+                <div class="form-group">
                     <label asp-for="NickName"></label>
                     <input asp-for="NickName" placeholder=" Zadejte přezdívku" class="form-control" />
                     <span asp-validation-for="NickName" class="text-danger"></span>
-                </div>*@
+                </div>
                 <div>
                     <input type="file" name="file" asp-for="ImagePath" />
                     <label asp-for="ImagePath"></label>
@@ -49,11 +49,11 @@
         {
              <form  asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data">
               <div asp-validation-summary="All" class="text-danger"></div>
-               @* <div class="form-group">
+                <div class="form-group">
                     <label asp-for="NickName"></label>
                     <input asp-for="NickName" placeholder="Zadejte přezdívku" class="form-control" />
                     <span asp-validation-for="NickName" class="text-danger"></span>
-                </div>*@
+                </div>
                 <div>
                     <input type="file" name="file" asp-for="ImagePath" />
                     <label asp-for="ImagePath"></label>

@@ -67,7 +67,7 @@ namespace NewPortfolio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] CreatePostVM article)
         {
-            //Najde uzivatele podle id-Name
+            
             var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
 
             if (ModelState.IsValid)
@@ -80,6 +80,7 @@ namespace NewPortfolio.Controllers
                 post.AppUserId = userLog.Id;
                 post.NickName = userLog.NickName;
                 post.ImageUrl = userLog.Path;
+                post.Credits = userLog.Credit;
           
 
                 await _context.Article!.AddAsync(post);
@@ -206,6 +207,8 @@ namespace NewPortfolio.Controllers
               return (_context.Article?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
+
+        
         private string UploadImage(IFormFile file)
         {
             string uniqueFileName = "ImagesThumb";

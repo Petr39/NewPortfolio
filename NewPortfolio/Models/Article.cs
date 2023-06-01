@@ -34,14 +34,17 @@ namespace NewPortfolio.Models
 
         public string? AppUserId { get; set; }
 
-
+            
 
         public AppUser? ApplicationUser { get; set; }
 
        
         public string? ImageUrl { get; set; }   
 
-        public string? NickName { get; set; }    
+        public string? NickName { get; set; }   
+        
+
+        public int? Credits { get; set; }
 
         
 
