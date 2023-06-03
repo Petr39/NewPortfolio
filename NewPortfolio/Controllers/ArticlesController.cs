@@ -72,6 +72,7 @@ namespace NewPortfolio.Controllers
 
             if (ModelState.IsValid)
             {
+                userLog.CountPost += 1;
                 var post = new Article();
                 post.Id = article.Id;
                 post.Title = article.Title;
@@ -81,14 +82,15 @@ namespace NewPortfolio.Controllers
                 post.NickName = userLog.NickName;
                 post.ImageUrl = userLog.Path;
                 post.Credits = userLog.Credit;
-          
+                post.DateOfRegister = userLog.DateOfRegister.ToString("dd.MM.yyyy");
+              
+
 
                 await _context.Article!.AddAsync(post);
                 await _context.SaveChangesAsync();
 
 
                 return RedirectToAction(nameof(Index));
-
             }
 
             return View();

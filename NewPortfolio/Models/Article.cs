@@ -46,7 +46,11 @@ namespace NewPortfolio.Models
 
         public int? Credits { get; set; }
 
-        
+        public string DateOfRegister { get; set; }
+
+        public int CountPost { get; set; }
+
+
 
     }
 }

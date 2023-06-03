@@ -41,5 +41,7 @@ namespace NewPortfolio.Models
         [NotMapped]
         public IFormFile? Image { get; set; }
 
+        public int CountPost { get; set; }
+
     }
 }

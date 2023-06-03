@@ -11,33 +11,34 @@
 
 
 
-<section class="section-show-table">
-    <div class="section-hero">
+@*<section class="section-show-table">
+    <div >
         <h2 class="site-heading">Administrace účtu</h2>
         <p>
-         Vaše uživatelské jméno:   @User.Identity.Name
+            Vaše uživatelské jméno:   @User.Identity.Name
 
       
 
         </p>
-        <div class="d-flex flex-wrap gap-3 mb-3">
-            <a asp-action="LogOut" class="btn-use btn-edit">Odhlásit se</a>
-        </div>
+       
         @if (this.Context.User.IsInRole("admin"))
         {
            
              <form  asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data">
                <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="NickName"></label>
+
+                    <label>Změna přezdívky zde</label>
+                    
                     <input asp-for="NickName" placeholder=" Zadejte přezdívku" class="form-control" />
                     <span asp-validation-for="NickName" class="text-danger"></span>
                 </div>
                 <div>
+                    <label>Vyberte si Avatara</label>
                     <input type="file" name="file" asp-for="ImagePath" />
-                    <label asp-for="ImagePath"></label>
+                   
                 </div>
-                <button type="submit" class="btn-use btn-succes">Změnit přezdívku za 1000 kreditů</button>
+                <button type="submit" class="btn-use btn-succes">Uložit</button>
             </form>
 
             <div>
@@ -50,19 +51,63 @@
              <form  asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data">
               <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="NickName"></label>
+                    <label>Změna přezdívky zde</label>
+                   
                     <input asp-for="NickName" placeholder="Zadejte přezdívku" class="form-control" />
                     <span asp-validation-for="NickName" class="text-danger"></span>
                 </div>
                 <div>
+                    <label>Vyberte si Avatara</label>
                     <input type="file" name="file" asp-for="ImagePath" />
-                    <label asp-for="ImagePath"></label>
+               
                 </div>
-                <button type="submit" class="btn-use btn-succes">Změnit za 1000 kreditů</button>
+                <button type="submit" class="btn-use btn-succes">Uložit</button>
             </form>
         }
 
-
+        <div class="d-flex flex-wrap gap-3 mb-3">
+            <a asp-action="LogOut" class="btn-use btn-edit">Odhlásit se</a>
+        </div>
         
     </div>
+</section>*@
+
+<section class="section-administration">
+    
+        <h2 class="site-heading">Administrace účtu</h2>
+        <hr>
+    <h6 class="admin-acc"> @User.Identity.Name</h6>
+
+    <h6>Počet kreditů: 30233</h6>
+          
+       
+        <div class="form-group">
+            <div class="form-btn">
+                <a asp-action="Create" asp-controller="Articles" class="btn-use btn-succes">Přidat článek</a>
+                <a asp-action="Index" asp-controller="Articles" class="btn-use btn-detail">Seznam článků</a>
+                <a asp-action="LogOut" class="btn-use btn-edit">Odhlásit se</a>
+            </div>
+      @if (this.Context.User.IsInRole("admin"))
+        {
+            <form class="form-administration" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div>
+                    <label>Přezdívka <small class="small-text">změna stojí 1000 Kreditů</small> </label>
+                    <label asp-for="NickName"></label>
+                    <input asp-for="NickName" placeholder=" Zadejte přezdívku" class="form-control" />
+                    <span asp-validation-for="NickName" class="text-danger"></span>
+                </div>
+                <div>
+                    <label for="">Vyberte Avatara</label>
+                    <input type="file" name="file" asp-for="ImagePath" />
+                </div>
+
+                <div class="admin-acc-btn-div">
+                    <hr>
+                    <button type="submit" class="btn-use btn-succes admin-acc-btn">Uložit změny</button>
+                </div>                
+            </form>
+
+        }
+     </div>
 </section>

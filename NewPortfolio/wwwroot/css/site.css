@@ -92,13 +92,18 @@ header {
     position: absolute;
     padding: 0 19%;
     display: flex;
-    margin-top:25px;
+    margin-top: 25px;
     width: 100%;
     height: 100%;
     min-height: 100vh;
     align-items: center;
     justify-content: space-between;
     background: var(--bg-body);
+}
+
+
+.site-heading {
+    font-size: 1rem;
 }
 
 .section-show-table {
@@ -113,6 +118,67 @@ header {
     justify-content: space-between;
     background: var(--bg-body);
 }
+
+
+
+
+.section-administration {
+    position: absolute;
+    padding: 0 19%;
+    top: 100px;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    background: var(--bg-body);
+}
+
+.small-text {
+    font-size: .6rem;
+    font-weight: 100;
+}
+
+.admin-acc {
+    font-size: 1rem;
+    font-weight: 300;
+    color: white;
+}
+
+
+.form-group {
+    margin-top: 30px;
+    top: 40px;
+    width: 100%;
+}
+
+
+.admin-acc-btn {
+    margin-top: 10px;
+}
+
+
+
+.admin-acc-btn-div {
+    margin-top: 100px;
+}
+
+.form-btn {
+    display: flex;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.form-administration {
+    margin-top: 50px;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
 .articles-tr {
     background: #49a54e;
     font-weight: 100;
@@ -136,17 +202,16 @@ h2 {
 .hr {
     margin: 5px 0%;
     color: black;
-  
 }
 
 .cleaner {
     clear: both;
 }
 
-.registration{
+.registration {
     background: #2aafd2;
-    padding:40px 5px;
-    border:1px solid black;
+    padding: 40px 5px;
+    border: 1px solid black;
     border-radius: 20px;
     box-shadow: 3px 3px 8px black;
 }
@@ -168,6 +233,81 @@ h2 {
         text-shadow: 0 0 8px cyan;
     }
 
+.account-layout-content {
+    background: white;
+    border: 1px solid black;
+    margin-top: 10px;
+    padding: 5px 5px;
+    width: 600px;
+    display: flex;
+}
+
+
+.account-text {
+    background: #17b5bb;
+    margin-left: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    width: 100%;
+}
+
+.account-text-other {
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+    .account-text-other p {
+        color: black;
+        font-size: .7rem;
+    }
+
+.account-title {
+    background: #17b5bb;
+}
+
+.account {
+    width: 160px;
+    height: 70px;
+    background: #339c82;
+    display: flex;
+    border: 1px solid black;
+    padding: 5px;
+    /* position: absolute;*/
+}
+
+    .account div {
+        margin-right: 5px;
+    }
+
+    .account h6 {
+        font-size: 0.8rem;
+        color: rgb(243, 203, 27);
+    }
+
+.account-img {
+    border: 1px solid black;
+    padding: 5px;
+    background: transparent;
+}
+
+.pf {
+    display: flex;
+}
+
+    .pf img {
+        margin-left: .5rem;
+    }
+
+.account-content p,
+.account-content span {
+    font-size: .6rem;
+    color: rgb(0, 0, 0);
+}
+
+.pf a {
+    font-size: .7rem;
+    font-weight: 700;
+}
 
 .btn {
     color: var(--color-header);
@@ -239,18 +379,15 @@ h2 {
     transform: scale(1.6);
 }
 
-.img-sort {
+.img-sort img {
+    width: 300px;
+    height: auto;
+    transition: .6s ease-in-out;
 }
 
-    .img-sort img {
-        width: 300px;
-        height: auto;
-        transition: .6s ease-in-out;
+    .img-sort img:hover {
+        transform: scale(1.8);
     }
-
-        .img-sort img:hover {
-            transform: scale(1.8);
-        }
 
 footer {
     left: 0;
@@ -345,7 +482,7 @@ table, th, td {
 @media (max-width: 1460px) {
 
     .section-index,
-    .section-index-tiny{
+    .section-index-tiny {
         margin-top: 100px;
         padding: 1% 12%;
         width: 100%;
@@ -419,7 +556,31 @@ table, th, td {
         display: block;
     }
 
-    .section-index¨,
+
+    .account-layout-content {
+        background: white;
+        border: 1px solid black;
+        margin-top: 10px;
+        padding: 5px 5px;
+        width: 300px;
+        display: flex;
+    }
+
+    .section-administration,
+    .form-administration {
+        width: 100%;
+        padding: 5%;
+    }
+
+    .account-text {
+        background: #17b5bb;
+        margin-left: 5px;
+        padding: 5px;
+        border: 1px solid black;
+        width: 100%;
+    }
+
+    .section-index,
     .section-index-tiny {
         position: absolute;
         margin-top: 100px;

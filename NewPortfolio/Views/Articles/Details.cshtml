@@ -6,33 +6,41 @@
 
 <section class="section-index">
     <div class="section-hero">
-      <dl class="row">
-          <dt class = "col-sm-2">Článek</dt>
-                @Html.DisplayFor(model => model.Content)
-      </dl>
-      <div>
-         <h5>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h5>
-          <h6>@Html.DisplayFor(model=>model.ApplicationUser.Credit) credits</h6> 
+        <div class="account-layout-content">
+            <div class="account">
+                <div class="account-img">
+                    <img src="@Html.DisplayFor(model=>model.ApplicationUser.Path)" width="40" height="40" />
+                </div>
+                <div class="account-content">
+                    <h6>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h6>
+                    <div class="pf">
+                        <a href="contact.html">@Html.DisplayFor(model=>model.ApplicationUser.Credit)</a>
+                        <img src="/images/euro.png" />
+                    </div>
+                    <div>
 
-          <img src="@Html.DisplayFor(model=>model.ApplicationUser.Path)" width="40" height="40" />
-           
-      </div>
+                        <p>Příspěvky:@Html.DisplayFor(model=>model.ApplicationUser.CountPost)</p>
+                        <p>Register:@Html.DisplayFor(model=>model.DateOfRegister)</p>
+                    </div>
+                </div>
+                <div>
+                </div>
+            </div>
+            <div class="account-text">
 
+                <div class="account-text-other">
+                    <p class="account-title">@Html.DisplayFor(model=>model.Title)</p>
+                    <p class="account-title">@Html.DisplayFor(model=>model.Description)</p>
+                </div>
+                <div>
+                   @Html.DisplayFor(model => model.Content)
+                </div>
+
+            </div>
+        </div>
         <div>
             <a class="btn-use btn-edit" asp-action="Index">Zpět</a>
         </div>
     </div>
 </section>
 
-@*@section Scripts{
-    @{
-        <script>
-            tinymce.init({
-                selector: 'textarea',
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-            });
-        </script>
-    }
-}
-*@

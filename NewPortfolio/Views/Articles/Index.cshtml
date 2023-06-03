@@ -51,22 +51,15 @@
                                @Html.DisplayFor(modelItem => item.NickName)
                         </th>
                         <th>
-                               <img src="@item.ApplicationUser.Path" width="40" height="40" asp-append-version="true">
-                             
-                               
-                           @*    @Html.DisplayFor(modeltItem=>item.Credits)*@
-                        
+                            <img src="@item.ApplicationUser.Path" width="40" height="40" asp-append-version="true">
                         </th>
-                       
-                                @if (this.Context.User.IsInRole("admin"))
-                                {
-                                     <th id="btn-hidden" class="nav-list-button">
-                                          <a class="btn-use btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                                          <a class="btn-use btn-edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                                     </th>
-                                }
-                     
-
+                        @if (this.Context.User.IsInRole("admin"))
+                        {
+                            <th id="btn-hidden" class="nav-list-button">
+                               <a class="btn-use btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                               <a class="btn-use btn-edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            </th>
+                        }
                     </tr>
                     }
                </tbody>

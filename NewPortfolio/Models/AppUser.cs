@@ -27,5 +27,9 @@ namespace NewPortfolio.Models
         public IFormFile? ImagePath { get; set; }
 
         List<Article>? Articles { get; set; }
+
+        public DateTime DateOfRegister { get; set; } = DateTime.Now;
+
+        public int CountPost { get; set; } = 0;
     }
 }
