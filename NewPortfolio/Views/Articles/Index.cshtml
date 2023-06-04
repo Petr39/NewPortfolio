@@ -1,19 +1,40 @@
 ﻿@model IEnumerable<NewPortfolio.Models.Article>
 
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
 @{
     ViewData["Title"] = "Index";
+
 }
+
+
 
 <section class="section-index">
 
     <div class="section-hero">
 
-        <div class="articles">
-            <table>
+
+        <form asp-controller="Articles" asp-action="Index" method="get">
+            <div>
+                <select id="inputSearch" name="searchby">
+                    <option selected value="">Najít..</option>
+                    <option value="title">Titulek</option>
+                    <option value="description">Popisek</option>
+                </select>
+                <input name="searchfor" id="inputSearch"/>
+                <button class="btn-use btn-edit" type="submit" id="inputSearch">Najít</button>
+            <a class="btn-use btn-succes" type="button" asp-controller="Articles" asp-action="Index">Smazat</a>
+            </div>
+        </form>
+
+
+        <div  class="articles">
+            <table id="tblData">
                 <thead>
                     <tr class="articles-tr">
                         <th width="130px">
-                            Článek
+                            Popisek
                         </th>
                         <th width="130px">
                             Titulek
@@ -22,9 +43,13 @@
                         <th width="130px">
                             Vytvořil
                         </th>
-                        <th>
-                           Avatar
+                        <th width="130px">
+                            Avatar
                         </th>
+
+
+
+
                        
                         @if (this.Context.User.IsInRole("admin"))
                         {
@@ -38,8 +63,6 @@
                 <tbody>
                     @foreach(var item in Model)
                     {
-                      
-
                     <tr class="articles-tr-down">
                             <th>
                                 <a  asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem=>item.Description)</a>
@@ -63,9 +86,22 @@
                     </tr>
                     }
                </tbody>
-        </table>
+               </table>
             <a class="btn-use btn-succes" asp-action="Create">Vytvořit nový</a>
-
         </div>
+        
+       <div class="pagination">
+
+
+        @Html.PagedListPager((IPagedList) Model, page => Url.Action("Index", new {page,
+        searchfor = Context.Request.Query["searchfor"], searchby = Context.Request.Query["searchby"]}),
+        
+        new X.PagedList.Web.Common.PagedListRenderOptions {
+            LiElementClasses = new string [] {"page-item"},
+            PageClasses = new string [] {"page-link"}
+        })
+     
+       </div>
+
     </div>
 </section>

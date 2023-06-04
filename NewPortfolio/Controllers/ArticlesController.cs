@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NewPortfolio.Data;
 using NewPortfolio.Models;
+using System.Linq;
+using X.PagedList;
 
 namespace NewPortfolio.Controllers
 {
@@ -26,11 +28,36 @@ namespace NewPortfolio.Controllers
         }
 
         // GET: Articles
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchby, string searchfor, int? page)
         {
+            //var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
+            var applicationDbContex = GetAllArticles(searchby, searchfor).ToPagedListAsync(page ?? 1,5);
+            return View(await applicationDbContex);       
+        
+
+        }
+
+        private List<Article> GetAllArticles(string searchby, string searchfor)
+        {
+            if (searchby == "title" && searchfor != null)
+            {
+                var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser).Where(s => s.Title.ToLower().Contains(searchfor.ToLower()));
+              
+                return applicationDbContexta.ToList();
+            }
+
+            if (searchby == "description" && searchfor != null)
+            {
+                var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser).Where(s => s.Description.ToLower().Contains(searchfor.ToLower()));
+
+                return applicationDbContexta.ToList();
+            }
 
             var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
-            return View(await applicationDbContext.ToListAsync());
+
+            return applicationDbContext.ToList();
+
+
         }
 
         // GET: Articles/Details/5
@@ -225,6 +252,28 @@ namespace NewPortfolio.Controllers
             }
 
             return uniqueFileName;
-      }
+         }
+
+
+        #region API CALLS
+
+        //[HttpGet]
+        //public IActionResult GetAll()
+        //{
+        //    var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
+        //    return Json(new { data = applicationDbContext });
+
+        //}
+
+        //[HttpGet]
+        //public async Task<IActionResult> GetAll()
+        //{
+        //    var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
+        //    return Json(new { data = applicationDbContext });
+
+        //}
+
+
+        #endregion
     }
 }
