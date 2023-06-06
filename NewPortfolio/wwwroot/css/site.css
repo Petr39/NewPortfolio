@@ -300,12 +300,14 @@ h2 {
     border: 1px solid black;
     margin-top: 10px;
     padding: 5px 5px;
-    width: 600px;
+    /*width: 600px;*/
     display: flex;
+    width:100%;
 }
 
 
 .account-text {
+    position:relative;
     background: #17b5bb;
     margin-left: 5px;
     padding: 5px;
@@ -316,6 +318,7 @@ h2 {
 .account-text-other {
     display: flex;
     border-bottom: 1px solid black;
+    width:100%;
 }
 
     .account-text-other p {
@@ -663,7 +666,7 @@ table, th, td {
         border: 1px solid black;
         margin-top: 10px;
         padding: 5px 5px;
-        width: 300px;
+        width: 100%;
         display: flex;
     }
 
