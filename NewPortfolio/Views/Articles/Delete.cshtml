@@ -7,40 +7,20 @@
 <section class="section-index">
 
     <div class="section-hero">
-<div>
-    
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ApplicationUser)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ApplicationUser.NickName)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Smazat" class="btn-use btn-danger" /> 
-        <a class="btn-use btn-edit" asp-action="Index">Zpět</a>
-    </form>
-</div>
+  <div>
+      <div>
+          <p class="p-hero"><h6 class="h6-hero">Titulek</h6> @Html.DisplayFor(model=>model.Title)</p>
+          <hr />
+                <p class="p-hero"><h6 class="h6-hero">Popisek</h6> @Html.DisplayFor(model=>model.Description)</p>
+          <hr />
+                <p class="p-hero"><h6 class="h6-hero">Obsah  </h6> @Html.DisplayFor(model=>model.Content)</p>
+          <hr />
+        <form asp-action="Delete">
+          <input type="hidden" asp-for="Id" />
+          <input type="submit" value="Smazat" class="btn-use btn-danger" /> 
+          <a class="btn-use btn-edit" asp-action="Index">Zpět</a>
+        </form>
+      </div>
+  </div>
 </div>
 </section>

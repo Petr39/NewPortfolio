@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NewPortfolio.Migrations;
 using NewPortfolio.Models;
 using System.Diagnostics;
 
@@ -8,6 +9,8 @@ namespace NewPortfolio.Controllers
     {
         public IActionResult Index()
         {
+        
+          
             return View();
         }
 
@@ -27,5 +30,7 @@ namespace NewPortfolio.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+     
     }
 }

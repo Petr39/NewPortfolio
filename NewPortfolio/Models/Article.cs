@@ -21,13 +21,14 @@ namespace NewPortfolio.Models
         /// <summary>
         /// Titulek článku
         /// </summary>
-        [StringLength(20,ErrorMessage ="Titulek je příliš dlouhý (max 20 znaků)")]
+        [StringLength(12,ErrorMessage ="Titulek je příliš dlouhý (max 12 znaků)")]
         [Required(ErrorMessage ="Vyplňte titulek")]
         [Display(Name ="Titulek")]
         public string Title { get; set; } = string.Empty;
         /// <summary>
         /// Popisek článku
         /// </summary>
+        [StringLength(12,ErrorMessage ="Popis je příliš dlouhý (max 12 znaků)")]        
         [Required(ErrorMessage ="Vyplňte popisek článku")]
         [Display(Name ="Popis")]
         public string Description { get; set; } = string.Empty;
@@ -46,9 +47,9 @@ namespace NewPortfolio.Models
 
         public int? Credits { get; set; }
 
-        public string DateOfRegister { get; set; }
+        public string? DateOfRegister { get; set; }
 
-        public int CountPost { get; set; }
+        public int? CountPost { get; set; }
 
 
 

@@ -5,12 +5,8 @@
 
 @{
     ViewData["Title"] = "Index";
-
 }
-
-
-
-<section class="section-index">
+<section class="section-index-articles">
 
     <div class="section-hero">
 
@@ -18,42 +14,42 @@
         <form asp-controller="Articles" asp-action="Index" method="get">
             <div>
                 <select id="inputSearch" name="searchby">
-                    <option selected value="">Najít..</option>
+                    <option selected value="">Vyhledat podle...</option>
                     <option value="title">Titulek</option>
                     <option value="description">Popisek</option>
                 </select>
                 <input name="searchfor" id="inputSearch"/>
                 <button class="btn-use btn-edit" type="submit" id="inputSearch">Najít</button>
-            <a class="btn-use btn-succes" type="button" asp-controller="Articles" asp-action="Index">Smazat</a>
+            <a class="btn-use btn-edit" type="button" asp-controller="Articles" asp-action="Index">Smazat</a>
             </div>
         </form>
 
 
         <div  class="articles">
-            <table id="tblData">
+            <table id="tblData" width="100%">
                 <thead>
                     <tr class="articles-tr">
-                        <th width="130px">
+                        <th class="articles-th">
                             Popisek
                         </th>
-                        <th width="130px">
+                        <th class="articles-th">
                             Titulek
                         </th>
                         
-                        <th width="130px">
+                        <th class="articles-th">
                             Vytvořil
                         </th>
-                        <th width="130px">
-                            Avatar
+                        <th class="articles-th-article">
+                            Obsah
                         </th>
-
+                
 
 
 
                        
                         @if (this.Context.User.IsInRole("admin"))
                         {
-                          <th width="120px">
+                            <th class="articles-th-btn">
                            </th>
                         }
                        
@@ -65,22 +61,23 @@
                     {
                     <tr class="articles-tr-down">
                             <th>
-                                <a  asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem=>item.Description)</a>
+                                <a class="text-decoration" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem=>item.Description)</a>
                         </th>
                             <th>
                                 @Html.DisplayFor(modelItem => item.Title)
                         </th>
                          <th >
-                               @Html.DisplayFor(modelItem => item.NickName)
+                               @Html.DisplayFor(modelItem => item.ApplicationUser.NickName)
                         </th>
                         <th>
-                            <img src="@item.ApplicationUser.Path" width="40" height="40" asp-append-version="true">
+                            @Html.DisplayFor(modelItem=>item.Content)
                         </th>
+               
                         @if (this.Context.User.IsInRole("admin"))
                         {
                             <th id="btn-hidden" class="nav-list-button">
-                               <a class="btn-use btn-danger" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                               <a class="btn-use btn-edit" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                    <a class="btn-use btn-danger  bt-size" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                    <a class="btn-use btn-edit  bt-size" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                             </th>
                         }
                     </tr>

@@ -15,23 +15,32 @@ namespace NewPortfolio.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
+        
+      
       
         private IWebHostEnvironment webHostEnvironment;
         public ArticlesController(ApplicationDbContext context,
                UserManager<AppUser> userManager,
                IWebHostEnvironment webHostEnvironment
+          
+           
               )
         {
             _context = context;
             _userManager = userManager;
-            this.webHostEnvironment = webHostEnvironment;        
+            this.webHostEnvironment = webHostEnvironment;  
+          
+          
         }
 
         // GET: Articles
         public async Task<IActionResult> Index(string searchby, string searchfor, int? page)
         {
+
+       
+
             //var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
-            var applicationDbContex = GetAllArticles(searchby, searchfor).ToPagedListAsync(page ?? 1,5);
+            var applicationDbContex = GetAllArticles(searchby, searchfor).ToPagedListAsync(page ?? 1,10);
             return View(await applicationDbContex);       
         
 
@@ -80,7 +89,8 @@ namespace NewPortfolio.Controllers
         }
 
         [Authorize]
-
+        
+        //[Area("Admin")]
         // GET: Articles/Create
         public IActionResult Create()
         {
