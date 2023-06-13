@@ -5,7 +5,6 @@
 
 @{
     ViewData["Title"] = "Administrace účtu";
-   
 }
 
 
@@ -14,12 +13,11 @@
     
         <h2 class="site-heading">Administrace účtu</h2>
         <hr>
-    <h6 class="admin-acc"> @User.Identity.Name</h6>
+        <h6 class="admin-acc">@User.Identity.Name</h6>
+    <h6>Počet kreditů: <a id="credits">@ViewData["credit"]</a></h6>
+     
 
-    <h6>Počet kreditů: 0</h6>
-          
-       
-        <div class="form-group">
+    <div class="form-group">
             <div class="form-btn">
                 <a asp-action="Create" asp-controller="Articles" class="btn-use btn-succes">Přidat článek</a>
                 <a asp-action="Index" asp-controller="Articles" class="btn-use btn-detail">Seznam článků</a>
@@ -28,9 +26,10 @@
       @if (this.Context.User.IsInRole("admin"))
         {
             <h3>Administrátor</h3>
+
         }
 
-
+        <hr />
 
             <form class="form-administration" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="All" class="text-danger"></div>
@@ -40,11 +39,16 @@
                     <input asp-for="NickName" placeholder=" Zadejte přezdívku" class="form-control" />
                     <span asp-validation-for="NickName" class="text-danger"></span>
                 </div>
+                <hr />
+
                 <div>
-                    <img src="~/images/Avatar/" width="60px" height="60px"/>
+                     <div>
+                    <img src=@ViewData["img"] class="avatar" />
+                     </div>
                     <label for="">Vyberte Avatara</label>
                     <input type="file" name="file" asp-for="ImagePath" />
                 </div>
+                <hr />
 
                 <div class="admin-acc-btn-div">
                     <hr>

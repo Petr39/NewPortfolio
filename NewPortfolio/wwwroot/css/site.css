@@ -10,13 +10,17 @@
 }
 
 
+#credits {
+    color: gold;
+}
+
 :root {
     --bg-header: #0e3e7c;
-    --bg-body: #4d57dd;
+    --bg-body: #428aa4;
     --color-header: white;
     --color-body: black;
     --btn-edit: #1a324e;
-    --btn-details: #2988a0;
+    --btn-details: #0da8a1;
     --btn-danger: #c70505;
     --btn-succes: #49a54e;
 }
@@ -247,7 +251,7 @@ header {
 }
 
 .articles-tr-down {
-    background: rgb(54, 125, 190);
+    background: rgb(163, 182, 201);
     margin: 20px;
 }
 
@@ -296,19 +300,19 @@ h2 {
     }
 
 .account-layout-content {
-    background: white;
+    /* background: rgb(47, 135, 190); */
     border: 1px solid black;
     margin-top: 10px;
     padding: 5px 5px;
     /*width: 600px;*/
     display: flex;
-    width:100%;
+    width: 100%;
 }
 
 
 .account-text {
-    position:relative;
-    background: #17b5bb;
+    position: relative;
+    /* background: #0b3251; */
     margin-left: 5px;
     padding: 5px;
     border: 1px solid black;
@@ -318,7 +322,7 @@ h2 {
 .account-text-other {
     display: flex;
     border-bottom: 1px solid black;
-    width:100%;
+    width: 100%;
 }
 
     .account-text-other p {
@@ -327,32 +331,41 @@ h2 {
     }
 
 .account-title {
-    background: #17b5bb;
+    margin-right: 1rem;
 }
 
 .account {
     width: 160px;
-    height: 70px;
-    background: #339c82;
+    height: auto;
+    background: rgb(163, 182, 201);
     display: flex;
     border: 1px solid black;
     padding: 5px;
-    /* position: absolute;*/
 }
 
-    .account div {
-        margin-right: 5px;
-    }
+.account-view {
+    text-align: left;
+    width: 160px;
+    height: auto;
+    background: transparent;
+    display: flex;
+    /* border: 1px solid black; */
+    padding: 5px;
+}
 
-    .account h6 {
-        font-size: 0.8rem;
-        color: rgb(243, 203, 27);
-    }
+.account div {
+    margin-right: 5px;
+}
+
+.account h6 {
+    font-size: 0.8rem;
+    color: rgb(243, 203, 27);
+}
 
 .account-img {
-    border: 1px solid black;
     padding: 5px;
     background: transparent;
+    /* box-shadow: 2px 2px 2px .5px; */
 }
 
 .pf {
@@ -505,6 +518,12 @@ table, th, td {
     font-weight: 200;
 }
 
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgb(47, 153, 47);
+}
 
 .p-hero {
     color: white;
@@ -662,7 +681,6 @@ table, th, td {
 
 
     .account-layout-content {
-        background: white;
         border: 1px solid black;
         margin-top: 10px;
         padding: 5px 5px;
@@ -677,7 +695,6 @@ table, th, td {
     }
 
     .account-text {
-        background: #17b5bb;
         margin-left: 5px;
         padding: 5px;
         border: 1px solid black;

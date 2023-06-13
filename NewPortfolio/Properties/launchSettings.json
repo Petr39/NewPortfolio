@@ -1,18 +1,49 @@
-﻿{
+﻿//{
+//  "iisSettings": {
+//    "windowsAuthentication": false,
+//    "anonymousAuthentication": true,
+//    "iisExpress": {
+//      "applicationUrl": "http://idontcry.azurewebsites.net",
+//      "sslPort": 44300
+//    }
+//  },
+//  "profiles": {
+//    "NewPortfolio": {
+//      "commandName": "Project",
+//      "dotnetRunMessages": true,
+//      "launchBrowser": true,
+//      "applicationUrl": "https://idontcry.azurewebsites.net;http://idontcry.azurewebsites.net",
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Production"
+//      }
+//    },
+//    "IIS Express": {
+//      "commandName": "IISExpress",
+//      "launchBrowser": true,
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Production"
+//      }
+//    }
+//  }
+//}
+
+
+
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:44777",
-      "sslPort": 44300
+      "applicationUrl": "http://localhost:48525",
+      "sslPort": 44314
     }
   },
   "profiles": {
-    "NewPortfolio": {
+    "hovno": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7247;http://localhost:5087",
+      "applicationUrl": "https://localhost:7279;http://localhost:5146",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

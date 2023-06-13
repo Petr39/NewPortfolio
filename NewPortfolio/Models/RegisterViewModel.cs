@@ -30,13 +30,8 @@ namespace NewPortfolio.Models
         public string ConfirmPassword { get; set; } = "";
 
 
-    //    [ValidateNever]
-    //    public string? Path { get; set; }
-
-
-
-    //    [NotMapped]
-    //    [Display(Name = "Vyberte obrázek")]
-    //    public IFormFile? ImagePath { get; set; }
+        [NotMapped]
+        public bool Check { get; set; }
+  
     }
 }

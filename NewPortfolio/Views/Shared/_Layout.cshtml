@@ -23,15 +23,16 @@
         </div>
 
         <ul class="navlist">
-            <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-            <li><a asp-area="" asp-controller="Articles" asp-action="Index">Articles</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="Experience">Experience</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Domů</a></li>
+            <li><a asp-area="" asp-controller="Articles" asp-action="Index">Diablo 4</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Experience">O mně</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
             <li>
                 <a href="/Account/Administration">
                 @if (User.Identity.IsAuthenticated)
                 {
                   @*  <a asp-area="" asp-controller="Humen" asp-action="Index">Humans</a>*@
+                 
 
                 }
 
@@ -47,6 +48,8 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <span >Účet</span>
+                       
+                        
                     }
                     else
                     {

@@ -2,8 +2,6 @@
 @{
     ViewData["Title"] = "Registrace";
 }
-
-
 <section class="section-index">
     <div class="section-hero">
         <div class="registration">
@@ -19,8 +17,6 @@
                     <input asp-for="NickNameUser" placeholder="poprvé je zdarma, změna stojí 1000 kreditů" class="form-control" />
                     <span asp-validation-for="NickNameUser" class="text-danger"></span>
                 </div>
-
-                
                 <div class="form-group">
                     <label asp-for="Password"></label>
                     <input asp-for="Password" class="form-control" />
@@ -31,15 +27,15 @@
                     <input asp-for="ConfirmPassword" class="form-control" />
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
-               @* <div>
-                        <input type="file" name="file" asp-for="ImagePath" />
-                        <label asp-for="ImagePath"></label>
-                </div>   *@             
+               <div>
+                   <input asp-for="Check" type="checkbox" />
+                   <a asp-controller="Home" asp-action="RegisterAgree">Souhlasím s pravidly</a>
+               </div>
                 <div>
-                <button type="submit" class="btn-use btn-succes">Registrovat</button>
+                   <button type="submit" class="btn-use btn-succes">Registrovat</button>
                 </div>
             </form>
-       </div>
+        </div>
 </div>
 </section>
 @section Scripts {

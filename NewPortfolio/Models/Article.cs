@@ -21,25 +21,25 @@ namespace NewPortfolio.Models
         /// <summary>
         /// Titulek článku
         /// </summary>
-        [StringLength(12,ErrorMessage ="Titulek je příliš dlouhý (max 12 znaků)")]
+      
         [Required(ErrorMessage ="Vyplňte titulek")]
         [Display(Name ="Titulek")]
-        public string Title { get; set; } = string.Empty;
+        public string? Title { get; set; } = string.Empty;
         /// <summary>
         /// Popisek článku
         /// </summary>
-        [StringLength(12,ErrorMessage ="Popis je příliš dlouhý (max 12 znaků)")]        
+      
         [Required(ErrorMessage ="Vyplňte popisek článku")]
         [Display(Name ="Popis")]
-        public string Description { get; set; } = string.Empty;
+        public string? Description { get; set; } = string.Empty;
 
         public string? AppUserId { get; set; }
 
-            
+
 
         public AppUser? ApplicationUser { get; set; }
 
-       
+
         public string? ImageUrl { get; set; }   
 
         public string? NickName { get; set; }   

@@ -4,7 +4,6 @@ using NewPortfolio.Data;
 using NewPortfolio.Models;
 
 
-
 namespace NewPortfolio
 {
     public class Program
@@ -17,6 +16,8 @@ namespace NewPortfolio
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+          
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
@@ -26,7 +27,6 @@ namespace NewPortfolio
                 options.Password.RequireNonAlphanumeric = false;
                 options.SignIn.RequireConfirmedAccount = false;
                 options.User.RequireUniqueEmail = true;
-                
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
@@ -46,6 +46,10 @@ namespace NewPortfolio
                 app.UseHsts();
             }
 
+            //app.UseSwagger();
+            //app.UseSwaggerUI();
+
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -60,19 +64,19 @@ namespace NewPortfolio
             //app.MapRazorPages();
 
 
-            using (var scope = app.Services.CreateScope())
-            {
-                RoleManager<IdentityRole> spravceRoli = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-                UserManager<AppUser> spravceUzivatelu = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
+            //using (var scope = app.Services.CreateScope())
+            //{
+            //    RoleManager<IdentityRole> spravceRoli = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            //    UserManager<AppUser> spravceUzivatelu = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
-                spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
-                AppUser uzivatel = spravceUzivatelu.FindByEmailAsync("admin@seznam.cz").Result;
-                spravceUzivatelu.AddToRoleAsync(uzivatel, "admin").Wait();
+            //    spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
+            //    AppUser uzivatel = spravceUzivatelu.FindByEmailAsync("admin@seznam.cz").Result;
+            //    spravceUzivatelu.AddToRoleAsync(uzivatel, "admin").Wait();
 
-                ////spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
-                //AppUser uzivatel2 = spravceUzivatelu.FindByEmailAsync("emicka@seznam.cz").Result;
-                //spravceUzivatelu.AddToRoleAsync(uzivatel2, "admin").Wait();
-            }
+            //    ////spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
+            //    //AppUser uzivatel2 = spravceUzivatelu.FindByEmailAsync("emicka@seznam.cz").Result;
+            //    //spravceUzivatelu.AddToRoleAsync(uzivatel2, "admin").Wait();
+            //}
             app.Run();
         }
     }

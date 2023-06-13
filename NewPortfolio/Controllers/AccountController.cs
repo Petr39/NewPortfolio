@@ -71,7 +71,6 @@ namespace NewPortfolio.Controllers
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-
             return View();
         }
        
@@ -82,7 +81,11 @@ namespace NewPortfolio.Controllers
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
 
-            
+
+            if(model.Check)
+            {
+
+           
             ViewData["ReturnUrl"] = returnUrl;
 
             if (await userManager.FindByEmailAsync(model.Email) is null)
@@ -104,14 +107,20 @@ namespace NewPortfolio.Controllers
 
                 }
                 AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Email {model.Email} je již zaregistrován" }));
-          
+            }
             return View(model);
         }
 
 
         [Authorize]
-        public IActionResult Administration()
+        public IActionResult Administration(AppUser user)
         {
+            var log = userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
+            if(log!= null)
+            {
+                ViewData["credit"] = log.Credit;
+            }
+              ViewData["img"] = log.Path;
             return View();
         }
 
@@ -130,37 +139,37 @@ namespace NewPortfolio.Controllers
                 using (var fileStream = new FileStream(Path.Combine(avatarPath, fileName), FileMode.Create))
                 {
                     file.CopyToAsync(fileStream);
-
                 }
-
-
-
                 log.Path = @"\images\Avatar\" + fileName;
+                ViewData["img"] = log.Path;
+                //log.Path = avatarPath;
                 await userManager.UpdateAsync(log);
-                return RedirectToAction("Administration");
             }
-
-
 
             //Změna přezdívky s validací
             if (ModelState.IsValid)
             {
-                if (log.Credit >= 1000)
+
+
+
+                if (log.Credit >= 1000 && log.NickName!=user.NickName && user.NickName!=null && !(user.NickName.Length <=3))
                 {
                     log.NickName = user.NickName;
                     log.Credit = log.Credit - 1000;
                     await userManager.UpdateAsync(log);
-                    return RedirectToAction("Administration");
                 }
                 AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Nemáte dostatečný kredit na změnu přezdívky" }));
 
             }
-            return View(user);
+
+             return RedirectToAction("Administration");
+
+           // return View(user);
 
         }
 
  
-
+       
 
         #region Helpers
         private IActionResult RedirectToLocal(string returnUrl)

@@ -15,15 +15,13 @@
                     <h6>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h6>
                     <div class="pf">
                         <a href="contact.html">@Html.DisplayFor(model=>model.ApplicationUser.Credit)</a>
-                        <img src="/images/euro.png" />
+                        <img src="~/images/euro.png" />
                     </div>
                     <div>
 
                         <p>Příspěvky:@Html.DisplayFor(model=>model.ApplicationUser.CountPost)</p>
                         <p>Register:@Html.DisplayFor(model=>model.DateOfRegister)</p>
                     </div>
-                </div>
-                <div>
                 </div>
             </div>
             <div class="account-text">
@@ -35,11 +33,10 @@
                 <div>
                    @Html.DisplayFor(model => model.Content)
                 </div>
-
             </div>
+        </div>
         <div>
             <a class="btn-use btn-edit" asp-action="Index">Zpět</a>
-        </div>
         </div>
     </div>
 </section>

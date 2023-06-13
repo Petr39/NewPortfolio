@@ -1,4 +1,4 @@
-﻿ 
+﻿
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,35 +15,24 @@ namespace NewPortfolio.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
-        
-      
-      
+
         private IWebHostEnvironment webHostEnvironment;
         public ArticlesController(ApplicationDbContext context,
                UserManager<AppUser> userManager,
                IWebHostEnvironment webHostEnvironment
-          
-           
               )
         {
             _context = context;
             _userManager = userManager;
-            this.webHostEnvironment = webHostEnvironment;  
-          
-          
+            this.webHostEnvironment = webHostEnvironment;
         }
 
-        // GET: Articles
+        [HttpGet]
         public async Task<IActionResult> Index(string searchby, string searchfor, int? page)
         {
-
-       
-
-            //var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
-            var applicationDbContex = GetAllArticles(searchby, searchfor).ToPagedListAsync(page ?? 1,10);
-            return View(await applicationDbContex);       
-        
-
+            var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
+            var applicationDbContex = GetAllArticles(searchby, searchfor).ToPagedList(page ?? 1, 6);
+            return View(applicationDbContex);
         }
 
         private List<Article> GetAllArticles(string searchby, string searchfor)
@@ -51,7 +40,7 @@ namespace NewPortfolio.Controllers
             if (searchby == "title" && searchfor != null)
             {
                 var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser).Where(s => s.Title.ToLower().Contains(searchfor.ToLower()));
-              
+
                 return applicationDbContexta.ToList();
             }
 
@@ -65,11 +54,8 @@ namespace NewPortfolio.Controllers
             var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
 
             return applicationDbContext.ToList();
-
-
         }
-
-        // GET: Articles/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Article == null)
@@ -89,12 +75,12 @@ namespace NewPortfolio.Controllers
         }
 
         [Authorize]
-        
+
         //[Area("Admin")]
-        // GET: Articles/Create
+        [HttpGet]
         public IActionResult Create()
         {
-            // ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -104,7 +90,7 @@ namespace NewPortfolio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] CreatePostVM article)
         {
-            
+
             var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
 
             if (ModelState.IsValid)
@@ -120,8 +106,6 @@ namespace NewPortfolio.Controllers
                 post.ImageUrl = userLog.Path;
                 post.Credits = userLog.Credit;
                 post.DateOfRegister = userLog.DateOfRegister.ToString("dd.MM.yyyy");
-              
-
 
                 await _context.Article!.AddAsync(post);
                 await _context.SaveChangesAsync();
@@ -129,16 +113,13 @@ namespace NewPortfolio.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-
             return View();
-
-
         }
 
 
-        [Authorize]
-       // [Area("admin")]
-        // GET: Articles/Edit/5
+        //[Authorize]
+        //[Area("admin")]
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Article == null)
@@ -155,10 +136,7 @@ namespace NewPortfolio.Controllers
             return View(article);
         }
 
-        // POST: Articles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize]
+        //[Authorize]
         //[Area("admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -199,8 +177,8 @@ namespace NewPortfolio.Controllers
             return View(article);
         }
 
-        // GET: Articles/Delete/5
-        [Authorize]
+
+        //[Authorize]
         //[Area("admin")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -221,7 +199,7 @@ namespace NewPortfolio.Controllers
         }
 
 
-        [Authorize]
+        //[Authorize]
         //[Area("admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -243,11 +221,11 @@ namespace NewPortfolio.Controllers
 
         private bool ArticleExists(int id)
         {
-              return (_context.Article?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Article?.Any(e => e.Id == id)).GetValueOrDefault();
         }
 
 
-        
+
         private string UploadImage(IFormFile file)
         {
             string uniqueFileName = "ImagesThumb";
@@ -258,22 +236,22 @@ namespace NewPortfolio.Controllers
             using (FileStream fs = System.IO.File.Create(filePath))
             {
                 file.CopyTo(fs);
-                //file.CopyToAsync(fs);
+                file.CopyToAsync(fs);
             }
 
             return uniqueFileName;
-         }
+        }
 
 
         #region API CALLS
 
-        //[HttpGet]
-        //public IActionResult GetAll()
-        //{
-        //    var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
-        //    return Json(new { data = applicationDbContext });
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
+            return Json(new { data = applicationDbContext });
 
-        //}
+        }
 
         //[HttpGet]
         //public async Task<IActionResult> GetAll()

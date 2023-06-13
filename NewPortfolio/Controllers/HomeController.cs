@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NewPortfolio.Migrations;
+
 using NewPortfolio.Models;
 using System.Diagnostics;
 
@@ -20,6 +20,12 @@ namespace NewPortfolio.Controllers
         }
 
         public IActionResult Experience()
+        {
+            return View();
+        }
+
+
+        public IActionResult RegisterAgree()
         {
             return View();
         }
