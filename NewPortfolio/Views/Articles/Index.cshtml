@@ -70,7 +70,7 @@
                                         <div>
 
                                             <p>Příspěvky:@Html.DisplayFor(model=>item.ApplicationUser.CountPost)</p>
-                                            <p>Register:@Html.DisplayFor(model=>item.DateOfRegister)</p>
+                                            <p>Registrován:@Html.DisplayFor(model=>item.DateOfRegister)</p>
                                         </div>
                                     </div>
                                 </div>
@@ -81,10 +81,10 @@
                
                         @if (this.Context.User.IsInRole("admin"))
                         {
-                            <th id="btn-hidden" class="nav-list-button">
-                                    <a class="btn-use btn-danger  bt-size" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                                    <a class="btn-use btn-edit  bt-size" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            </th>
+                         <th id="btn-hidden" class="nav-list-button">
+                             <a class="btn-use btn-danger  bt-size" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                             <a class="btn-use btn-edit  bt-size" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                         </th>
                         }
                     </tr>
                     }
@@ -94,13 +94,13 @@
         </div>
         
        <div class="pagination">
-        @Html.PagedListPager((IPagedList) Model, page => Url.Action("Index", new {page,
-        searchfor = Context.Request.Query["searchfor"], searchby = Context.Request.Query["searchby"]}),
-        
-        new X.PagedList.Web.Common.PagedListRenderOptions {
-            LiElementClasses = new string [] {"page-item"},
-            PageClasses = new string [] {"page-link"}
-        })
+           @Html.PagedListPager((IPagedList) Model, page => Url.Action("Index", new {page,
+           searchfor = Context.Request.Query["searchfor"], searchby = Context.Request.Query["searchby"]}),
+           
+           new X.PagedList.Web.Common.PagedListRenderOptions {
+               LiElementClasses = new string [] {"page-item"},
+               PageClasses = new string [] {"page-link"}
+           })
        </div>
 
     </div>

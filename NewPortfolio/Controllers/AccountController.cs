@@ -80,32 +80,24 @@ namespace NewPortfolio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
-
-
             if(model.Check)
-            {
-
-           
-            ViewData["ReturnUrl"] = returnUrl;
+            { 
+                ViewData["ReturnUrl"] = returnUrl;
 
             if (await userManager.FindByEmailAsync(model.Email) is null)
             {
-                    var user = new AppUser { UserName = model.Email, Email = model.Email, NickName = model.NickNameUser };
-                    var result = await userManager.CreateAsync(user, model.Password);
-
-
-                    if (result.Succeeded)
-                    {
-                        await signInManager.SignInAsync(user, isPersistent: false);
-
-                        return string.IsNullOrWhiteSpace(returnUrl) ?
-                            RedirectToAction("Index", "Home") :
-                            RedirectToLocal(returnUrl);
-                    }
+                 var user = new AppUser { UserName = model.Email, Email = model.Email, NickName = model.NickNameUser };
+                 var result = await userManager.CreateAsync(user, model.Password);
+                 if (result.Succeeded)
+                 {
+                    await signInManager.SignInAsync(user, isPersistent: false);
+                    return string.IsNullOrWhiteSpace(returnUrl) ?
+                    RedirectToAction("Index", "Home") :
+                    RedirectToLocal(returnUrl);
+                 }
 
                     AddErrors(result);
-
-                }
+             }
                 AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Email {model.Email} je již zaregistrován" }));
             }
             return View(model);
@@ -145,13 +137,9 @@ namespace NewPortfolio.Controllers
                 //log.Path = avatarPath;
                 await userManager.UpdateAsync(log);
             }
-
             //Změna přezdívky s validací
             if (ModelState.IsValid)
             {
-
-
-
                 if (log.Credit >= 1000 && log.NickName!=user.NickName && user.NickName!=null && !(user.NickName.Length <=3))
                 {
                     log.NickName = user.NickName;
@@ -161,11 +149,7 @@ namespace NewPortfolio.Controllers
                 AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Nemáte dostatečný kredit na změnu přezdívky" }));
 
             }
-
              return RedirectToAction("Administration");
-
-           // return View(user);
-
         }
 
  

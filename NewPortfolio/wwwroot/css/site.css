@@ -16,7 +16,8 @@
 
 :root {
     --bg-header: #0e3e7c;
-    --bg-body: #428aa4;
+    --bg-body: #1f4e5f;
+    --bg-article: #2678a1;
     --color-header: white;
     --color-body: black;
     --btn-edit: #1a324e;
@@ -239,7 +240,7 @@ header {
 }
 
 .articles-tr {
-    background: #a1cbf1;
+    background: #7ea0c0;
     font-weight: 100;
     padding: 0 5px;
 }
@@ -251,7 +252,7 @@ header {
 }
 
 .articles-tr-down {
-    background: rgb(163, 182, 201);
+    background: var(--bg-article);
     margin: 20px;
 }
 
@@ -312,7 +313,6 @@ h2 {
 
 .account-text {
     position: relative;
-    /* background: #0b3251; */
     margin-left: 5px;
     padding: 5px;
     border: 1px solid black;
@@ -337,7 +337,7 @@ h2 {
 .account {
     width: 160px;
     height: auto;
-    background: rgb(163, 182, 201);
+    background: var(--bg-article);
     display: flex;
     border: 1px solid black;
     padding: 5px;
@@ -345,11 +345,11 @@ h2 {
 
 .account-view {
     text-align: left;
-    width: 160px;
+    width: 165px;
     height: auto;
     background: transparent;
     display: flex;
-    /* border: 1px solid black; */
+    border: 1px solid black; 
     padding: 5px;
 }
 
@@ -364,8 +364,7 @@ h2 {
 
 .account-img {
     padding: 5px;
-    background: transparent;
-    /* box-shadow: 2px 2px 2px .5px; */
+    background: transparent;  
 }
 
 .pf {
