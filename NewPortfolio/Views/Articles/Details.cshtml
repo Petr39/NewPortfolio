@@ -7,23 +7,23 @@
 <section class="section-index">
     <div class="section-hero">
         <div class="account-layout-content">
-            <div class="account">
-                <div class="account-img">
-                    <img src="@Html.DisplayFor(model=>model.ApplicationUser.Path)" width="40" height="40" />
-                </div>
-                <div class="account-content">
-                    <h6>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h6>
-                    <div class="pf">
-                        <a href="contact.html">@Html.DisplayFor(model=>model.ApplicationUser.Credit)</a>
-                        <img src="~/images/euro.png" />
+                <div class="account-view">
+                    <div class="account-img">
+                        <img src="@Html.DisplayFor(model=>model.ApplicationUser.Path)" width="40" height="40" />
                     </div>
-                    <div>
+                    <div class="account-content">
+                        <h6>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h6>
+                        <div class="pf">
+                            <a href="contact.html">@Html.DisplayFor(model=>model.ApplicationUser.Credit)</a>
+                            <img src="/images/euro.png" />
+                        </div>
+                        <div>
 
-                        <p>Příspěvky:@Html.DisplayFor(model=>model.ApplicationUser.CountPost)</p>
-                        <p>Registrován:@Html.DisplayFor(model=>model.DateOfRegister)</p>
+                            <p>Příspěvky:@Html.DisplayFor(model=>model.ApplicationUser.CountPost)</p>
+                            <p>Registrován:@Html.DisplayFor(model=>model.DateOfRegister)</p>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </div>      
             <div class="account-text">
 
                 <div class="account-text-other">

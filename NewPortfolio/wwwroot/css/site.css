@@ -301,7 +301,7 @@ h2 {
     }
 
 .account-layout-content {
-    /* background: rgb(47, 135, 190); */
+  /*   background: rgb(47, 135, 190);*/
     border: 1px solid black;
     margin-top: 10px;
     padding: 5px 5px;
@@ -344,12 +344,13 @@ h2 {
 }
 
 .account-view {
+    position:relative;
     text-align: left;
-    width: 165px;
+   /*margin:.2rem;*/
     height: auto;
     background: transparent;
     display: flex;
-    border: 1px solid black; 
+  /*  border: 1px solid black;*/
     padding: 5px;
 }
 
