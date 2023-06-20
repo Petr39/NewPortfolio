@@ -30,7 +30,7 @@ namespace NewPortfolio.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string searchby, string searchfor, int? page)
         {
-            var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
+            var applicationDbContext =_context.Article.Include(a => a.ApplicationUser);
             var applicationDbContex = GetAllArticles(searchby, searchfor).ToPagedList(page ?? 1, 6);
             return View(applicationDbContex);
         }
@@ -74,8 +74,7 @@ namespace NewPortfolio.Controllers
             return View(article);
         }
 
-        [Authorize]
-
+        [Authorize]        
         //[Area("Admin")]
         [HttpGet]
         public IActionResult Create()
@@ -117,8 +116,9 @@ namespace NewPortfolio.Controllers
         }
 
 
-        //[Authorize]
+        [Authorize]
         //[Area("admin")]
+
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -136,16 +136,13 @@ namespace NewPortfolio.Controllers
             return View(article);
         }
 
-        //[Authorize]
-        //[Area("admin")]
+        [Authorize]
+      //  [Area("admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Title,Description,AppUserId, NickName")] Article article)
         {
             var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
-
-
-
             if (id != article.Id)
             {
                 return NotFound();
@@ -178,7 +175,7 @@ namespace NewPortfolio.Controllers
         }
 
 
-        //[Authorize]
+        [Authorize]
         //[Area("admin")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -199,7 +196,7 @@ namespace NewPortfolio.Controllers
         }
 
 
-        //[Authorize]
+        [Authorize]
         //[Area("admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

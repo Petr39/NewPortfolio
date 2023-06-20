@@ -4,8 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - PortfolioProject</title>
-
+    <meta name="description" content="Diablo 4 LazarusWill" />
+    <meta name="keywords" content="Diablo 4, LazarusWill, lazarus will" />
+    <title>@ViewData["Title"] - LazarusWill</title>
+    <link rel="shortcut icon" href="~/images/euro (1).png" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
@@ -18,22 +20,20 @@
 <body>
     <header>
         <div>
-            <a class="logo" href="">IDontCry<small>.CZ</small></a>
+            <a class="logo" href="">LazarusWill<small>.CZ</small></a>
             <i class="ri-youtube-line"></i>
         </div>
 
         <ul class="navlist">
             <li><a asp-area="" asp-controller="Home" asp-action="Index">Domů</a></li>
-            <li><a asp-area="" asp-controller="Articles" asp-action="Index">Diablo 4</a></li>
-            <li><a asp-area="" asp-controller="Home" asp-action="Experience">O mně</a></li>
+            <li><a asp-area="" asp-controller="Articles" asp-action="Index">Diablo 4</a></li>   
             <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
+          
             <li>
                 <a href="/Account/Administration">
                 @if (User.Identity.IsAuthenticated)
                 {
                   @*  <a asp-area="" asp-controller="Humen" asp-action="Index">Humans</a>*@
-                 
-
                 }
 
                 else
@@ -72,7 +72,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
   
-    @*<script src="https://cdn.tiny.cloud/1/crmf15zac8vbsxzszzpra05gd7wa9zdkj2ubgj9kjomyqh69/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>*@
+    
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

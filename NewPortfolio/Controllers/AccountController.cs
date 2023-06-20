@@ -11,6 +11,7 @@ using System.IO.Compression;
 namespace NewPortfolio.Controllers
 {
     [Authorize]
+    
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> userManager;
@@ -111,8 +112,8 @@ namespace NewPortfolio.Controllers
             if(log!= null)
             {
                 ViewData["credit"] = log.Credit;
+                ViewData["img"] = log.Path;
             }
-              ViewData["img"] = log.Path;
             return View();
         }
 

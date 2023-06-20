@@ -13,7 +13,6 @@ namespace NewPortfolio.Data
         }
         public DbSet<Article>? Article { get; set; }
 
-       // public DbSet<AppUser>? User { get; set; }   
-
-    }
+   
+    } 
 }

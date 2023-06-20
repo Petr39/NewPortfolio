@@ -1,59 +1,59 @@
-﻿//{
-//  "iisSettings": {
-//    "windowsAuthentication": false,
-//    "anonymousAuthentication": true,
-//    "iisExpress": {
-//      "applicationUrl": "http://idontcry.azurewebsites.net",
-//      "sslPort": 44300
-//    }
-//  },
-//  "profiles": {
-//    "NewPortfolio": {
-//      "commandName": "Project",
-//      "dotnetRunMessages": true,
-//      "launchBrowser": true,
-//      "applicationUrl": "https://idontcry.azurewebsites.net;http://idontcry.azurewebsites.net",
-//      "environmentVariables": {
-//        "ASPNETCORE_ENVIRONMENT": "Production"
-//      }
-//    },
-//    "IIS Express": {
-//      "commandName": "IISExpress",
-//      "launchBrowser": true,
-//      "environmentVariables": {
-//        "ASPNETCORE_ENVIRONMENT": "Production"
-//      }
-//    }
-//  }
-//}
-
-
-
-{
+﻿{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:48525",
-      "sslPort": 44314
+      "applicationUrl": "http://www.lazaruswill.cz",
+      "sslPort": 44300
     }
   },
   "profiles": {
-    "hovno": {
+    "NewPortfolio": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:7279;http://localhost:5146",
+      "applicationUrl": "https://www.lazaruswill.cz;http://www.lazaruswill.cz",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     }
   }
 }
+
+
+
+//{
+//  "iisSettings": {
+//    "windowsAuthentication": false,
+//    "anonymousAuthentication": true,
+//    "iisExpress": {
+//      "applicationUrl": "http://localhost:48525",
+//      "sslPort": 44314
+//    }
+//  },
+//  "profiles": {
+//    "hovno": {
+//      "commandName": "Project",
+//      "dotnetRunMessages": true,
+//      "launchBrowser": true,
+//      "applicationUrl": "https://localhost:7279;http://localhost:5146",
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Development"
+//      }
+//    },
+//    "IIS Express": {
+//      "commandName": "IISExpress",
+//      "launchBrowser": true,
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Development"
+//      }
+//    }
+//  }
+//}

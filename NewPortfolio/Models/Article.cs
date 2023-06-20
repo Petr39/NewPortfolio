@@ -38,6 +38,8 @@ namespace NewPortfolio.Models
 
 
         public AppUser? ApplicationUser { get; set; }
+      
+     
 
 
         public string? ImageUrl { get; set; }   
@@ -50,8 +52,5 @@ namespace NewPortfolio.Models
         public string? DateOfRegister { get; set; }
 
         public int? CountPost { get; set; }
-
-
-
     }
 }

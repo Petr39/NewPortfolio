@@ -15,8 +15,8 @@
 }
 
 :root {
-    --bg-header: #0e3e7c;
-    --bg-body: #1f4e5f;
+    --bg-header: #226d9b;
+    --bg-body: #274540;
     --bg-article: #2678a1;
     --color-header: white;
     --color-body: black;
@@ -45,7 +45,7 @@ header {
 .logo {
     font-size: 2rem;
     font-weight: 600;
-    color: rgb(255, 187, 0);
+    color: #f5791a;
 }
 
 .navlist {
@@ -86,7 +86,6 @@ header {
 .link {
     color: white;
 }
-
 
 .text-area {
     height: 200px;
@@ -291,7 +290,7 @@ h2 {
 
 .span {
     font-size: 3rem;
-    color: cyan;
+    color: #BA5801;
     transition: .3s;
 }
 
@@ -301,11 +300,10 @@ h2 {
     }
 
 .account-layout-content {
-  /*   background: rgb(47, 135, 190);*/
+    background: var(--bg-article);
     border: 1px solid black;
     margin-top: 10px;
     padding: 5px 5px;
-    /*width: 600px;*/
     display: flex;
     width: 100%;
 }
@@ -344,14 +342,13 @@ h2 {
 }
 
 .account-view {
-    position:relative;
+    position: relative;
     text-align: left;
-   /*margin:.2rem;*/
     height: auto;
     background: transparent;
     display: flex;
-  /*  border: 1px solid black;*/
     padding: 5px;
+    justify-content: space-between;
 }
 
 .account div {
@@ -365,7 +362,7 @@ h2 {
 
 .account-img {
     padding: 5px;
-    background: transparent;  
+    background: transparent;
 }
 
 .pf {
@@ -419,7 +416,6 @@ h2 {
 
     .btn-use:hover {
         cursor: pointer;
-        /* background: transparent; */
         opacity: 50%;
         border: 1px solid rgb(59, 131, 160);
     }
@@ -441,13 +437,13 @@ h2 {
 }
 
 .img-div img {
-    width: 100%;
+    width: 80%;
     height: auto;
     transition: .6s ease-in-out;
 }
 
 .img-div-muay img {
-    width: 100%;
+    width: 80%;
     height: auto;
     transition: .6s ease-in-out;
 }
@@ -510,6 +506,7 @@ table, th, td {
 
 
 .section-hero {
+    padding-top:100px;
     width: 100%;
 }
 
@@ -582,12 +579,27 @@ table, th, td {
     .bt-size {
         width: 100px;
     }
+
+    .img-div img,
+    .img-div-muay img {
+        width: 550px;
+        height: auto;
+    }
+
+    .section-index,
+    .section-index-tiny {
+        position: absolute;
+        margin-top: 100px;
+        padding: 1% 12%;
+        width: 100%;
+    }
 }
 
 @media (max-width: 1460px) {
 
     .section-index,
     .section-index-tiny {
+        position:absolute;
         margin-top: 100px;
         padding: 1% 12%;
         width: 100%;
