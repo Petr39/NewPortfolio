@@ -126,7 +126,7 @@ namespace NewPortfolio.Controllers
             string wwwRootPath = webHostEnvironment.WebRootPath;
             if (file != null)
             {
-                string fileName= Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                 string fileName= Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                  string avatarPath= Path.Combine(wwwRootPath,@"images\Avatar");
 
                 using (var fileStream = new FileStream(Path.Combine(avatarPath, fileName), FileMode.Create))
@@ -147,8 +147,7 @@ namespace NewPortfolio.Controllers
                     log.Credit = log.Credit - 1000;
                     await userManager.UpdateAsync(log);
                 }
-                AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Nemáte dostatečný kredit na změnu přezdívky" }));
-
+                AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Nemáte dostatečný kredit na změnu přezdívky nebo máte přezdívku méně jak čtyři znaky" }));
             }
              return RedirectToAction("Administration");
         }
