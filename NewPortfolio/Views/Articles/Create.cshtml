@@ -1,9 +1,11 @@
 ﻿@model NewPortfolio.Models.CreatePostVM
 
+
 @{
     ViewData["Title"] = "Create";
 }
-
+<section class="section-index-articles">
+    <div class="section-hero">
 <h1>Create</h1>
 
 <section class="section-index">
@@ -24,43 +26,29 @@
             </div>
             <div class="form-group">
                 <label asp-for="Content" class="control-label"></label>
-                        <textarea asp-for="Content" class="text-area"></textarea>
+                <textarea asp-for="Content" class="text-area"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
             </div>
                <div class="form-group" >
-                   <label asp-for="AppUserId" hidden class="control-label"></label>
-                   <input asp-for="AppUserId" hidden class="form-control" />
+                <label asp-for="AppUserId" hidden class="control-label"></label>
+                <input asp-for="AppUserId" hidden class="form-control" />
               </div>
              <div class="form-group">
                  <label asp-for="NickName" hidden class="control-label"></label>
                  <input asp-for="NickName" hidden class="form-control" />
-             </div>        
+             </div> 
+             <div>
+                 <select asp-for="BuildPostId" asp-items="ViewBag.BuildPostId"></select>
+             </div>
+            
             <div class="form-group">
-                <input type="submit" value="Vytvořit" class="btn-use btn-succes" />
-                 <a class="btn-use btn-edit" asp-action="Index">Zpět</a>
+                  <input type="submit" value="Vytvořit" class="btn-use btn-succes" />
+                  <a class="btn-use btn-edit" asp-action="Index">Zpět</a>
             </div>
         </form>
     </div>
-
-
-</div>
-
-
+ </div>
 </div>
 </section>
-
-
-
-@*@section Scripts{
-    @{
-        <script>
-            tinymce.init({
-                selector: 'textarea',
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-            });
-        </script>
-    }
-}
-
-*@
+</div>
+</section>

@@ -55,26 +55,25 @@
                                 <a class="text-decoration" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem=>item.Description)</a>
                         </th>
                         <th>
-                                @Html.DisplayFor(modelItem => item.Title)
+                                @Html.DisplayFor(modelItem => item.Title) - @Html.DisplayFor(modelItem=>item.BuildPost.BuildName)
                         </th>
                          <th >
-                                <div class="account-view">
-                                    <div class="account-img">
-                                        <img src="@Html.DisplayFor(model=>item.ApplicationUser.Path)" width="40" height="40" />
-                                    </div>
-                                    <div class="account-content">
-                                        <h6>@Html.DisplayFor(model=>item.ApplicationUser.NickName)</h6>
-                                        <div class="pf">
-                                            <a href="contact.html">@Html.DisplayFor(model=>item.ApplicationUser.Credit)</a>
-                                            <img src="/images/euro.png" />
-                                        </div>
-                                        <div>
-
-                                            <p>Příspěvky:@Html.DisplayFor(model=>item.ApplicationUser.CountPost)</p>
-                                            <p>Registrován:@Html.DisplayFor(model=>item.DateOfRegister)</p>
-                                        </div>
-                                    </div>
-                                </div>
+                           <div class="account-view">
+                               <div class="account-img">
+                                   <img src="@Html.DisplayFor(model=>item.ApplicationUser.Path)" width="40" height="40" />
+                               </div>
+                               <div class="account-content">
+                                   <h6>@Html.DisplayFor(model=>item.ApplicationUser.NickName)</h6>
+                                   <div class="pf">
+                                       <a href="contact.html">@Html.DisplayFor(model=>item.ApplicationUser.Credit)</a>
+                                       <img src="/images/euro.png" />
+                                   </div>
+                                   <div>
+                                       <p>Příspěvky:@Html.DisplayFor(model=>item.ApplicationUser.CountPost)</p>
+                                       <p>Registrován:@Html.DisplayFor(model=>item.DateOfRegister)</p>
+                                   </div>
+                               </div>
+                           </div>
                         </th>
                         <th>
                             @Html.DisplayFor(modelItem=>item.Content)

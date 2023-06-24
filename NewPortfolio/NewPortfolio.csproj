@@ -30,7 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Interfaces\" />
     <Folder Include="wwwroot\images\Avatar\" />
+    <Folder Include="wwwroot\images\Items\" />
   </ItemGroup>
 
 </Project>

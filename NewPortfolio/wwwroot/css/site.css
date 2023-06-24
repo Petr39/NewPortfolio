@@ -15,13 +15,13 @@
 }
 
 :root {
-    --bg-header: #226d9b;
-    --bg-body: #274540;
-    --bg-article: #2678a1;
+    --bg-header: #40779e;
+    --bg-body: #629a9e;
+    --bg-article: #79a4ba;
     --color-header: white;
     --color-body: black;
     --btn-edit: #1a324e;
-    --btn-details: #0da8a1;
+    --btn-details: #23817d;
     --btn-danger: #c70505;
     --btn-succes: #49a54e;
 }
@@ -148,7 +148,8 @@ header {
 
 
 .site-heading {
-    font-size: 1rem;
+    font-size: 2rem;
+    text-align: center;
 }
 
 .section-show-table {
@@ -182,12 +183,24 @@ header {
     font-weight: 100;
 }
 
+.admin-info {
+    display: flex;
+    justify-content: space-evenly;
+}
+
 .admin-acc {
     font-size: 1rem;
     font-weight: 300;
     color: white;
+    margin-top: 2rem;
 }
 
+.admin-credit {
+    font-size: 1rem;
+    font-weight: 300;
+    color: gold;
+    margin-top: 2rem;
+}
 
 .form-group {
     margin-top: 30px;
@@ -203,18 +216,20 @@ header {
 
 
 .admin-acc-btn-div {
-    margin-top: 100px;
+    margin-top: 60px;
+    display: flex;
 }
 
 .form-btn {
     display: flex;
+    justify-content: space-between;
     margin-top: 20px;
     text-align: center;
 }
 
 .form-administration {
     margin-top: 50px;
-    width: 100%;
+    width: auto;
 }
 
 
@@ -308,6 +323,11 @@ h2 {
     width: 100%;
 }
 
+
+.form-control {
+    width: 250px;
+    background: #7bcdd3;
+}
 
 .account-text {
     position: relative;
@@ -506,7 +526,7 @@ table, th, td {
 
 
 .section-hero {
-    padding-top:100px;
+    padding-top: 100px;
     width: 100%;
 }
 
@@ -522,17 +542,19 @@ table, th, td {
     border: 1px solid rgb(47, 153, 47);
 }
 
+.avatar-items {
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    margin: 5px;
+}
+
+
 .p-hero {
     color: white;
     font-weight: 300;
 }
-/*
 
-.section-hero-form {
-    margin: 0 10%;
-    background: #4a566c;
-    padding: 0 10%;
-}*/
 .form-group {
     display: flex;
     flex-direction: column;
@@ -556,7 +578,6 @@ table, th, td {
     display: flex;
     justify-content: space-between;
     width: 320px;
-    /*background:green;*/
     top: 25px;
     padding: 10px;
 }
@@ -569,6 +590,8 @@ table, th, td {
     .title:hover {
         border-bottom: 1px solid black;
     }
+
+
 /*Responsive design zde*/
 @media (max-width: 1535px) {
     header {
@@ -599,7 +622,7 @@ table, th, td {
 
     .section-index,
     .section-index-tiny {
-        position:absolute;
+        position: absolute;
         margin-top: 100px;
         padding: 1% 12%;
         width: 100%;

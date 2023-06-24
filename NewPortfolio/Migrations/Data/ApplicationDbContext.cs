@@ -13,6 +13,12 @@ namespace NewPortfolio.Data
         }
         public DbSet<Article>? Article { get; set; }
 
-   
+        public DbSet<BuildPost> BuildPosts {get; set; }
+
+        public DbSet<Item> Items { get; set; }
+
+        public DbSet<Build> Builds { get; set; }
+
+
     } 
 }

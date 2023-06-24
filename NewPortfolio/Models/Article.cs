@@ -7,6 +7,9 @@ namespace NewPortfolio.Models
 {
     public class Article
     {
+
+
+
         [Key]
         /// <summary>
         /// Id článku
@@ -52,5 +55,14 @@ namespace NewPortfolio.Models
         public string? DateOfRegister { get; set; }
 
         public int? CountPost { get; set; }
+
+        
+        [ForeignKey(nameof(BuildPost))]
+        [Display(Name ="Build Postavy")]
+        public int BuildPostId { get; set; }
+
+        [Display(Name = "Vyberte svoji třídu")]
+        public virtual  BuildPost? BuildPost { get; set; }
+     
     }
 }

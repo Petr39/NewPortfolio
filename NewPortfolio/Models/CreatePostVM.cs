@@ -30,7 +30,7 @@ namespace NewPortfolio.Models
         [Display(Name = "Popis")]
         public string Description { get; set; } = string.Empty;
 
-        //public string? NameUser { get; set; }
+       
         public string? AppUserId { get; set; }
 
 
@@ -42,6 +42,14 @@ namespace NewPortfolio.Models
         public IFormFile? Image { get; set; }
 
         public int CountPost { get; set; }
+
+        [ForeignKey("BuildPost")]
+        [Display(Name = "Vyberte svoji třídu")]
+
+        public int BuildPostId { get; set; }
+
+        [Display(Name = "Vyberte svoji třídu")]
+        public virtual BuildPost? BuildPost { get; set; }
 
     }
 }

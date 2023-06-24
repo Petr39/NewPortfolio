@@ -1,8 +1,8 @@
+global using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NewPortfolio.Data;
 using NewPortfolio.Models;
-
 
 namespace NewPortfolio
 {

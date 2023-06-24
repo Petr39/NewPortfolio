@@ -122,7 +122,6 @@ namespace NewPortfolio.Controllers
         public async Task<IActionResult> Administration(AppUser user, IFormFile? file)
         {
             var log= userManager.Users.FirstOrDefault(x=>x.UserName==User.Identity!.Name);
-
             string wwwRootPath = webHostEnvironment.WebRootPath;
             if (file != null)
             {
@@ -135,7 +134,6 @@ namespace NewPortfolio.Controllers
                 }
                 log.Path = @"\images\Avatar\" + fileName;
                 ViewData["img"] = log.Path;
-                //log.Path = avatarPath;
                 await userManager.UpdateAsync(log);
             }
             //Změna přezdívky s validací
