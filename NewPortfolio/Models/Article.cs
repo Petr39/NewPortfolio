@@ -56,13 +56,7 @@ namespace NewPortfolio.Models
 
         public int? CountPost { get; set; }
 
-        
-        [ForeignKey(nameof(BuildPost))]
-        [Display(Name ="Build Postavy")]
-        public int BuildPostId { get; set; }
-
-        [Display(Name = "Vyberte svoji třídu")]
-        public virtual  BuildPost? BuildPost { get; set; }
+                
      
     }
 }

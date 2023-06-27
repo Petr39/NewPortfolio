@@ -5,11 +5,10 @@
 }
 <section class="section-index-articles">
     <div class="section-hero">
-<h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>BuildPost</h4>
+
+<h3>Opravdu smazat tento build?</h3>
+<div>   
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -22,8 +21,8 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Smazat" class="btn-use btn-danger" /> 
+        <a asp-action="Index" class="btn-use btn-edit">Zpět</a>
     </form>
 </div>
 </div>

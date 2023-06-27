@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.EntityFrameworkCore;
 using NewPortfolio.Data;
@@ -150,8 +151,57 @@ namespace NewPortfolio.Controllers
              return RedirectToAction("Administration");
         }
 
- 
-       
+        [HttpGet]
+        public IActionResult SendCredit()
+        {         
+            return View();
+        }
+        //pro adminy, poslání kreditů
+        [HttpPost]
+        public async Task<IActionResult> SendCredit(AppUser user)
+        {
+            var log = userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
+            if (log != null)
+            {
+                log.Credit = log.Credit + user.Credit;
+                await userManager.UpdateAsync(log);                
+            }
+            return RedirectToAction("Administration");
+        }
+        //Načtení uživatelů pro poslání kreditů
+        [HttpGet]
+        public async Task<IActionResult> ViewSendCredit(string? id)
+        {
+            var model = new TransferViewModel();
+            var userLog = userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
+            var  a = await userManager.Users.FirstOrDefaultAsync(c=>c.Id == id);
+            model.SourceUserId = userLog.Id;
+            model.TargetUserId = a.Id;
+            return View(model);
+        }
+
+        //Validace pro poslání kreditů
+        [HttpPost]
+        public async Task<IActionResult> ViewSendCredit(TransferViewModel user)
+        {
+            if(ModelState.IsValid)
+            {
+                var targetUser = await userManager.FindByIdAsync(user.TargetUserId);
+                var sourceUser = await userManager.FindByIdAsync(user.SourceUserId);
+
+                if(sourceUser.Credit >= user.Amount)
+                {
+                    sourceUser.Credit = sourceUser.Credit - user.Amount;
+                    targetUser.Credit = targetUser.Credit + user.Amount;
+                    await  userManager.UpdateAsync(sourceUser);
+                    await  userManager.UpdateAsync(targetUser);
+                    return View();
+                }
+            }
+            
+         
+            return View();
+        }
 
         #region Helpers
         private IActionResult RedirectToLocal(string returnUrl)

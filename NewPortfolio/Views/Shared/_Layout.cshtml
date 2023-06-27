@@ -28,7 +28,7 @@
             <li><a asp-area="" asp-controller="Home" asp-action="Index">Domů</a></li>
             <li><a asp-area="" asp-controller="Articles" asp-action="Index">Články</a></li>   
             <li><a asp-area="" asp-controller="BuildPosts" asp-action="Index">Buildy</a></li>
-            <li><a asp-area="" asp-controller="Items" asp-action="Index">Věci</a></li>
+            <li><a asp-area="" asp-controller="Items" asp-action="Index">Itemy</a></li>
             <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
            
           
@@ -51,8 +51,6 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <span >Účet</span>
-                       
-                        
                     }
                     else
                     {
@@ -69,7 +67,7 @@
     </main>
     <footer>
         <div>
-            &copy; @DateTime.Now.Year IDontCry.cz <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; @DateTime.Now.Year LazarusWill.cz <a asp-area="" asp-controller="Home" asp-action="RegisterAgree"> Pravidla</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

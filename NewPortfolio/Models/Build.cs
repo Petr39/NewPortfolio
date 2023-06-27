@@ -10,6 +10,7 @@ namespace NewPortfolio.Models
         public int Id { get; set; }
 
         [Required]
+        [Display(Name ="Popis buildu")]
         public string Name { get; set; }
 
 

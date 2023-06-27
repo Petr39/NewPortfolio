@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,13 +20,8 @@ namespace NewPortfolio.Controllers
             _context = context;
         }
 
-        // GET: Builds
-        //public async Task<IActionResult> Index()
-        //{
-        //    var applicationDbContext = _context.Builds.Include(b => b.BuildPost);
-        //    return View(await applicationDbContext.ToListAsync());
-        //}
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index(int? id)
         {
             var applicationDbContext = _context.Builds.Where(c=>c.BuildPostId == id).ToListAsync();
@@ -33,12 +29,10 @@ namespace NewPortfolio.Controllers
         }
 
 
-        // GET: Builds/Details/5
+        [AllowAnonymous]
+
         public async Task<IActionResult> Details(int? id)
         {
-
-            
-
             if (id == null || _context.Builds == null)
             {
                 return NotFound();
@@ -55,16 +49,14 @@ namespace NewPortfolio.Controllers
             return View(build);
         }
 
-        // GET: Builds/Create
+       [Authorize]
         public IActionResult Create()
         {
             ViewData["BuildPostId"] = new SelectList(_context.BuildPosts, "Id", "Id");
             return View();
         }
 
-        // POST: Builds/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name,BuildPostId")] Build build)
@@ -79,7 +71,7 @@ namespace NewPortfolio.Controllers
             return View(build);
         }
 
-        // GET: Builds/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Builds == null)
@@ -96,9 +88,7 @@ namespace NewPortfolio.Controllers
             return View(build);
         }
 
-        // POST: Builds/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,BuildPostId")] Build build)
@@ -132,7 +122,7 @@ namespace NewPortfolio.Controllers
             return View(build);
         }
 
-        // GET: Builds/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Builds == null)
@@ -151,7 +141,7 @@ namespace NewPortfolio.Controllers
             return View(build);
         }
 
-        // POST: Builds/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

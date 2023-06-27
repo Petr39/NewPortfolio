@@ -21,6 +21,11 @@
                 <input asp-for="NameItem" class="form-control" />
                 <span asp-validation-for="NameItem" class="text-danger"></span>
             </div>
+            <div>
+                <label asp-for="DescriptionItem"></label>
+                <input asp-for="DescriptionItem">
+                <span asp-validation-for="DescriptionItem" class="text-danger"></span>
+            </div>
             <div class="form-group">
 
                         <div>
@@ -34,14 +39,14 @@
                
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Vytvořit" class="btn-use btn-succes" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" class="btn-use btn-edit">Zpět</a>
 </div>
 
 

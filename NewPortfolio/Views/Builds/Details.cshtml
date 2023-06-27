@@ -3,7 +3,8 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+<section class="section-index-articles">
+    <div class="section-hero">
 <h1>Details</h1>
 
 <div>
@@ -25,6 +26,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" class="btn-use btn-edit" asp-route-id="@Model?.Id">Editovat</a>
+    <a asp-controller="BuildPosts" asp-action="Index" class="btn-use btn-edit">Zpět na buildy</a>
 </div>
+
+</div>
+</section>

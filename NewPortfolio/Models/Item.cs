@@ -11,7 +11,10 @@ namespace NewPortfolio.Models
         [Display(Name ="Název věci")]
         public string NameItem { get; set; }
 
-        
+        [Required]
+        [Display(Name ="Popis předmětu")]
+        public string? DescriptionItem { get; set; }
+
         public string? PathItem { get; set; }
 
         [NotMapped]

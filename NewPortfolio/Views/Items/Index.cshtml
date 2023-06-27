@@ -1,44 +1,86 @@
 ﻿@model IEnumerable<NewPortfolio.Models.Item>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
 
 @{
     ViewData["Title"] = "Index";
 }
+
+
 <section class="section-index-articles">
     <div class="section-hero">
-<h1>Index</h1>
+        <form asp-controller="Items" asp-action="Index" method="get">
+            <div>
+                <select id="inputSearch" name="searchby">
+                    <option selected value="">Vyhledat podle...</option>
+                    <option value="nameitem">Zbraň</option>
+                    <option value="description">Popis</option>
+                   
+                </select>
+                <input name="searchfor" id="inputSearch" />
+                <button class="btn-use btn-edit" type="submit" id="inputSearch">Najít</button>
+                <a class="btn-use btn-edit" type="button" asp-controller="Items" asp-action="Index">Smazat</a>
+            </div>
+        </form>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                
-            </th>
-            <th>
-                
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NameItem)
-            </td>
-            <td>
-                            <div>
-                                <img src=@item.PathItem class="avatar-items" />
-                            </div>
-            </td>
-            <td>
-               Popis itemu zde
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+<div>
+    <table id="tblData" width="100%">
+
+       @* <thead>
+            <tr>
+
+                <th>
+
+                </th>
+                        @if (User.IsInRole("admin"))
+                        {
+                            <th>
+                            </th>
+                        }
+            </tr>
+        </thead>*@
+
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td width="10%">
+                        @Html.DisplayFor(modelItem => item.NameItem)
+                    </td>
+                   <td width="10%">
+                     <div>
+                       <img src=@item.PathItem class="avatar-items" />
+                     </div>
+                   </td>
+                   <td>
+                       @Html.DisplayFor(modelItem=>item.DescriptionItem)
+                   </td>
+
+                        @if (User.IsInRole("admin"))
+                            {
+                        <td>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn-use btn-danger">Smazat</a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn-use btn-edit">Editovat</a>
+                        </td>
+                            }
+                           
+            </tr>}
+        </tbody>
+   </table>
+            <a asp-action="Index" asp-controller="Home" class="btn-use btn-edit">Domů</a>
+</div>
+        <p>
+            <a asp-action="Create" class="btn-use btn-succes">Vytvořit</a>
+        </p>
+        <div class="pagination">
+            @Html.PagedListPager((IPagedList) Model, page => Url.Action("Index", new {page,
+            searchfor = Context.Request.Query["searchfor"], searchby = Context.Request.Query["searchby"]}),
+
+            new X.PagedList.Web.Common.PagedListRenderOptions {
+            LiElementClasses = new string [] {"page-item"},
+            PageClasses = new string [] {"page-link"}
+            })
+        </div>
 </div>
 </section>

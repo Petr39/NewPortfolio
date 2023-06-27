@@ -12,8 +12,8 @@ using NewPortfolio.Data;
 namespace NewPortfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230624090022_ghj")]
-    partial class ghj
+    [Migration("20230625115911_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -254,9 +254,6 @@ namespace NewPortfolio.Migrations
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("BuildPostId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -288,9 +285,29 @@ namespace NewPortfolio.Migrations
 
                     b.HasIndex("AppUserId");
 
+                    b.ToTable("Article");
+                });
+
+            modelBuilder.Entity("NewPortfolio.Models.Build", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("BuildPostId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
                     b.HasIndex("BuildPostId");
 
-                    b.ToTable("Article");
+                    b.ToTable("Builds");
                 });
 
             modelBuilder.Entity("NewPortfolio.Models.BuildPost", b =>
@@ -317,6 +334,10 @@ namespace NewPortfolio.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("DescriptionItem")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NameItem")
                         .IsRequired()
@@ -387,15 +408,23 @@ namespace NewPortfolio.Migrations
                         .WithMany()
                         .HasForeignKey("AppUserId");
 
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("NewPortfolio.Models.Build", b =>
+                {
                     b.HasOne("NewPortfolio.Models.BuildPost", "BuildPost")
-                        .WithMany()
+                        .WithMany("Builds")
                         .HasForeignKey("BuildPostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ApplicationUser");
-
                     b.Navigation("BuildPost");
+                });
+
+            modelBuilder.Entity("NewPortfolio.Models.BuildPost", b =>
+                {
+                    b.Navigation("Builds");
                 });
 #pragma warning restore 612, 618
         }

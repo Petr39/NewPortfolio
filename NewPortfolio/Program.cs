@@ -20,13 +20,13 @@ namespace NewPortfolio
                 //        builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 //.AddEntityFrameworkStores<ApplicationDbContext>();
 
-          
+           
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 
             {
-                options.Password.RequiredLength = 3;
+                options.Password.RequiredLength = 8;
                 options.Password.RequireNonAlphanumeric = false;
                 options.SignIn.RequireConfirmedAccount = false;
                 options.User.RequireUniqueEmail = true;
@@ -76,9 +76,10 @@ namespace NewPortfolio
             //    AppUser uzivatel = spravceUzivatelu.FindByEmailAsync("admin@seznam.cz").Result;
             //    spravceUzivatelu.AddToRoleAsync(uzivatel, "admin").Wait();
 
-            //    ////spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
-            //    //AppUser uzivatel2 = spravceUzivatelu.FindByEmailAsync("emicka@seznam.cz").Result;
-            //    //spravceUzivatelu.AddToRoleAsync(uzivatel2, "admin").Wait();
+            //    spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
+            //    AppUser uzivatel2 = spravceUzivatelu.FindByEmailAsync("petr.valosek@post.cz").Result;
+            //    spravceUzivatelu.AddToRoleAsync(uzivatel2, "admin").Wait();
+
             //}
             app.Run();
         }

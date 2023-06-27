@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,7 @@ namespace NewPortfolio.Controllers
             _context = context;
         }
 
-        // GET: BuildPosts
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
               return _context.BuildPosts != null ? 
@@ -27,12 +28,12 @@ namespace NewPortfolio.Controllers
                           Problem("Entity set 'ApplicationDbContext.BuildPosts'  is null.");
         }
 
-        // GET: BuildPosts/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
 
 
-           // var log = _context.Builds.First(b => b.Id == id);
+           
             if (id == null || _context.Builds == null)
             {
                 return NotFound();
@@ -48,7 +49,7 @@ namespace NewPortfolio.Controllers
             return View(buildPost);
         }
 
-        // GET: BuildPosts/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -58,6 +59,7 @@ namespace NewPortfolio.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,BuildName")] BuildPost buildPost)
         {
@@ -70,7 +72,7 @@ namespace NewPortfolio.Controllers
             return View(buildPost);
         }
 
-        // GET: BuildPosts/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.BuildPosts == null)
@@ -86,9 +88,7 @@ namespace NewPortfolio.Controllers
             return View(buildPost);
         }
 
-        // POST: BuildPosts/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,BuildName")] BuildPost buildPost)
@@ -121,7 +121,7 @@ namespace NewPortfolio.Controllers
             return View(buildPost);
         }
 
-        // GET: BuildPosts/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.BuildPosts == null)
@@ -139,7 +139,7 @@ namespace NewPortfolio.Controllers
             return View(buildPost);
         }
 
-        // POST: BuildPosts/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

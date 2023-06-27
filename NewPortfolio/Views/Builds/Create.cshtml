@@ -4,9 +4,8 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>Build</h4>
+<section class="section-index-articles">
+    <div class="section-hero">
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,7 +13,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <textarea asp-for="Name" class="form-control" ></textarea>
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -22,13 +21,15 @@
                 <select asp-for="BuildPostId" class ="form-control" asp-items="ViewBag.BuildPostId"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Vytvořit" class="btn-use btn-succes" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="BuildPosts" asp-action="Index" class="btn-use btn-edit">Zpět na buildy</a>
 </div>
 
+</div>
+</section>

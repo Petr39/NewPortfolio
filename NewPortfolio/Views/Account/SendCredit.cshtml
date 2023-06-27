@@ -1,0 +1,32 @@
+﻿@model NewPortfolio.Models.AppUser
+@using Microsoft.AspNetCore.Identity;
+
+
+@{
+    ViewData["Title"] = "Poslání kreditů";
+}
+
+
+<section class="section-index-articles">
+    <div class="section-hero">
+        @if (this.Context.User.IsInRole("admin"))
+        {
+           <form asp-action = "SendCredit" method="post">
+                <input asp-for="Credit" />
+                <span asp-validation-for="Credit" class="text-danger"></span>
+
+
+    
+        
+                <div class="admin-acc-btn-div">
+                    <button type="submit" class="btn-use btn-danger admin-acc-btn">Uložit změny</button>
+                </div>
+
+
+            </form>
+        }
+        Ahoj
+
+
+    </div>
+</section>

@@ -13,13 +13,13 @@ namespace NewPortfolio.Models
         public string? LastName { get; set; }
 
         
-        [Display(Name ="Přezdívka")]
+        [Display(Name ="Přezdívka"),MaxLength(8,ErrorMessage ="Přezdívka může být maximálně 8 znaků")]
         public string? NickName { get; set; }
 
-        [Display(Name ="Váš kredit")]
-        public int Credit { get; set; }
+        [Display(Name = "Váš kredit")]
+        public int Credit { get; set; } = 1000;
 
-        
+        //Cesta k obrázku
         public string? Path { get; set; }
 
 

@@ -1,40 +1,40 @@
 ﻿@model IEnumerable<NewPortfolio.Models.BuildPost>
 
+
+
 @{
     ViewData["Title"] = "Index";
 }
 <section class="section-index-articles">
     <div class="section-hero">
-<h1>Index</h1>
-
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn-use btn-succes">Vytvořit nový build</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
+                <tr class="articles-tr">
             <th>
-                @Html.DisplayNameFor(model => model.BuildName)
+                Název buildu
             </th>
-            <th>
-               
-            </th>
+        
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
+    @foreach (var item in Model) {
+                    <tr articles-tr-down>
             <td>
-                @Html.DisplayFor(modelItem => item.BuildName)
+                <a asp-controller="Builds" asp-action="Index" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.BuildName)</a>
             </td>
+                @if(User.IsInRole("admin")){
             <td>
-                            <a asp-controller="Builds" asp-action="Index" asp-route-id="@item.Id">Details</a>
-                          @*  <a asp-controller="Builds" asp-action="Index" asp-route-id="@item.Id">Details</a>*@
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn-use btn-danger">Smazat</a>
+                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn-use btn-edit">Editovat</a>
             </td>
+                }
         </tr>
 }
     </tbody>
 </table>
+<a asp-action="Index" asp-controller="Home" class="btn-use btn-edit">Domů</a>
 </div>
 </section>

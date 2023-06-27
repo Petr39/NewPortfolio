@@ -30,9 +30,7 @@ namespace NewPortfolio.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Index(string searchby, string searchfor, int? page)
-        {
-            
-            var applicationDbContext =_context.Article.Include(a => a.ApplicationUser);
+        {          
             var applicationDbContex = GetAllArticles(searchby, searchfor).ToPagedList(page ?? 1, 6);
             return View(applicationDbContex);
         }
@@ -41,19 +39,19 @@ namespace NewPortfolio.Controllers
         {
             if (searchby == "title" && searchfor != null)
             {
-                var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser).Include(b=>b.BuildPost).Where(s => s.Title.ToLower().Contains(searchfor.ToLower()));
+                var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser).Where(s => s.Title.ToLower().Contains(searchfor.ToLower()));
 
                 return applicationDbContexta.ToList();
             }
 
             if (searchby == "description" && searchfor != null)
             {
-                var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser).Include(b=>b.BuildPost).Where(s => s.Description.ToLower().Contains(searchfor.ToLower()));
+                var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser).Where(s => s.Description.ToLower().Contains(searchfor.ToLower()));
 
                 return applicationDbContexta.ToList();
             }
 
-            var applicationDbContext = _context.Article.Include(a => a.ApplicationUser).Include(b=>b.BuildPost);
+            var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
 
             return applicationDbContext.ToList();
         }
@@ -77,13 +75,12 @@ namespace NewPortfolio.Controllers
         }
 
         [Authorize]        
-        //[Area("Admin")]
+        //[Area("admin")]
         [HttpGet]
         public IActionResult Create()
         {
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
-            //ViewData["BuildPostId"] = BuildPosted();
-            ViewData["BuildPostId"] = new SelectList(_context.BuildPosts, "Id", "BuildName");
+            
             
             return View();
         }
@@ -96,13 +93,13 @@ namespace NewPortfolio.Controllers
         }
 
         [Authorize] 
-        //[Area("Admin")]
+        //[Area("admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content,Title,Description,BuildPostId")] CreatePostVM article)
+        public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] CreatePostVM article)
         {
              var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
-             ViewData["BuildPostId"] = new SelectList(_context.BuildPosts, "Id", "BuildName", article.BuildPostId);
+          
 
             if (ModelState.IsValid)
             {
@@ -118,7 +115,7 @@ namespace NewPortfolio.Controllers
                    post.ImageUrl = userLog.Path;
                    post.Credits = userLog.Credit;
                    post.DateOfRegister = userLog.DateOfRegister.ToString("dd.MM.yyyy");
-                   post.BuildPostId = article.BuildPostId;                
+                             
                    await _context.Article!.AddAsync(post);
                    await _context.SaveChangesAsync();
 

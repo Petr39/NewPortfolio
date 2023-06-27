@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<NewPortfolio.Models.Article>
 
+
 @using X.PagedList;
 @using X.PagedList.Mvc.Core;
 
-
+@*Index pro Články*@
 
 @{
     ViewData["Title"] = "Index";
@@ -54,10 +55,10 @@
                             <th>
                                 <a class="text-decoration" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem=>item.Description)</a>
                         </th>
-                        <th>
-                                @Html.DisplayFor(modelItem => item.Title) - @Html.DisplayFor(modelItem=>item.BuildPost.BuildName)
+                            <th class="articles-th">
+                            @Html.DisplayFor(model=>item.Title)
                         </th>
-                         <th >
+                         <th>
                            <div class="account-view">
                                <div class="account-img">
                                    <img src="@Html.DisplayFor(model=>item.ApplicationUser.Path)" width="40" height="40" />
@@ -65,9 +66,11 @@
                                <div class="account-content">
                                    <h6>@Html.DisplayFor(model=>item.ApplicationUser.NickName)</h6>
                                    <div class="pf">
-                                       <a href="contact.html">@Html.DisplayFor(model=>item.ApplicationUser.Credit)</a>
-                                       <img src="/images/euro.png" />
+                                            <a asp-action="ViewSendCredit" asp-controller="Account" asp-route-id="@item.AppUserId">@Html.DisplayFor(model=>item.ApplicationUser.Credit)
+                                                <img src="/images/euro.png" />
+                                            </a>
                                    </div>
+                                  
                                    <div>
                                        <p>Příspěvky:@Html.DisplayFor(model=>item.ApplicationUser.CountPost)</p>
                                        <p>Registrován:@Html.DisplayFor(model=>item.DateOfRegister)</p>
@@ -75,15 +78,15 @@
                                </div>
                            </div>
                         </th>
-                        <th>
+                        <th >
                             @Html.DisplayFor(modelItem=>item.Content)
                         </th>
                
                         @if (this.Context.User.IsInRole("admin"))
                         {
                          <th id="btn-hidden" class="nav-list-button">
-                             <a class="btn-use btn-danger  bt-size" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                             <a class="btn-use btn-edit  bt-size" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                             <a class="btn-use btn-danger  bt-size" asp-action="Delete" asp-route-id="@item.Id">Smazat</a>
+                             <a class="btn-use btn-edit  bt-size" asp-action="Edit" asp-route-id="@item.Id">Editovat</a>
                          </th>
                         }
                     </tr>
@@ -92,7 +95,7 @@
                </table>
             <a class="btn-use btn-succes" asp-action="Create">Vytvořit nový</a>
         </div>
-        
+        <a asp-action="Index" asp-controller="Home" class="btn-use btn-edit">Domů</a>
        <div class="pagination">
            @Html.PagedListPager((IPagedList) Model, page => Url.Action("Index", new {page,
            searchfor = Context.Request.Query["searchfor"], searchby = Context.Request.Query["searchby"]}),

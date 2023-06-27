@@ -36,7 +36,9 @@
 
                 <label><small class="small-text">změna stojí 1000 Kreditů</small> </label>
                 </div>    
-
+                <div>
+                    <a asp-action="SendCredit" class="btn-use btn-edit">Poslat kredit</a>
+                </div>
                 <div>
                     <input asp-for="NickName" placeholder=" Zadejte přezdívku" class="form-control" />
                     <span asp-validation-for="NickName" class="text-danger"></span>
