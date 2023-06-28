@@ -13,7 +13,7 @@
 <table class="table">
     <thead>
                 <tr class="articles-tr">
-            <th>
+            <th colspan="2">
                 Název buildu
             </th>
         
@@ -21,7 +21,7 @@
     </thead>
     <tbody>
     @foreach (var item in Model) {
-                    <tr articles-tr-down>
+                    <tr class="articles-tr-down" >
             <td>
                 <a asp-controller="Builds" asp-action="Index" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.BuildName)</a>
             </td>

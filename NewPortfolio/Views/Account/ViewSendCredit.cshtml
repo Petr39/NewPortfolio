@@ -5,20 +5,33 @@
 
 <section class="section-index-articles">
     <div class="section-hero">
-        <form asp-action="ViewSendCredit" method="post">
-            <div class="form-group">
-               <label asp-for="SourceUserId" hidden class="control-label"></label>
-                <input asp-for="SourceUserId" hidden/>
-            </div>
-            <div class="form-group">
-                <label asp-for="TargetUserId" hidden class="control-label"></label>
-                <input asp-for="TargetUserId" hidden/>           
+        <div class="div-credit">
+            <div>
+                <h5>Zadejte částku pro zaslání kreditu</h5>
             </div>
             <div>
-                <label for="amount">Částka:</label>
-                @Html.TextBoxFor(model => model.Amount)
+
+                <form asp-action="ViewSendCredit" method="post">
+                    <div class="form-group">
+                        <label asp-for="SourceUserId" hidden class="control-label"></label>
+                        <input asp-for="SourceUserId" hidden />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TargetUserId" hidden class="control-label"></label>
+                        <input asp-for="TargetUserId" hidden />
+                    </div>
+                    <div>
+                        <div class="div-label">
+                          <label  >Zadejte částku:</label>
+                        </div>
+                       @Html.TextBoxFor(model => model.Amount)
+                    </div>
+                    <div>
+                        <button type="submit" class="btn-use btn-succes width-btn">Poslat kredit</button>
+                        <button class="btn-use btn-edit width-btn">Storno</button>
+                    </div>
+                </form>
             </div>
-            <button type="submit" class="btn-use btn-succes">Poslat kredit</button>
-        </form>
-</div>
+        </div>
+    </div>
 </section>

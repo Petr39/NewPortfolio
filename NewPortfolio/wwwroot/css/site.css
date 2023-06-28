@@ -18,7 +18,7 @@ body {
 }
 
 :root {
-    --bg-header: #30617e;
+    --bg-header: #7ca9c4;
     --bg-body: #7898ad;
     --bg-article: #79a4ba;
     --color-header: white;
@@ -241,6 +241,43 @@ header {
 }
 
 
+.div-credit {
+    margin: auto;
+    display: flow-root;
+    position: relative;
+    text-align: center;
+    background: var(--bg-header);
+    margin: 0 20%;
+    width: 60%;
+    padding: 5px;
+}
+
+    .div-credit form {
+        text-align: center;
+    }
+
+    .div-credit h5 {
+        color: rgb(238, 224, 30);
+    }
+
+.input {
+    background: rgb(146, 188, 204);
+    color: rgb(0, 0, 0);
+    outline: none;
+    border: 1px solid rgb(146, 188, 204);
+}
+
+.div-label {
+    background: rgb(146, 188, 204);
+    border-radius: 20px;
+    outline: none;
+    margin: 0 15rem;
+}
+
+.width-btn {
+    width: 150px;
+}
+
 .pages {
     width: 40px;
     height: 40px;
@@ -255,8 +292,8 @@ header {
 
 .articles-th-article {
     width: 50%;
-    text-align:left;
-    scroll-behavior:auto;
+    text-align: left;
+    scroll-behavior: auto;
 }
 
 .articles-th-btn {
@@ -340,11 +377,10 @@ h2 {
 }
 
 .account-text {
-    padding:5px;
-    position:relative;
-    width:100%;
+    padding: 5px;
+    position: relative;
+    width: 100%;
     border: 1px solid black;
-   
 }
 
 .account-text-other {
@@ -397,13 +433,13 @@ h2 {
 
 .pf {
     display: flex;
-   /* align-items:center;*/
-    vertical-align:central;
+    /* align-items:center;*/
+    vertical-align: central;
 }
 
     .pf img {
         margin-left: .1rem;
-        vertical-align:bottom;
+        vertical-align: bottom;
     }
 
 .account-content p,
@@ -435,9 +471,13 @@ h2 {
         box-shadow: 0px 0px 5px cyan;
     }
 
+.width-btn {
+    width: 150px;
+}
+
 .btn-use {
     text-align: center;
-    float: right;
+    /*  float: right;*/
     color: white;
     font-size: .8rem;
     font-weight: 100;
@@ -613,6 +653,25 @@ table, th, td {
         transition: .3s;
     }
 
+
+    .div-credit {
+        margin: auto;
+        display: flow-root;
+        position: absolute;
+        text-align: center;
+        background: var(--bg-header);
+        margin: 0 20%;
+        padding: 5px;
+    }
+
+    .div-label {
+        background: rgb(146, 188, 204);
+        border-radius: 20px;
+        outline: none;
+        width: 80%;
+        margin: 3rem;
+    }
+
     .bt-size {
         width: 100px;
     }
@@ -685,6 +744,7 @@ table, th, td {
 @media (max-width: 1195px) {
 
 
+
     .section-index,
     .section-index-tiny {
         position: absolute;
@@ -704,6 +764,19 @@ table, th, td {
         width: 100px;
     }
 
+    .div-contact {
+        position: absolute;
+        left: 0px;
+        width: 100%;
+    }
+
+        .div-contact h5 {
+            text-align: center;
+        }
+
+        .div-contact a {
+            margin-left: 5rem;
+        }
 
     .img-div,
     .img-div-muay {
@@ -729,10 +802,30 @@ table, th, td {
     #menu-icon {
         display: block;
     }
-   
+
+
+    .div-credit {
+        margin: auto;
+        display: flow-root;
+        position: relative;
+        text-align: center;
+        background: var(--bg-header);
+        margin: 0 20%;
+        width: 60%;
+        padding: 5px;
+    }
+
+    .div-label {
+        background: rgb(146, 188, 204);
+        border-radius: 20px;
+        outline: none;
+        width: 90%;
+        margin: 1rem;
+    }
+
     .account-layout-content {
         border: 1px solid black;
-        margin-top: 10px;      
+        margin-top: 10px;
         width: 100%;
         display: flex;
     }
@@ -744,7 +837,7 @@ table, th, td {
     }
 
     .account-text {
-        padding:5px;
+        padding: 5px;
         border: 1px solid black;
         width: 100%;
     }
@@ -790,6 +883,10 @@ table, th, td {
     .img-div img:hover,
     .img-div-muay img:hover {
         transform: none;
+    }
+
+    header {
+        height: 70px;
     }
 }
 

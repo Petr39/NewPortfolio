@@ -19,7 +19,7 @@ namespace NewPortfolio.Data
 
         public DbSet<Build> Builds { get; set; }
 
-        //public DbSet<VirtualAccount> VirtualAccounts { get; set; }
+      
 
     } 
 }
