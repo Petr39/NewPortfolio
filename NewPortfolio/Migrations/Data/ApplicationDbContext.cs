@@ -19,7 +19,7 @@ namespace NewPortfolio.Data
 
         public DbSet<Build> Builds { get; set; }
 
-      
+        public DbSet<ArticlePost> ArticlePosts { get; set; }  
 
     } 
 }

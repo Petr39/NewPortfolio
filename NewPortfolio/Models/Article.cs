@@ -57,6 +57,9 @@ namespace NewPortfolio.Models
         public int? CountPost { get; set; }
 
                 
+        public virtual IEnumerable<ArticlePost> ArticlePosts { get; set; }
+
+        
      
     }
 }

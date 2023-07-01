@@ -1,0 +1,33 @@
+﻿@model NewPortfolio.Models.ArticlePost
+
+@{
+    ViewData["Title"] = "Details";
+}
+<section class="section-index-articles">
+    <div class="section-hero">
+<h1>Details</h1>
+
+<div>
+    <h4>ArticlePost</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Post)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Post)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Article)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Article.Content)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+</div>
+</section>

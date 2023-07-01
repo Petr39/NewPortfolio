@@ -39,14 +39,18 @@ namespace NewPortfolio.Controllers
         {
             if (searchby == "title" && searchfor != null)
             {
-                var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser).Where(s => s.Title.ToLower().Contains(searchfor.ToLower()));
+                var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser)
+                    .Where(s => s.Title.ToLower()
+                    .Contains(searchfor.ToLower()));
 
                 return applicationDbContexta.ToList();
             }
 
             if (searchby == "description" && searchfor != null)
             {
-                var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser).Where(s => s.Description.ToLower().Contains(searchfor.ToLower()));
+                var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser)
+                    .Where(s => s.Description.ToLower()
+                    .Contains(searchfor.ToLower()));
 
                 return applicationDbContexta.ToList();
             }
@@ -63,8 +67,11 @@ namespace NewPortfolio.Controllers
                 return NotFound();
             }
 
+
+
+           
             var article = await _context.Article
-                .Include(a => a.ApplicationUser)
+                .Include(a => a.ApplicationUser).Include(c=>c.ArticlePosts)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (article == null)
             {
@@ -74,14 +81,18 @@ namespace NewPortfolio.Controllers
             return View(article);
         }
 
-        [Authorize]        
-        //[Area("admin")]
+        [HttpGet]
+        public IActionResult AddPost(int? id)
+        {
+            return View();
+        }
+
+
+        [Authorize]         
         [HttpGet]
         public IActionResult Create()
         {
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
-            
-            
             return View();
         }
         private List<SelectListItem> BuildPosted()
@@ -92,8 +103,7 @@ namespace NewPortfolio.Controllers
             return listPost;
         }
 
-        [Authorize] 
-        //[Area("admin")]
+        [Authorize]         
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] CreatePostVM article)
@@ -115,6 +125,7 @@ namespace NewPortfolio.Controllers
                    post.ImageUrl = userLog.Path;
                    post.Credits = userLog.Credit;
                    post.DateOfRegister = userLog.DateOfRegister.ToString("dd.MM.yyyy");
+                
                              
                    await _context.Article!.AddAsync(post);
                    await _context.SaveChangesAsync();
@@ -127,7 +138,6 @@ namespace NewPortfolio.Controllers
 
 
         [Authorize]
-        //[Area("admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Article == null)
@@ -144,8 +154,7 @@ namespace NewPortfolio.Controllers
             return View(article);
         }
 
-        [Authorize]
-      //  [Area("admin")]
+        [Authorize]   
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Title,Description,AppUserId, NickName")] Article article)

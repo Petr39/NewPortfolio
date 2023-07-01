@@ -33,11 +33,25 @@
                 <div>
                    @Html.DisplayFor(model => model.Content)
                 </div>
+                <div>
+                    
+                </div>
             </div>
         </div>
+        <table>
+            <thead>
+                @*@Html.DisplayFor(model=>model.ArticlePosts)*@
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ArticlePosts)
+                {
+                  <h5>Komentář:@item.Article.ApplicationUser.NickName</h5>  @item.Post;
+                }
+            </tbody>
+        </table>
         <div>
             <a class="btn-use btn-edit" asp-action="Index">Zpět</a>
-            <a class="btn-use btn-succes">Přidat komentář</a>
+            <a class="btn-use btn-succes" asp-action="Create" asp-controller="ArticlePosts" asp-route-id="@Model.Id" >Přidat komentář</a>
         </div>
     </div>
 </section>
