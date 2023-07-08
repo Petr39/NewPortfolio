@@ -68,7 +68,7 @@ namespace NewPortfolio.Controllers
             }
 
 
-
+            
            
             var article = await _context.Article
                 .Include(a => a.ApplicationUser).Include(c=>c.ArticlePosts)

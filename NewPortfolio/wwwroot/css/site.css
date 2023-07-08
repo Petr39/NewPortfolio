@@ -431,6 +431,37 @@ h2 {
     background: transparent;
 }
 
+
+/* komentáøe èlánkù*/
+.div-comment {
+    padding-left: 5px;
+    display: flexbox;
+    background: var(--bg-article);
+    margin-top: 5px;
+    border: 1px solid black;
+}
+    /* komentáøe èlánkù*/
+    .div-comment h5 {
+        text-decoration: underline;
+        color: rgb(0, 19, 128);
+    }
+/* obrázek pro poslání zprávy */
+.img-comment {
+    width: 20px;
+    vertical-align: sub;
+    margin-left: 5px;
+}
+
+.div-comment-first {
+    display: flex;
+    justify-content: space-between;
+}
+
+    .div-comment-first p {
+        font-weight: 300;
+        font-size: .8rem;
+    }
+
 .pf {
     display: flex;
     /* align-items:center;*/

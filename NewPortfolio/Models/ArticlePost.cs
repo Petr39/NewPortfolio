@@ -11,11 +11,30 @@ namespace NewPortfolio.Models
         /// <summary>
         /// Komentář k článku
         /// </summary>
-        public string Post { get; set; }
+        public string? Post { get; set; }
 
         [ForeignKey("ArticleId")]
         public Article? Article { get; set; }
 
+
+        [ForeignKey("AppUserId")]
+        public  AppUser? AppUser;
         public int ArticleId { get; set; }
+
+        /// <summary>
+        /// ID uživatele, který dal komentář k danému článku
+        /// </summary>
+        public string AppUserId { get; set; }
+
+        /// <summary>
+        /// Jméno uživatele, který zadá komentář k článku
+        /// </summary>
+
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// Datum založení komentáře
+        /// </summary>
+        public DateTime DateTime { get; set; } 
     }
 }

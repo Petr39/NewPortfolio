@@ -45,13 +45,25 @@
             <tbody>
                 @foreach (var item in Model.ArticlePosts)
                 {
-                  <h5>Komentář:@item.Article.ApplicationUser.NickName</h5>  @item.Post;
+                  
+                <div class="div-comment">
+
+                        <div class="div-comment-first">
+                            <h5><a asp-action="Index">@item.UserName</a> <a asp-action="Index"><img class="img-comment" src="/images/email (2).png"></a></h5>
+                        <p>@item.DateTime</p>
+                    </div>
+                    <div>
+                        @item.Post
+                    </div>
+                </div>
                 }
+
+
             </tbody>
         </table>
         <div>
             <a class="btn-use btn-edit" asp-action="Index">Zpět</a>
-            <a class="btn-use btn-succes" asp-action="Create" asp-controller="ArticlePosts" asp-route-id="@Model.Id" >Přidat komentář</a>
+            <a class="btn-use btn-succes" asp-action="Create" asp-controller="ArticlePosts" asp-route-id="@Model.Id">Přidat komentář</a>
         </div>
     </div>
 </section>
