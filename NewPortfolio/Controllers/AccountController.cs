@@ -1,29 +1,34 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.EntityFrameworkCore;
 using NewPortfolio.Data;
 using NewPortfolio.Models;
+using NuGet.Protocol.Plugins;
 using System.IO.Compression;
 
 namespace NewPortfolio.Controllers
 {
     [Authorize]
-    
     public class AccountController : Controller
     {
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
         private readonly IWebHostEnvironment webHostEnvironment;
+        
+        //private readonly IEmailService emailService;
+       
 
         public AccountController(UserManager<AppUser> userManager,SignInManager<AppUser> signInManager,IWebHostEnvironment webHostEnvironment)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.webHostEnvironment = webHostEnvironment;
+            //this.emailService = emailService;
         }
 
         [HttpGet]
@@ -38,11 +43,10 @@ namespace NewPortfolio.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl =null)
         {
             ViewData["ReturnUrl"] = returnUrl;
 
-           
             if (!ModelState.IsValid)
                 return View(model);
 
@@ -82,6 +86,9 @@ namespace NewPortfolio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
+
+
+
             if(model.Check)
             { 
                 ViewData["ReturnUrl"] = returnUrl;
@@ -89,7 +96,18 @@ namespace NewPortfolio.Controllers
             if (await userManager.FindByEmailAsync(model.Email) is null)
             {
                  var user = new AppUser { UserName = model.Email, Email = model.Email, NickName = model.NickNameUser };
+                     //---------Tady bude při registraci overovaci email------------// 
+                     // var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                     // var confirmLink = Url.Action(nameof(Confirm),"Authentication",new {token,email = user.Email!},Request.Scheme);
+                     // var message = new Message(new string[] { user.Email! }, "Confirmation email link", cofirmLink);
                  var result = await userManager.CreateAsync(user, model.Password);
+
+                    //if (user.TwoFactorEnabled)
+                    //{
+
+                    //}
+
+
                  if (result.Succeeded)
                  {
                     await signInManager.SignInAsync(user, isPersistent: false);
@@ -156,7 +174,7 @@ namespace NewPortfolio.Controllers
         {         
             return View();
         }
-        //pro adminy, poslání kreditů
+        //pro adminy, poslání kreditů pro sebe
         [HttpPost]
         public async Task<IActionResult> SendCredit(AppUser user)
         {
@@ -172,12 +190,16 @@ namespace NewPortfolio.Controllers
         [HttpGet]
         public async Task<IActionResult> ViewSendCredit(string? id)
         {
-            var model = new TransferViewModel();
-            var userLog = userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
-            var  a = await userManager.Users.FirstOrDefaultAsync(c=>c.Id == id);
-            model.SourceUserId = userLog.Id;
-            model.TargetUserId = a.Id;
-            return View(model);
+            if(id is not null)
+            {
+                var model = new TransferViewModel();
+                var userLog = userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
+                var  a = await userManager.Users.FirstOrDefaultAsync(c=>c.Id == id);
+                model.SourceUserId = userLog.Id;
+                model.TargetUserId = a.Id;
+                return View(model);
+            }
+            return View();
         }
 
         //Validace pro poslání kreditů
@@ -195,13 +217,46 @@ namespace NewPortfolio.Controllers
                     targetUser.Credit = targetUser.Credit + user.Amount;
                     await  userManager.UpdateAsync(sourceUser);
                     await  userManager.UpdateAsync(targetUser);
-                    return View();
+                    return RedirectToAction("Administration");
                 }
             }
-            
-         
+            return RedirectToAction("Administration");
+        }
+
+        /// <summary>
+        /// Pohled uživatelského rozhranní
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> AccountView(string? id)
+        {
+            var user = await userManager.Users.FirstOrDefaultAsync(c=>c.Id==id);
+            if(user !=null)
+            {
+               return View(user);
+            }
             return View();
         }
+
+
+        /// <summary>
+        /// Poslání zprávy druhému uživateli
+        /// </summary>
+        /// <param name="descriptionMessage"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendMessage(string descriptionMessage, string message, string? idUser)
+        {
+            if(idUser==null)
+            {
+                return RedirectToAction("Administration");
+            }
+            return View();
+        }
+
 
         #region Helpers
         private IActionResult RedirectToLocal(string returnUrl)

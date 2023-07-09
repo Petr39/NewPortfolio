@@ -6,11 +6,15 @@ namespace NewPortfolio.Models
     {
         [Key]
         public int Id { get; set; }
-
+        /// <summary>
+        /// Název věci
+        /// </summary>
         [Required]
         [Display(Name ="Název věci")]
         public string NameItem { get; set; }
-
+        /// <summary>
+        /// Popis předmětu
+        /// </summary>
         [Required]
         [Display(Name ="Popis předmětu")]
         public string? DescriptionItem { get; set; }

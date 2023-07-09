@@ -7,58 +7,53 @@
 <section class="section-index">
     <div class="section-hero">
         <div class="account-layout-content">
-                <div class="account-view">
-                    <div class="account-img">
-                        <img src="@Html.DisplayFor(model=>model.ApplicationUser.Path)" width="40" height="40" />
-                    </div>
-                    <div class="account-content">
-                        <h6>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h6>
-                        <div class="pf">
-                            <a href="contact.html">@Html.DisplayFor(model=>model.ApplicationUser.Credit)</a>
-                            <img src="/images/euro.png" />
-                        </div>
-                        <div>
-
-                            <p>Příspěvky:@Html.DisplayFor(model=>model.ApplicationUser.CountPost)</p>
-                            <p>Registrován:@Html.DisplayFor(model=>model.DateOfRegister)</p>
-                        </div>
-                    </div>
-                </div>      
-            <div class="account-text">
-
-                <div class="account-text-other">
-                    <p class="account-title">@Html.DisplayFor(model=>model.Title)</p>
-                    <p class="account-title">@Html.DisplayFor(model=>model.Description)</p>
+            <div class="account-view">
+                <div class="account-img">
+                    <img src="@Html.DisplayFor(model=>model.ApplicationUser.Path)" width="40" height="40" />
                 </div>
+                <div class="account-content">
+                    <div>
+                        <div class="account-nickname">
+                            <a asp-action="AccountView" asp-controller="Account" asp-route-id="@Model.ApplicationUser.Id"> <h6>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h6></a>
+                            <p><img class="img-comment" src="/images/email.png" /></p>
+                        </div>
+                    </div>
+                    <div class="pf">
+                        <a asp-action="ViewSendCredit" asp-controller="Account" asp-route-id="@Model.AppUserId">
+                            @Html.DisplayFor(model=>model.ApplicationUser.Credit)
+                            <img src="/images/euro.png" />
+                        </a>
+                    </div>
+
+                    <div>
+                        <p>Příspěvky:@Html.DisplayFor(model=>model.ApplicationUser.CountPost)</p>
+                        <p>Registrován:@Html.DisplayFor(model=>model.DateOfRegister)</p>
+                    </div>
+                </div>
+            </div>           
+            <div class="account-text">
                 <div>
                    @Html.DisplayFor(model => model.Content)
-                </div>
-                <div>
-                    
                 </div>
             </div>
         </div>
         <table>
             <thead>
-                @*@Html.DisplayFor(model=>model.ArticlePosts)*@
+                
             </thead>
             <tbody>
                 @foreach (var item in Model.ArticlePosts)
                 {
-                  
-                <div class="div-comment">
-
-                        <div class="div-comment-first">
-                            <h5><a asp-action="Index">@item.UserName</a> <a asp-action="Index"><img class="img-comment" src="/images/email (2).png"></a></h5>
-                        <p>@item.DateTime</p>
+                     <div class="div-comment">
+                          <div class="div-comment-first">
+                            <h5><a asp-action="AccountView" asp-controller="Account" asp-route-id="@item.AppUserId">@item.UserName</a>  <a asp-action="Index"><img class="img-comment" src="/images/email.png"></a></h5>
+                          <p>@item.DateTime</p>
+                       </div>
+                       <div>
+                            @item.Post
+                       </div>
                     </div>
-                    <div>
-                        @item.Post
-                    </div>
-                </div>
                 }
-
-
             </tbody>
         </table>
         <div>

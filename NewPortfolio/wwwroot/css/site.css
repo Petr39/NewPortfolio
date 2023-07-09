@@ -275,7 +275,7 @@ header {
 }
 
 .width-btn {
-    width: 150px;
+    width: 200px;
 }
 
 .pages {
@@ -383,20 +383,6 @@ h2 {
     border: 1px solid black;
 }
 
-.account-text-other {
-    display: flex;
-    border-bottom: 1px solid black;
-    width: 100%;
-}
-
-    .account-text-other p {
-        color: black;
-        font-size: .7rem;
-    }
-
-.account-title {
-    margin-right: 1rem;
-}
 
 .account {
     width: 160px;
@@ -431,6 +417,25 @@ h2 {
     background: transparent;
 }
 
+/* profil uživatele*/
+.account-profile {
+    margin-top: 150px;
+    padding: 0 19%;
+    /* background:green; */
+}
+
+.account-profile-board {
+    padding: 5px;
+    border: 1px solid black;
+}
+
+
+.account-profile-textarea {
+    width: 100%;
+    height: 230px;
+    resize: none;
+    position: relative;
+}
 
 /* komentáøe èlánkù*/
 .div-comment {
@@ -464,7 +469,6 @@ h2 {
 
 .pf {
     display: flex;
-    /* align-items:center;*/
     vertical-align: central;
 }
 
@@ -477,6 +481,10 @@ h2 {
 .account-content span {
     font-size: .6rem;
     color: rgb(0, 0, 0);
+}
+
+.account-nickname {
+    display: flex;
 }
 
 .pf a {
@@ -508,7 +516,6 @@ h2 {
 
 .btn-use {
     text-align: center;
-    /*  float: right;*/
     color: white;
     font-size: .8rem;
     font-weight: 100;
@@ -610,9 +617,9 @@ table, th, td {
 
 
 .section-hero {
-    padding-top: 100px;
+    padding-top: 170px;
     width: 100%;
-    padding-bottom: 30px;
+    padding-bottom: 40px;
 }
 
 .h6-hero {
@@ -861,6 +868,16 @@ table, th, td {
         display: flex;
     }
 
+
+    .account-profile {
+        margin-top: 80px;
+        padding: 0 2%;
+    }
+
+
+
+
+
     .section-administration,
     .form-administration {
         width: 100%;
@@ -873,12 +890,23 @@ table, th, td {
         width: 100%;
     }
 
+    .account-text-head p {
+        display: flex;
+        font-size: .6rem;
+    }
+
     .section-index,
     .section-index-tiny {
         position: absolute;
         margin-top: 100px;
         padding: 1% 1%;
         width: 100%;
+    }
+
+    .section-hero {
+        padding-top: 30px;
+        width: 100%;
+        padding-bottom: 40px;
     }
 
     .navlist {
