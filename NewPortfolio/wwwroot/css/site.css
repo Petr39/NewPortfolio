@@ -437,6 +437,10 @@ h2 {
     position: relative;
 }
 
+.credit {
+    color: gold;
+}
+
 /* komentáøe èlánkù*/
 .div-comment {
     padding-left: 5px;
@@ -516,6 +520,7 @@ h2 {
 
 .btn-use {
     text-align: center;
+    /*  float: right;*/
     color: white;
     font-size: .8rem;
     font-weight: 100;

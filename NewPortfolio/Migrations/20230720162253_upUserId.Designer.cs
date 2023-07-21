@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NewPortfolio.Data;
 
@@ -11,9 +12,10 @@ using NewPortfolio.Data;
 namespace NewPortfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230720162253_upUserId")]
+    partial class upUserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -390,9 +392,6 @@ namespace NewPortfolio.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("MessageBody")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -404,11 +403,11 @@ namespace NewPortfolio.Migrations
                         .HasColumnType("nvarchar(12)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Messages");
                 });
@@ -497,9 +496,11 @@ namespace NewPortfolio.Migrations
 
             modelBuilder.Entity("NewPortfolio.Models.Message", b =>
                 {
-                    b.HasOne("NewPortfolio.Models.AppUser", null)
+                    b.HasOne("NewPortfolio.Models.AppUser", "User")
                         .WithMany("Messages")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NewPortfolio.Models.AppUser", b =>

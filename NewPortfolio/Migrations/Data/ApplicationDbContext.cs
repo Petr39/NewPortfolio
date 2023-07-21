@@ -21,5 +21,7 @@ namespace NewPortfolio.Data
 
         public DbSet<ArticlePost> ArticlePosts { get; set; }  
 
+        public DbSet<Message> Messages { get; set; }
+
     } 
 }

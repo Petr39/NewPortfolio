@@ -1,0 +1,36 @@
+﻿@model IEnumerable<NewPortfolio.Models.Message>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<section class="section-index-articles">
+    <div class="section-hero">
+        <table>
+            <thead>
+                <th>
+                    Hlavička
+                </th>
+                <th>
+                    Tělo zprávy
+                </th>
+            </thead>
+
+            <tbody>
+               
+                  @foreach(var item in Model)
+                  {
+
+                     
+                      <tr>
+                         <td>
+                            @item.MessageHead
+                         </td>
+                         <td>
+                            @item.MessageBody
+                         </td>
+                      </tr>
+                  }
+            </tbody>
+        </table>
+</div>
+</section>

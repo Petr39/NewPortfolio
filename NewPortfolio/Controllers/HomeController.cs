@@ -9,8 +9,6 @@ namespace NewPortfolio.Controllers
     {
         public IActionResult Index()
         {
-        
-          
             return View();
         }
 

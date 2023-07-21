@@ -67,6 +67,7 @@ namespace NewPortfolio.Controllers
             {
                 _context.Add(buildPost);
                 await _context.SaveChangesAsync();
+                TempData["success"] = $"Build {buildPost.BuildName} přidán";
                 return RedirectToAction(nameof(Index));
             }
             return View(buildPost);
@@ -152,9 +153,10 @@ namespace NewPortfolio.Controllers
             if (buildPost != null)
             {
                 _context.BuildPosts.Remove(buildPost);
+                await _context.SaveChangesAsync();
+                TempData["error"] = $"Build {buildPost.BuildName} smazán";
             }
             
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

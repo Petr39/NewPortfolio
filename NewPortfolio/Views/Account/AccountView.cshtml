@@ -17,34 +17,15 @@
                 @Model.NickName
             </p>
             <p>
-                Registrován: @Model.DateOfRegister
+                Registrován: @Model.DateOfRegister.ToString("dd.MM.yyyy")
             </p>
         </div>
         <div>
-               Kredity: @Model.Credit 
+               Kredity: <span class="credit">@Model.Credit</span> 
         </div>
 
-    <div class="account-profile-board">
-        <div>
-            Lorem ipsum, dolor sit amet consectetur
-            adipisicing elit. Esse laboriosam exceptur
-            i, laborum ex sed nulla dolorem libero veli
-            t illo dignissimos tenetur animi pariatur
-            natus quasi qui voluptates possimus necessi
-            tatibus recusandae, assumenda unde officiis,
-            dolore error? Facilis, quidem velit ad blandit
-            iis est ea nemo. Veritatis quia ab officia nihi
-            l. Non, totam!
-        </div>
-        <div>
-            <label></label>
-            <input>
-            <textarea class="account-profile-textarea" placeholder="Vložte zprávu"></textarea>
-        </div>
-
-
-
-    </div>
+    
     <a asp-action="Index" asp-controller="Articles" class="btn-use btn-edit width-btn">Zpět</a>
-    <a asp-action="Index" asp-controller="Articles" class="btn-use btn-detail width-btn">Poslat zprávu</a>
+        <a asp-action="Index" asp-controller="Messages" asp-route-id="@Model.Id" class="btn-use btn-detail width-btn">Ukaž zprávy</a>
+    <a asp-action="Create" asp-controller="Messages" asp-route-id="@Model.Id" class="btn-use btn-detail width-btn">Poslat zprávu</a>
 </section>

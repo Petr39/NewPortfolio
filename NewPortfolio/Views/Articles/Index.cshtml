@@ -2,11 +2,15 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Core;
 
+
+
 @{
     ViewData["Title"] = "Seznam článků";
 }
 <section class="section-index-articles">
     <div class="section-hero">
+
+   
         <h5>Články o hře Diablo 4</h5>
         <form asp-controller="Articles" asp-action="Index" method="get">
             <div>
@@ -62,8 +66,8 @@
                                <div class="account-content">
                                    <div>
                                        <div class="account-nickname">
-                                           <a asp-action="AccountView" asp-controller="Account" asp-route-id="@item.ApplicationUser.Id"><h6>@Html.DisplayFor(model=>item.ApplicationUser.NickName)</h6></a>
-                                           <p><img class="img-comment" src="/images/email.png" /></p>
+                                                <a asp-action="AccountView" asp-controller="Account" asp-route-id="@item.ApplicationUser.Id"><h6>@Html.DisplayFor(model=>item.ApplicationUser.NickName)</h6></a>
+                                               <p><img class="img-comment" src="/images/email.png" /></p>
                                        </div>
                                    </div>
                                    <div class="pf">
@@ -86,16 +90,16 @@
                         @if (this.Context.User.IsInRole("admin"))
                         {
                          <th id="btn-hidden" class="nav-list-button">
-                         <a class="btn-use btn-danger width-btn" asp-action="Delete" asp-route-id="@item.Id">Smazat</a>
-                         <a class="btn-use btn-edit width-btn" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                    <a class="btn-use btn-danger width-btn" asp-action="Delete" asp-route-id="@item.Id"><i class="ri-chat-delete-line"></i></a>
+                                    <a class="btn-use btn-edit width-btn" asp-action="Edit" asp-route-id="@item.Id"><i class="ri-pencil-line"></i></a>
                          </th>
                         }
                     </tr>
                     }
                </tbody>
                </table>
-            <a class="btn-use btn-succes" asp-action="Create">Vytvořit nový</a>
-        <a asp-action="Index" asp-controller="Home" class="btn-use btn-edit width-btn">Domů</a>
+            <a class="btn-use btn-succes" asp-action="Create"> <i class="ri-file-add-line"></i> Vytvořit nový</a>
+            <a asp-action="Index" asp-controller="Home" class="btn-use btn-edit width-btn"> <i class="ri-home-line"></i> Domů</a>
         </div>
        <div class="pagination">
            @Html.PagedListPager((IPagedList) Model, page => Url.Action("Index", new {page,

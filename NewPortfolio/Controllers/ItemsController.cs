@@ -109,10 +109,11 @@ namespace NewPortfolio.Controllers
                     ViewData["img"] = item.PathItem;
 
                     await _context.SaveChangesAsync();
+                   _context.Add(item);
+                    TempData["success"] = $"Předmět {item.DescriptionItem} přidán";
+                   return RedirectToAction(nameof(Index));
                 }
-                _context.Add(item);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            
             }
             return View(item);
         }
@@ -199,10 +200,12 @@ namespace NewPortfolio.Controllers
             if (item != null)
             {
                 _context.Items.Remove(item);
+                await _context.SaveChangesAsync();
+                TempData["error"] = $"Předmět smazán";
+                return RedirectToAction(nameof(Index));
             }
             
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return View(item);
         }
 
         private bool ItemExists(int id)

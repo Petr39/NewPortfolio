@@ -1,0 +1,45 @@
+﻿@model Message
+
+@{
+    ViewData["Title"] = "Create";
+}
+<section class="section-index-articles">
+    <div class="section-hero">
+
+
+       
+            <form asp-action="Create" method="post" class="account-profile-board">
+            <div>
+                Zde můžete uživateli poslat zrávu
+            </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <label asp-for="Id" hidden></label>
+                <input asp-for="Id" hidden class="form-control" />
+                <div class="form-group">
+                    <label asp-for="MessageHead" class="control-label"></label>
+                    <input asp-for="MessageHead" class="form-control" />
+                    <span asp-validation-for="MessageHead" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MessageBody" class="control-label"></label>
+                    <textarea asp-for="MessageBody" class="text-area"></textarea>
+                    <span asp-validation-for="MessageBody" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserId" hidden class="control-label"></label>
+                    <input asp-for="UserId" hidden class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn-use btn-success">Vytvořit</button>
+                </div>
+
+        
+
+            </form>
+           
+
+<div>
+    <a asp-action="Index" asp-controller="Articles">Zpět na články</a>
+</div>
+</div>
+</section>

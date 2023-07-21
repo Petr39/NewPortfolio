@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Pangolin&family=Poppins:ital,wght@0,200;0,500;0,700;1,300;1,500&display=swap" rel="stylesheet">
-  
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 
 </head>
 <body>
@@ -63,6 +63,7 @@
     </header>
 
     <main>
+        <partial name="_Notification" />
         @RenderBody()
     </main>
     <footer>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NewPortfolio.Data;
+
 using NewPortfolio.Models;
 using System.Linq;
 using X.PagedList;
@@ -16,16 +17,18 @@ namespace NewPortfolio.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
-
         private IWebHostEnvironment webHostEnvironment;
+
         public ArticlesController(ApplicationDbContext context,
                UserManager<AppUser> userManager,
                IWebHostEnvironment webHostEnvironment
+               
               )
         {
             _context = context;
             _userManager = userManager;
             this.webHostEnvironment = webHostEnvironment;
+           
         }
 
         [HttpGet]
@@ -34,6 +37,8 @@ namespace NewPortfolio.Controllers
             var applicationDbContex = GetAllArticles(searchby, searchfor).ToPagedList(page ?? 1, 6);
             return View(applicationDbContex);
         }
+
+
 
         private List<Article> GetAllArticles(string searchby, string searchfor)
         {
@@ -109,7 +114,12 @@ namespace NewPortfolio.Controllers
         public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] CreatePostVM article)
         {
              var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
-          
+
+            //Ověření, že titulek není stejný jako popisek
+            if (article.Title.ToLower() == article.Description.ToLower())
+            {
+                ModelState.AddModelError("title", "Název titulku nesmí být stejný jako popisek");
+            }
 
             if (ModelState.IsValid)
             {
@@ -129,8 +139,7 @@ namespace NewPortfolio.Controllers
                              
                    await _context.Article!.AddAsync(post);
                    await _context.SaveChangesAsync();
-
-
+                TempData["success"] = "Článek přidán";
                 return RedirectToAction(nameof(Index));
             }
             return View();
@@ -213,7 +222,6 @@ namespace NewPortfolio.Controllers
 
 
         [Authorize]
-        //[Area("admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -222,6 +230,7 @@ namespace NewPortfolio.Controllers
             {
                 return Problem("Entity set 'ApplicationDbContext.Article'  is null.");
             }
+
             var article = await _context.Article.FindAsync(id);
             if (article != null)
             {
@@ -229,6 +238,7 @@ namespace NewPortfolio.Controllers
             }
 
             await _context.SaveChangesAsync();
+            TempData["error"] = "Článek odstraněn";
             return RedirectToAction(nameof(Index));
         }
 
@@ -255,7 +265,7 @@ namespace NewPortfolio.Controllers
             return uniqueFileName;
         }
 
-
+        
         #region API CALLS
 
         [HttpGet]
@@ -263,17 +273,7 @@ namespace NewPortfolio.Controllers
         {
             var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
             return Json(new { data = applicationDbContext });
-
         }
-
-        //[HttpGet]
-        //public async Task<IActionResult> GetAll()
-        //{
-        //    var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
-        //    return Json(new { data = applicationDbContext });
-
-        //}
-
 
         #endregion
     }

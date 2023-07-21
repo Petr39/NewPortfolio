@@ -50,7 +50,11 @@ namespace NewPortfolio.Models
         /// </summary>
         public int CountPost { get; set; } = 0;
 
-        
+
+        /// <summary>
+        /// Zprávy od uživatelů
+        /// </summary>
+        public virtual IEnumerable<Message> Messages { get; set; }
     }
 
    

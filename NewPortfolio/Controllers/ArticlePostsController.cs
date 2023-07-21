@@ -64,26 +64,29 @@ namespace NewPortfolio.Controllers
 
             var user = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
 
-
-            var a = new ArticlePost()
+            if (user != null)
             {
-                ArticleId = articlePost.Id,
-                Post = articlePost.Post,
-                AppUserId = user.Id,
-                UserName = user.NickName,
-                DateTime= DateTime.Now,
-                
-                
-            };
+                var a = new ArticlePost()
+                {
+                    ArticleId = articlePost.Id,
+                    Post = articlePost.Post,
+                    AppUserId = user.Id,
+                    UserName = user.NickName,
+                    DateTime= DateTime.Now,
+                };
 
-            if (ModelState.IsValid)
-            {
-                _context.Add(a);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
+
+               if (ModelState.IsValid)
+               {
+                   _context.Add(a);
+                   await _context.SaveChangesAsync();
+                    TempData["success"] = "Přidán komentář článku";
+                    return RedirectToAction("Index");
+               }
+               return View();
+
             }
-
-            return View(a);
+            return View();
         }
        
         public async Task<IActionResult> Edit(int? id)
