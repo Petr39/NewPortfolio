@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NewPortfolio.Data;
-
-using NewPortfolio.Migrations;
 using NewPortfolio.Models;
-using NewPortfolio.ModelView;
+
 
 namespace NewPortfolio.Controllers
 {
+    //Pro posílání zpráv uživatelům
+    [Authorize]
     public class MessagesController : Controller 
     {
         private readonly ApplicationDbContext _context;
@@ -33,13 +28,13 @@ namespace NewPortfolio.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Index(string id)
         {
-            //Tohle mi poradil chatbot - zkrácení načtení uživatele
+         
             var userLog = await _userManager.GetUserAsync(User);
 
-
             var user= await _userManager.FindByIdAsync(id);
+
             if (user != null && userLog!=null)
-            {
+            { 
                 if(user!=userLog)
                     return RedirectToAction("Index","Articles");
                 //Vybere mi zprávy podle id uživatele do listu
@@ -62,19 +57,60 @@ namespace NewPortfolio.Controllers
             }
             return View(); 
         }
-
+        /// <summary>
+        /// Vytvoření zprávy uživateli
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(Message message)
         {
-            if(message != null)
+            var user= await _userManager.GetUserAsync(User);
+            if(user != null)
             {
-                await _context.Messages.AddAsync(message);
-                await _context.SaveChangesAsync();
-                TempData["success"] = "Zpráva odeslána";
-                return RedirectToAction("Index","Articles");
+               if(message.MessageBody !=null || message.MessageHead != null)
+               {
+                   message.DateTime = DateTime.Now;
+                   message.UserName = user.NickName;
+                   await _context.Messages.AddAsync(message);
+                   await _context.SaveChangesAsync();
+                   TempData["success"] = "Zpráva odeslána";
+                   return RedirectToAction("Index","Articles");
+               }
             }
             return View(message);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int? id)
+        {
+            var message = _context.Messages.FirstOrDefault(m => m.Id == id);
+            if(message != null)
+            {
+                return View(message);
+            }
+
+            return NotFound();
+        }
+
+        /// <summary>
+        /// Smazání zprávy
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> DeletePost(int? id)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var message = _context.Messages.FirstOrDefaultAsync(u => u.Id == id);
+            if(message != null && user!=null)
+            {
+                      _context.Remove(message);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+            return View();
         }
     }
 }

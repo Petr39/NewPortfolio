@@ -22,14 +22,15 @@
 
     <div class="form-group">
           
-      @if (this.Context.User.IsInRole("admin"))
-        {
-            <h3>Administrátor</h3>
-        }
 
-        <hr />
+   
 
             <form class="form-administration" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data">
+                @if (this.Context.User.IsInRole("admin"))
+                  {
+                      <h3>Administrátor</h3>
+                  }
+                  <hr>
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div>
 

@@ -150,6 +150,7 @@ header {
 .site-heading {
     font-size: 2rem;
     text-align: center;
+    margin: 0px 19%;
 }
 
 .table {
@@ -211,7 +212,7 @@ header {
 }
 
 .form-group {
-    margin-top: 30px;
+    margin: 30px 19%;
     top: 40px;
     width: 100%;
 }
@@ -373,7 +374,7 @@ h2 {
 
 .form-control {
     width: 250px;
-    background: #7bcdd3;
+    background: #ffffff;
 }
 
 .account-text {
@@ -419,14 +420,18 @@ h2 {
 
 /* profil uživatele*/
 .account-profile {
-    margin-top: 150px;
-    padding: 0 19%;
-    /* background:green; */
+    padding: 1% 1%;
+    margin: 150px 19%;
+    display: flex;
+    justify-content: space-between;
+    background: var(--bg-article);
 }
 
 .account-profile-board {
+    margin: 0 10%;
     padding: 5px;
-    border: 1px solid black;
+    /* border: 1px solid black; 
+     background: #23817d; */
 }
 
 
@@ -516,6 +521,7 @@ h2 {
 
 .width-btn {
     width: 150px;
+    height: 25px;
 }
 
 .btn-use {
@@ -525,7 +531,7 @@ h2 {
     font-size: .8rem;
     font-weight: 100;
     padding: .1rem .6rem;
-    margin-right: .1rem;
+    margin: .1rem;
     border: 1px solid transparent;
 }
 
@@ -581,6 +587,28 @@ h2 {
     .img-sort img:hover {
         transform: scale(1.8);
     }
+
+.messages {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    background: var(--bg-header);
+}
+
+.messages-head {
+    background: var(--bg-article);
+}
+
+.messages-th {
+    margin: 0 10px;
+    padding: 10px 10px;
+}
+
+.message-td {
+    margin: 0 2px;
+    padding: 0 2px;
+}
+
 
 footer {
     left: 0;
@@ -688,14 +716,39 @@ table, th, td {
         border-bottom: 1px solid black;
     }
 
+.vertical {
+    display: grid;
+}
 
-/*Responsive design zde*/
+
+/*Responsive design */
 @media (max-width: 1535px) {
     header {
         padding: 0 3%;
         transition: .3s;
     }
 
+    .account-profile-board {
+        margin: 0 1%;
+        padding: 5px;
+        /* border: 1px solid black; 
+         background: #23817d; */
+        width: 90%;
+    }
+
+    .account-profile {
+        padding: 1% 1%;
+        margin: 150px 10%;
+        display: flex;
+        justify-content: space-between;
+        /* background:green; */
+    }
+
+    .form-group {
+        margin: 30px 2%;
+        top: 20px;
+        width: 95%;
+    }
 
     .div-credit {
         margin: auto;
@@ -731,6 +784,10 @@ table, th, td {
         margin-top: 100px;
         padding: 1% 12%;
         width: 100%;
+    }
+
+    .text-area {
+        width: 85%;
     }
 }
 

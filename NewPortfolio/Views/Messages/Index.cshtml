@@ -5,29 +5,35 @@
 }
 <section class="section-index-articles">
     <div class="section-hero">
-        <table>
+        <table  class="messages">
+            <thead class="messages-head">
+                <th class="messages-th">
+                    Uživatel
+                </th>
+                 <th class="messages-th">
+                    Zpráva
+                </th>
+                <th class="messages-th">
+                    Datum 
+                </th>
             <thead>
-                <th>
-                    Hlavička
-                </th>
-                <th>
-                    Tělo zprávy
-                </th>
-            </thead>
-
             <tbody>
-               
+             
                   @foreach(var item in Model)
                   {
-
-                     
                       <tr>
-                         <td>
-                            @item.MessageHead
+                         <td class="message-td ">
+                            <a asp-action="AccountView" asp-controller="Account" asp-route-id="@item.UserId" class="text-decoration">
+                             @item.UserName
+
+                           </a>
                          </td>
-                         <td>
+                        <td class="message-td">
                             @item.MessageBody
                          </td>
+                        <td class="message-td">
+                            @item.DateTime.ToShortDateString()  @item.DateTime.ToShortTimeString()
+                        </td>
                       </tr>
                   }
             </tbody>

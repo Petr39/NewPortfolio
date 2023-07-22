@@ -1,18 +1,14 @@
 ﻿@model Message
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Vytvořit zprávu";
 }
 <section class="section-index-articles">
     <div class="section-hero">
-
-
-       
+      
             <form asp-action="Create" method="post" class="account-profile-board">
-            <div>
-                Zde můžete uživateli poslat zrávu
-            </div>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           
                 <label asp-for="Id" hidden></label>
                 <input asp-for="Id" hidden class="form-control" />
                 <div class="form-group">
@@ -30,16 +26,11 @@
                     <input asp-for="UserId" hidden class="form-control" />
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn-use btn-success">Vytvořit</button>
+                    <button type="submit" class="btn-use btn-succes">Vytvořit</button>
+                    <a asp-action="Index" asp-controller="Articles" class="btn-use btn-edit">Zpět na články</a>
                 </div>
-
-        
-
             </form>
-           
 
-<div>
-    <a asp-action="Index" asp-controller="Articles">Zpět na články</a>
-</div>
+
 </div>
 </section>

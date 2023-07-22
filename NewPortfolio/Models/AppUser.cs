@@ -54,7 +54,7 @@ namespace NewPortfolio.Models
         /// <summary>
         /// Zprávy od uživatelů
         /// </summary>
-        public virtual IEnumerable<Message> Messages { get; set; }
+        public virtual IEnumerable<Message>? Messages { get; set; }
     }
 
    

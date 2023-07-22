@@ -10,22 +10,28 @@
 
 <section class="account-profile">
 
-
     <div>
         <div>
-            <p>
-                @Model.NickName
-            </p>
-            <p>
-                Registrován: @Model.DateOfRegister.ToString("dd.MM.yyyy")
-            </p>
-        </div>
+           <div>
+              <p>
+                  @Model.NickName
+              </p>
+              <p>
+                  Registrován: @Model.DateOfRegister.ToString("dd.MM.yyyy")
+              </p>
+           </div>
         <div>
                Kredity: <span class="credit">@Model.Credit</span> 
         </div>
+    </div>
 
-    
-    <a asp-action="Index" asp-controller="Articles" class="btn-use btn-edit width-btn">Zpět</a>
+       <div class="account-img">
+           <img src="@Html.DisplayFor(model=>model.Path)" width="40" height="40" />
+       </div>
+ </div>
+    <div class="vertical">
+        <a asp-action="Index" asp-controller="Articles" class="btn-use btn-edit width-btn">Zpět</a>
         <a asp-action="Index" asp-controller="Messages" asp-route-id="@Model.Id" class="btn-use btn-detail width-btn">Ukaž zprávy</a>
-    <a asp-action="Create" asp-controller="Messages" asp-route-id="@Model.Id" class="btn-use btn-detail width-btn">Poslat zprávu</a>
+        <a asp-action="Create" asp-controller="Messages" asp-route-id="@Model.Id" class="btn-use btn-detail width-btn">Poslat zprávu</a>
+    </div>
 </section>
