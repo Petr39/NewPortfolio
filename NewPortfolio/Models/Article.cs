@@ -20,6 +20,7 @@ namespace NewPortfolio.Models
         /// </summary>
         [Required(ErrorMessage ="Vyplňte obsah")]
         [Display(Name ="Článek")]
+        [StringLength(255, ErrorMessage = "Maximum znaků je 255")]
         public string Content { get; set; } = string.Empty;
         /// <summary>
         /// Titulek článku
@@ -27,6 +28,7 @@ namespace NewPortfolio.Models
       
         [Required(ErrorMessage ="Vyplňte titulek")]
         [Display(Name ="Titulek")]
+        [StringLength(12, ErrorMessage ="Maximum znaků je 12")]
         public string? Title { get; set; } = string.Empty;
         /// <summary>
         /// Popisek článku
@@ -34,6 +36,7 @@ namespace NewPortfolio.Models
       
         [Required(ErrorMessage ="Vyplňte popisek článku")]
         [Display(Name ="Popis")]
+        [StringLength(12, ErrorMessage = "Maximum znaků je 12")]
         public string? Description { get; set; } = string.Empty;
 
         public string? AppUserId { get; set; }

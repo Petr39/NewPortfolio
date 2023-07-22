@@ -11,6 +11,7 @@ namespace NewPortfolio.Models
         /// <summary>
         /// Komentář k článku
         /// </summary>
+        [StringLength(255, ErrorMessage = "Maximum znaků je 255")]
         public string? Post { get; set; }
 
         [ForeignKey("ArticleId")]
@@ -24,12 +25,13 @@ namespace NewPortfolio.Models
         /// <summary>
         /// ID uživatele, který dal komentář k danému článku
         /// </summary>
+        [Required]
         public string AppUserId { get; set; }
 
         /// <summary>
         /// Jméno uživatele, který zadá komentář k článku
         /// </summary>
-
+        [Required]
         public string UserName { get; set; }
 
         /// <summary>

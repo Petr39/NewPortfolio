@@ -15,11 +15,12 @@ namespace NewPortfolio.Models
         /// </summary>
         [Required(ErrorMessage = "Vyplňte obsah")]
         [Display(Name = "Článek")]
+        [StringLength(255, ErrorMessage = "Maximum znaků je 255")]
         public string Content { get; set; } = string.Empty;
         /// <summary>
         /// Titulek článku
         /// </summary>
-        [StringLength(20, ErrorMessage = "Titulek je příliš dlouhý (max 20 znaků)")]
+        [StringLength(8, ErrorMessage = "Titulek je příliš dlouhý (max 8 znaků)")]
         [Required(ErrorMessage = "Vyplňte titulek")]
         [Display(Name = "Titulek")]
         public string Title { get; set; } = string.Empty;
@@ -28,6 +29,7 @@ namespace NewPortfolio.Models
         /// </summary>
         [Required(ErrorMessage = "Vyplňte popisek")]
         [Display(Name = "Popis")]
+        [StringLength(8, ErrorMessage = "Titulek je příliš dlouhý (max 8 znaků)")]
         public string Description { get; set; } = string.Empty;
 
        
