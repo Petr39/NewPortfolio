@@ -42,8 +42,14 @@ namespace NewPortfolio.Models
         [NotMapped]
         public AppUser? User { get; set; }
 
-      
+        /// <summary>
+        /// Přezdívka uživatele
+        /// </summary>
         public string? UserName { get; set; }
+
+        /// <summary>
+        /// Id uživatele
+        /// </summary>
         public string? UserId { get; set; }
     }
 }

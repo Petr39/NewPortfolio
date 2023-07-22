@@ -5,9 +5,17 @@ namespace NewPortfolio.Models
 {
     public class BuildPost
     {
+
+        /// <summary>
+        /// Id příspěvku k sestavení postavy
+        /// </summary>
         [Key]
         public int Id {get; set; }
 
+
+        /// <summary>
+        /// Sestavení postavy - název třídy postavy
+        /// </summary>
         [Display(Name ="Zadej třídu")]
         public string BuildName { get; set; }
 

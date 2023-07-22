@@ -11,7 +11,10 @@ using NewPortfolio.Data;
 using NewPortfolio.Models;
 
 namespace NewPortfolio.Controllers
-{
+{   
+    /// <summary>
+    /// Třída určneá k posílání zpráv uživatelům v příspěvcích
+    /// </summary>
     public class ArticlePostsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -23,6 +26,12 @@ namespace NewPortfolio.Controllers
             _userManager = userManager;
         }
 
+
+        /// <summary>
+        /// Načtení všech zpráv
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]      
         public async Task<IActionResult> Index(int? id)
         {
@@ -30,7 +39,11 @@ namespace NewPortfolio.Controllers
             return View(await postList.ToListAsync());
         }
 
-        // GET: ArticlePosts/Details/5
+        /// <summary>
+        /// Detaily zprávy
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ArticlePosts == null)
@@ -56,12 +69,18 @@ namespace NewPortfolio.Controllers
             return View(art);
         }
 
+
+        /// <summary>
+        /// Vytvoření zprávy s názvem uživatele a jeho id
+        /// </summary>
+        /// <param name="articlePost"></param>
+        /// <returns></returns>
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Post,ArticleId")] ArticlePostVM articlePost)
         {
-
+            //Načtení přihlášeného uživatele
             var user = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
 
             if (user != null)
@@ -75,15 +94,15 @@ namespace NewPortfolio.Controllers
                     DateTime= DateTime.Now,
                 };
 
-
+                //Ověření, jestli je validace v pořádku
                if (ModelState.IsValid)
                {
-                   _context.Add(a);
-                   await _context.SaveChangesAsync();
+                     _context.Add(a);
+                    await _context.SaveChangesAsync();
                     TempData["success"] = "Přidán komentář článku";
                     return RedirectToAction("Index");
                }
-               return View();
+            
 
             }
             return View();
@@ -178,6 +197,13 @@ namespace NewPortfolio.Controllers
         //    return RedirectToAction(nameof(Index));
         //}
 
+
+
+        /// <summary>
+        /// Ověření, že existuje příspěvek 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool ArticlePostExists(int id)
         {
           return (_context.ArticlePosts?.Any(e => e.Id == id)).GetValueOrDefault();

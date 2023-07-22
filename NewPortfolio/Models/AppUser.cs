@@ -35,10 +35,16 @@ namespace NewPortfolio.Models
         /// </summary>
         public string? Path { get; set; }
 
-
+        /// <summary>
+        /// Cesta k obrázku avatara - max velikost 40kB
+        /// </summary>
         [NotMapped]
         public IFormFile? ImagePath { get; set; }
 
+
+        /// <summary>
+        /// Článek
+        /// </summary>
         List<Article>? Articles { get; set; }
 
         /// <summary>

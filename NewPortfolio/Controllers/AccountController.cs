@@ -84,6 +84,12 @@ namespace NewPortfolio.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
+        /// <summary>
+        /// Registrace uživatele 
+        /// </summary>
+        /// <param name="returnUrl"></param>
+        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
@@ -126,7 +132,7 @@ namespace NewPortfolio.Controllers
                     }
 
                         AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Přezdívka {model.NickNameUser} je již registrována" }));
-                        return View(model);
+                        //return View(model);
                 }
                 AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Email {model.Email} je již zaregistrován" }));
             }
@@ -145,7 +151,7 @@ namespace NewPortfolio.Controllers
             {
                 ViewData["credit"] = logUser.Credit;
                 ViewData["img"] = logUser.Path;
-               //Dopsat kód
+               
             }
               
             return View();
@@ -289,6 +295,7 @@ namespace NewPortfolio.Controllers
             var user = await userManager.Users.FirstOrDefaultAsync(c=>c.Id==id);
             if(user !=null)            
                return View(user);
+
             TempData["error"] = "Uživatel nenačten";
             return RedirectToAction("Index","Articles");
         }
@@ -306,9 +313,10 @@ namespace NewPortfolio.Controllers
         /// <returns></returns>
         private Message CreditSendMessage(int credit, AppUser userName, AppUser userNameRecived)
         {
-                var message = new Message();
+            var message = new Message();
             if(userName!=null && userNameRecived != null)
             {
+                message.DateTime = DateTime.Now;
                 message.UserId = userName.Id;
                 message.MessageHead = userName.NickName;
                 message.UserName = userNameRecived.NickName;

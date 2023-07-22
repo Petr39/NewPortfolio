@@ -4,6 +4,10 @@ namespace NewPortfolio.Models
 {
     public class Item
     {
+
+        /// <summary>
+        /// Id věci
+        /// </summary>
         [Key]
         public int Id { get; set; }
         /// <summary>
@@ -19,6 +23,10 @@ namespace NewPortfolio.Models
         [Display(Name ="Popis předmětu")]
         public string? DescriptionItem { get; set; }
 
+
+        /// <summary>
+        /// Cesta k obrázku věci
+        /// </summary>
         public string? PathItem { get; set; }
 
         [NotMapped]

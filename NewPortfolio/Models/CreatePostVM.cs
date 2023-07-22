@@ -32,19 +32,36 @@ namespace NewPortfolio.Models
         [StringLength(8, ErrorMessage = "Titulek je příliš dlouhý (max 8 znaků)")]
         public string Description { get; set; } = string.Empty;
 
-       
+       /// <summary>
+       /// Id uživatele
+       /// </summary>
         public string? AppUserId { get; set; }
 
-
+        /// <summary>
+        /// Přezdívka uživatele/ NickName
+        /// </summary>
         public string? NickName { get; set; }
 
         public string? ImageUrlVM { get; set; }
 
+
+        /// <summary>
+        /// Cesta k obrázku/avatara uživatele max 40 kB
+        /// </summary>
         [NotMapped]
         public IFormFile? Image { get; set; }
 
+
+        /// <summary>
+        /// Počet příspěvků uživatele
+        /// </summary>
         public int CountPost { get; set; }
 
+
+
+        /// <summary>
+        /// Id třídy postavy 
+        /// </summary>
         [ForeignKey("BuildPost")]
         [Display(Name = "Vyberte svoji třídu")]
 

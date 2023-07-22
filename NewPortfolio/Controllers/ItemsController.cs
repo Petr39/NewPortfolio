@@ -15,7 +15,9 @@ using X.PagedList;
 
 namespace NewPortfolio.Controllers
 {
-    
+    /// <summary>
+    /// Třída určená k tvoření věcí/itemů ze hry, popisy itemů/věcí
+    /// </summary>
     public class ItemsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -29,8 +31,16 @@ namespace NewPortfolio.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-        [AllowAnonymous]
 
+        /// <summary>
+        /// Výpis věech věcí
+        /// </summary>
+        /// <param name="searchby"></param>
+        /// <param name="searchfor"></param>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        
         public async Task<IActionResult> Index(string searchby, string searchfor, int? page)
         {
 
@@ -38,7 +48,12 @@ namespace NewPortfolio.Controllers
             var applicationDbContex = GetAllItems(searchby, searchfor).ToPagedList(page ?? 1, 6);
             return View(applicationDbContex);           
         }
-
+        /// <summary>
+        /// Vyhledání věcí podle klíčového slova/znaku
+        /// </summary>
+        /// <param name="searchby"></param>
+        /// <param name="searchfor"></param>
+        /// <returns></returns>
         private List<Item> GetAllItems(string searchby, string searchfor)
         {
             if (searchby == "nameitem" && searchfor != null)

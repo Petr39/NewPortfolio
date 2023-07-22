@@ -4,11 +4,17 @@
     public class TransferViewModel
     {
 
-        //Id uživatele, co posílá kredit
+        /// <summary>
+        /// Id uživatele, co posílá kredit
+        /// </summary>
         public string SourceUserId { get; set; }
-        //Id uživatele, co přijímá kredit
+        /// <summary>
+        /// Id uživatele, co přijímá kredit
+        /// </summary>
         public string TargetUserId { get; set; }
-        //Částka k poslání
+        /// <summary>
+        /// Částka k poslání
+        /// </summary>
         public int Amount { get; set; }
     }
 }

@@ -13,6 +13,10 @@ using X.PagedList;
 
 namespace NewPortfolio.Controllers
 {
+
+    /// <summary>
+    /// Příspěvky uživatelům
+    /// </summary>
     public class ArticlesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -39,7 +43,12 @@ namespace NewPortfolio.Controllers
         }
 
 
-
+        /// <summary>
+        /// Načtení příspěvků podle titulku nebo popisku klíčovým slovem nebo znakem
+        /// </summary>
+        /// <param name="searchby"></param>
+        /// <param name="searchfor"></param>
+        /// <returns></returns>
         private List<Article> GetAllArticles(string searchby, string searchfor)
         {
             if (searchby == "title" && searchfor != null)

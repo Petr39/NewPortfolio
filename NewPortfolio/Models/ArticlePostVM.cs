@@ -2,6 +2,9 @@
 
 namespace NewPortfolio.Models
 {
+    /// <summary>
+    /// Třída určená ke komentáři daného článku
+    /// </summary>
     public class ArticlePostVM
     {
         public int Id { get; set; }
@@ -14,6 +17,10 @@ namespace NewPortfolio.Models
         [ForeignKey("ArticleId")]
         public Article? Article { get; set; }
 
+
+        /// <summary>
+        /// Id článku
+        /// </summary>
         public int ArticleId { get; set; }
     }
 }
