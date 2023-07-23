@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using NewPortfolio.Models;
+using NewPortfolio.Models.Repositories;
 using System.Diagnostics;
 
 namespace NewPortfolio.Controllers
@@ -12,12 +13,14 @@ namespace NewPortfolio.Controllers
     public class HomeController : Controller
     {
 
+        //EmailSender EmailSender=new EmailSender();
         /// <summary>
         /// Základní a zároveň úvodní stránka
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
+           //EmailSender.SendEmail();
             return View();
         }
 

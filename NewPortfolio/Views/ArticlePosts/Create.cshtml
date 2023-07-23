@@ -1,21 +1,18 @@
 ﻿@model NewPortfolio.Models.ArticlePostVM
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Komentář příspěvku";
 }
 <section class="section-index-articles">
     <div class="section-hero">
-<h1>Create</h1>
 
-<h4>ArticlePost</h4>
-<hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" method="post">
+                <form asp-action="Create" method="post" class="account-profile-board">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Post" class="control-label"></label>
-                <input asp-for="Post" class="form-control" />
+                <textarea asp-for="Post" class="text-area" ></textarea>
                 <span asp-validation-for="Post" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -23,15 +20,15 @@
                 <input asp-for="ArticleId" hidden/>
             </div>                  
             <div class="form-group">
-                <input type="submit" value="Vytvořit" class="btn-use btn-succes width-btn" />
+                <input type="submit" value="Vytvořit" class="btn-use btn-succes" />
+                 <a asp-action="Index" class="btn-use btn-edit">Zpět</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index" class="btn-use btn-edit">Zpět</a>
-</div>
+
+
 
 </div>
 </section>

@@ -12,6 +12,7 @@ namespace NewPortfolio.Models
         /// Komentář k článku
         /// </summary>
         [StringLength(255, ErrorMessage = "Maximum znaků je 255")]
+        [Display(Name ="Zadejte komentář")]
         public string Post { get; set; }
 
         [ForeignKey("ArticleId")]

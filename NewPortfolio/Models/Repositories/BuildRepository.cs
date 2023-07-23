@@ -6,6 +6,7 @@ using NewPortfolio.Interfaces;
 
 namespace NewPortfolio.Models.Repositories
 {
+   
     public class BuildRepository : IBuild
     {
 
@@ -21,6 +22,7 @@ namespace NewPortfolio.Models.Repositories
         public void Create(Build build)
         {
             context.Add(build);
+            
         }
 
         public void Delete(int id)

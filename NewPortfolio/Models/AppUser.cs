@@ -21,7 +21,8 @@ namespace NewPortfolio.Models
         /// <summary>
         /// Přeszdívka uživatele
         /// </summary>
-        [Display(Name ="Přezdívka"),MaxLength(8,ErrorMessage ="Přezdívka může být maximálně 8 znaků")]
+        [Display(Name ="Přezdívka")]
+        [StringLength(8)]
         public string? NickName { get; set; }
 
         /// <summary>

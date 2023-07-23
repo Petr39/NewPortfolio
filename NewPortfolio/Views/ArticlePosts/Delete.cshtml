@@ -1,0 +1,30 @@
+﻿@model NewPortfolio.Models.ArticlePost
+
+@{
+    ViewData["Title"] = "Smazzání komentáře";
+}
+
+
+<section class="section-index-articles">
+    <div class="section-hero">
+    <dl class="row">
+         <label>Článek</label>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Article.Content)
+        </dd>
+      
+        <hr />
+        <label>Komentář</label>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Post)
+        </dd>
+      
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Smazat" class="btn-use btn-danger" /> 
+        <a asp-action="Index" class="btn-use btn-edit">Zpět</a>
+     </form>
+  </div>
+</section>

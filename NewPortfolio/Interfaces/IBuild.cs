@@ -3,13 +3,10 @@ using NewPortfolio.Models;
 
 
 namespace NewPortfolio.Interfaces
- 
-
-
 {
     public interface IBuild
     {
-        Task<IEnumerable<Build>> ShowAll(int id);
+        Task <IEnumerable<Build>> ShowAll(int id);
 
         void Create(Build build);
 

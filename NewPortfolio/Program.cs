@@ -1,9 +1,10 @@
 global using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using NewPortfolio.Data;
-
 using NewPortfolio.Models;
+using NewPortfolio.Models.Repositories;
 
 namespace NewPortfolio
 {
@@ -29,6 +30,9 @@ namespace NewPortfolio
                 options.SignIn.RequireConfirmedEmail = false;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
+
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
 
@@ -73,9 +77,9 @@ namespace NewPortfolio
             //    AppUser uzivatel = spravceUzivatelu.FindByEmailAsync("admin@seznam.cz").Result;
             //    spravceUzivatelu.AddToRoleAsync(uzivatel, "admin").Wait();
 
-            //    spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
-            //    AppUser uzivatel2 = spravceUzivatelu.FindByEmailAsync("petr.valosek@post.cz").Result;
-            //    spravceUzivatelu.AddToRoleAsync(uzivatel2, "admin").Wait();
+            //    //spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
+            //    //AppUser uzivatel2 = spravceUzivatelu.FindByEmailAsync("petr.valosek@post.cz").Result;
+            //    //spravceUzivatelu.AddToRoleAsync(uzivatel2, "admin").Wait();
 
             //}
             app.Run();

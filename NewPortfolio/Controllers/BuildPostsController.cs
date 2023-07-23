@@ -11,8 +11,11 @@ using NewPortfolio.Models;
 
 namespace NewPortfolio.Controllers
 {
+    
     public class BuildPostsController : Controller
     {
+
+      
         private readonly ApplicationDbContext _context;
 
         public BuildPostsController(ApplicationDbContext context)
@@ -70,6 +73,8 @@ namespace NewPortfolio.Controllers
                 TempData["success"] = $"Build {buildPost.BuildName} přidán";
                 return RedirectToAction(nameof(Index));
             }
+
+            ModelState.Clear();
             return View(buildPost);
         }
 

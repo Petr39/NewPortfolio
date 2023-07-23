@@ -108,94 +108,54 @@ namespace NewPortfolio.Controllers
             return View();
         }
        
-        public async Task<IActionResult> Edit(int? id)
+      
+
+
+       /// <summary>
+       /// Smazání komentáře článku
+       /// </summary>
+       /// <param name="id"></param>
+       /// <returns></returns>
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ArticlePosts == null)
             {
                 return NotFound();
             }
 
-            var articlePost = await _context.ArticlePosts.FindAsync(id);
+            var articlePost = await _context.ArticlePosts
+                .Include(a => a.Article)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (articlePost == null)
             {
                 return NotFound();
             }
-            ViewData["ArticleId"] = new SelectList(_context.Article, "Id", "Content", articlePost.ArticleId);
+
             return View(articlePost);
         }
 
-        [Authorize]
-        [HttpPost]
+        /// <summary>
+        /// Potvrzení smazání komentáře k článku
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Post,ArticleId")] ArticlePost articlePost)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (id != articlePost.Id)
+            if (_context.ArticlePosts == null)
             {
-                return NotFound();
+                return Problem("Entity set 'ApplicationDbContext.ArticlePosts'  is null.");
+            }
+            var articlePost = await _context.ArticlePosts.FindAsync(id);
+            if (articlePost != null)
+            {
+                _context.ArticlePosts.Remove(articlePost);
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(articlePost);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ArticlePostExists(articlePost.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ArticleId"] = new SelectList(_context.Article, "Id", "Content", articlePost.ArticleId);
-            return View(articlePost);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
-
-        
-        //// GET: ArticlePosts/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null || _context.ArticlePosts == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var articlePost = await _context.ArticlePosts
-        //        .Include(a => a.Article)
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (articlePost == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(articlePost);
-        //}
-
-        //// POST: ArticlePosts/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    if (_context.ArticlePosts == null)
-        //    {
-        //        return Problem("Entity set 'ApplicationDbContext.ArticlePosts'  is null.");
-        //    }
-        //    var articlePost = await _context.ArticlePosts.FindAsync(id);
-        //    if (articlePost != null)
-        //    {
-        //        _context.ArticlePosts.Remove(articlePost);
-        //    }
-            
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
 
 
 

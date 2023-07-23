@@ -7,11 +7,7 @@
     <div class="section-hero">
         <div class="div-credit">
             <div>
-                <h5>Zadejte částku pro zaslání kreditu</h5>
-            </div>
-            <div>
-
-                <form asp-action="ViewSendCredit" method="post">
+                <form asp-action="ViewSendCredit" method="post" class="">
                     <div class="form-group">
                         <label asp-for="SourceUserId" hidden class="control-label"></label>
                         <input asp-for="SourceUserId" hidden />
@@ -21,10 +17,10 @@
                         <input asp-for="TargetUserId" hidden />
                     </div>
                     <div>
-                        <div class="div-label">
-                          <label  >Zadejte částku:</label>
-                        </div>
-                       @Html.TextBoxFor(model => model.Amount)
+                    
+                    <h5>Zadejte částku pro zaslání kreditu</h5>
+                        <input asp-for="Amount" class="input-credit" />
+                
                     </div>
                     <div>
                         <button type="submit" class="btn-use btn-succes width-btn">Poslat kredit</button>

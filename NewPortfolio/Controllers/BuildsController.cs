@@ -52,7 +52,7 @@ namespace NewPortfolio.Controllers
        [Authorize]
         public IActionResult Create()
         {
-            ViewData["BuildPostId"] = new SelectList(_context.BuildPosts, "Id", "Id");
+            ViewData["BuildPostId"] = new SelectList(_context.BuildPosts, "Id", "BuildName");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace NewPortfolio.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BuildPostId"] = new SelectList(_context.BuildPosts, "Id", "Id", build.BuildPostId);
+            ViewData["BuildPostId"] = new SelectList(_context.BuildPosts, "Id", "BuildName", build.BuildPostId);
             return View(build);
         }
 

@@ -39,7 +39,7 @@
     }
   },
   "profiles": {
-    "hovno": {
+    "startApp": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,

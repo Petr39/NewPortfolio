@@ -17,10 +17,12 @@ body {
     color: gold;
 }
 
+
+
 :root {
-    --bg-header: #7ca9c4;
-    --bg-body: #7898ad;
-    --bg-article: #79a4ba;
+    --bg-header: #658f99;
+    --bg-body: #8a98a1;
+    --bg-article: #99afbb;
     --color-header: white;
     --color-body: black;
     --btn-edit: #1a324e;
@@ -261,11 +263,16 @@ header {
         color: rgb(238, 224, 30);
     }
 
+.input-credit {
+    width: 120px;
+}
+
+
 .input {
     background: rgb(146, 188, 204);
     color: rgb(0, 0, 0);
     outline: none;
-    border: 1px solid rgb(146, 188, 204);
+    border: 1px solid rgb(134, 171, 185);
 }
 
 .div-label {
@@ -289,7 +296,6 @@ header {
 .articles-th {
     width: 8%;
     padding: 0 2px;
-
 }
 
 .articles-th-article {
@@ -303,7 +309,7 @@ header {
 }
 
 .articles-tr {
-    background: #7ea0c0;
+    background: var(--bg-header);
     font-weight: 100;
     padding: 0 5px;
 }
@@ -730,7 +736,7 @@ table, th, td {
     }
 
 
-   
+
     .account-profile-board {
         margin: 0 1%;
         padding: 5px;
@@ -906,6 +912,9 @@ table, th, td {
         display: block;
     }
 
+    #hidden {
+        display: none;
+    }
 
     .div-credit {
         margin: auto;

@@ -9,8 +9,6 @@
 }
 <section class="section-index-articles">
     <div class="section-hero">
-
-   
         <h5>Články o hře Diablo 4</h5>
         <form asp-controller="Articles" asp-action="Index" method="get">
             <div>
@@ -31,14 +29,14 @@
                         <th class="articles-th">
                             Popisek
                         </th>
-                        <th class="articles-th">
+                        <th id="hidden" class="articles-th">
                             Titulek
                         </th>
                         
                         <th class="articles-th">
                             Vytvořil
                         </th>
-                        <th class="articles-th-article">
+                        <th id="hidden" class="articles-th-article">
                             Obsah
                         </th>
                         @if (this.Context.User.IsInRole("admin"))
@@ -55,7 +53,7 @@
                             <th>
                                 <a class="text-decoration" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem=>item.Description)</a>
                             </th>
-                            <th class="articles-th">
+                            <th id="hidden" class="articles-th">
                             @Html.DisplayFor(model=>item.Title)
                         </th>
                          <th>
@@ -83,7 +81,7 @@
                                </div>
                            </div>
                         </th>
-                        <th >
+                            <th id="hidden">
                             @Html.DisplayFor(modelItem=>item.Content)
                         </th>
                

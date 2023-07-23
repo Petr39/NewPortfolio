@@ -14,6 +14,8 @@ using X.PagedList;
 namespace NewPortfolio.Controllers
 {
 
+
+    //[BindProperties]
     /// <summary>
     /// Příspěvky uživatelům
     /// </summary>
@@ -109,13 +111,13 @@ namespace NewPortfolio.Controllers
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
-        private List<SelectListItem> BuildPosted()
-        {
-            var listPost=new List<SelectListItem>();
-            List<BuildPost> buildPosts = _context.BuildPosts.ToList();
-            listPost = _context.BuildPosts.Select(x => new SelectListItem(x.BuildName, x.Id.ToString())).ToList();
-            return listPost;
-        }
+        //private List<SelectListItem> BuildPosted()
+        //{
+        //    var listPost=new List<SelectListItem>();
+        //    List<BuildPost> buildPosts = _context.BuildPosts.ToList();
+        //    listPost = _context.BuildPosts.Select(x => new SelectListItem(x.BuildName, x.Id.ToString())).ToList();
+        //    return listPost;
+        //}
 
         [Authorize]         
         [HttpPost]
@@ -210,7 +212,6 @@ namespace NewPortfolio.Controllers
 
 
         [Authorize]
-        //[Area("admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Article == null)

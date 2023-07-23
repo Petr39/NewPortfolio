@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
@@ -15,17 +16,21 @@ namespace NewPortfolio.Controllers
         private readonly SignInManager<AppUser> signInManager;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly ApplicationDbContext context;
+        private readonly IEmailSender emailSender;
+        
 
         public AccountController(UserManager<AppUser> userManager,
                SignInManager<AppUser> signInManager,
                IWebHostEnvironment webHostEnvironment,
-               ApplicationDbContext context
+               ApplicationDbContext context,
+               IEmailSender emailSender
               )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.webHostEnvironment = webHostEnvironment;
             this.context = context;
+            this.emailSender = emailSender;
             
          
         }
@@ -111,31 +116,32 @@ namespace NewPortfolio.Controllers
         {
             if(model.Check)
             { 
-                ViewData["ReturnUrl"] = returnUrl;
-
-             if (await userManager.FindByEmailAsync(model.Email) is null)
-            {
-                    //if (await userManager.Users.AllAsync(u => u.NickName != model.NickNameUser))
-                    if(!NickNameExist(model.NickNameUser))
-                    {
-                        var user = new AppUser { UserName = model.Email, Email = model.Email, NickName = model.NickNameUser };
-                        var result = await userManager.CreateAsync(user, model.Password);
-
-                        if (result.Succeeded)
-                        {
-                            await signInManager.SignInAsync(user, isPersistent: false);
-                                    return string.IsNullOrWhiteSpace(returnUrl) ?
-                                RedirectToAction("Index", "Home") :
-                                RedirectToLocal(returnUrl);
-                        }
-                        AddErrors(result);
-                    }
-
+                    ViewData["ReturnUrl"] = returnUrl;
+               
+                if (await userManager.FindByEmailAsync(model.Email) is null)
+                {
+                        if(!NickNameExist(model.NickNameUser))
+                          {
+                                var user = new AppUser { UserName = model.Email, Email = model.Email, NickName = model.NickNameUser };
+                                var result = await userManager.CreateAsync(user, model.Password);
+                           
+                                    //await emailSender.SendEmailAsync(model.Email,"ups","Ahoj test");
+                           
+                                    if (result.Succeeded)
+                                    {
+                                        await signInManager.SignInAsync(user, isPersistent: false);
+                                        return string.IsNullOrWhiteSpace(returnUrl) ?
+                                    RedirectToAction("Index", "Home") :
+                                    RedirectToLocal(returnUrl);
+                                    }
+                                AddErrors(result);
+                            }
                         AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Přezdívka {model.NickNameUser} je již registrována" }));
-                        //return View(model);
-                }
-                AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Email {model.Email} je již zaregistrován" }));
+                      return View(model);
+                    }
+                    AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Email {model.Email} je již zaregistrován" }));
             }
+            TempData["error"] = "Nepovrdili jste pravidla fóra";
             return View(model);
         }
 
@@ -182,7 +188,7 @@ namespace NewPortfolio.Controllers
                         logUser.NickName = user.NickName;
                         logUser.Credit -=1000;
                         await userManager.UpdateAsync(logUser);
-                    }
+                   }
                     AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Přezdívka je už obsazena" }));
                     return View(logUser);
                 }
@@ -213,7 +219,11 @@ namespace NewPortfolio.Controllers
             return View();
         }
 
-        //pro adminy, poslání kreditů pro sebe, testovací!!!
+        /// <summary>
+        /// pro adminy, poslání kreditů pro sebe, testovací!!!
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> SendCreditForAdmin(AppUser user)
         {
@@ -300,8 +310,6 @@ namespace NewPortfolio.Controllers
             return RedirectToAction("Index","Articles");
         }
 
-
-
         //--------------------------- Pomocné metody -------------------------
         
         /// <summary>
@@ -339,8 +347,10 @@ namespace NewPortfolio.Controllers
         /// <returns></returns>
         private bool NickNameExist(string nickName)
         {
-            bool exist = userManager.Users.Any(u => u.NickName == nickName);
-            return exist;            
+            bool userExist=true;
+            if (userManager.Users.Any(u => u.NickName == nickName))
+                return userExist;
+            return !userExist;            
         }
 
         #region Helpers

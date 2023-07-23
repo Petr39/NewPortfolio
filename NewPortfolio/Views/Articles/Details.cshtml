@@ -47,11 +47,25 @@
                      <div class="div-comment">
                           <div class="div-comment-first">
                             <h5><a asp-action="AccountView" asp-controller="Account" asp-route-id="@item.AppUserId">@item.UserName</a>  <a asp-action="Index"><img class="img-comment" src="/images/email.png"></a></h5>
-                          <p>@item.DateTime</p>
+                         
+                            <div>
+                               <p>@item.DateTime</p>
+
+                            @if (User.IsInRole("admin"))
+                            {
+                                <div>
+                                    <a asp-action="Delete" class="btn-use btn-danger" asp-controller="ArticlePosts" asp-route-id="@item.Id"><i class="ri-chat-delete-line"></i></a>
+                                </div>
+                            }
+                                <div>
+                                    <a asp-action="Edit" class="btn-use btn-danger" asp-controller="ArticlePosts" asp-route-id="@item.Id"><i class="ri-pencil-line"></i></a>
+                                </div>
+                            </div>
                        </div>
                        <div>
                             @item.Post
                        </div>
+                        
                     </div>
                 }
             </tbody>
