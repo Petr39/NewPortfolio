@@ -13,14 +13,14 @@ namespace NewPortfolio.Controllers
     public class HomeController : Controller
     {
 
-        //EmailSender EmailSender=new EmailSender();
+       
         /// <summary>
         /// Základní a zároveň úvodní stránka
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
-           //EmailSender.SendEmail();
+          
             return View();
         }
 
