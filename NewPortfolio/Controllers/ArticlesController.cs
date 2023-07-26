@@ -15,7 +15,7 @@ namespace NewPortfolio.Controllers
 {
 
 
-    //[BindProperties]
+    
     /// <summary>
     /// Příspěvky uživatelům
     /// </summary>

@@ -28,10 +28,18 @@ namespace NewPortfolio
                 options.SignIn.RequireConfirmedAccount = false;
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedEmail = false;
-            })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            }).AddEntityFrameworkStores<ApplicationDbContext>();
 
-            builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+            //For production lifetime
+            builder.Services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(60);
+                options.ExcludedHosts.Add("lazaruswill.cz");
+                options.ExcludedHosts.Add("www.lazaruswill.cz");
+            });
 
             builder.Services.AddControllersWithViews();
             builder.Services.AddRazorPages();
@@ -50,10 +58,6 @@ namespace NewPortfolio
                 app.UseHsts();
             }
 
-            //app.UseSwagger();
-            //app.UseSwaggerUI();
-
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -65,7 +69,7 @@ namespace NewPortfolio
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-            //app.MapRazorPages();
+           
 
 
             //using (var scope = app.Services.CreateScope())

@@ -26,28 +26,6 @@ namespace NewPortfolio.Models.Repositories
         public void SendEmail()
         {
 
-            try
-            {
-                MailMessage mail = new MailMessage();
-                SmtpClient smtp = new SmtpClient("smtp.gmail.cz");
-
-                mail.From = new MailAddress("student.hanak@gmail.com");
-                mail.To.Add("hanak.petr.net@eznam.cz");
-                mail.Subject = "Test";
-                mail.Body = "Ahoj, toto je zpráva poslána přes C# Aplikaci";
-
-                smtp.Port = 587;
-                smtp.Credentials = new System.Net.NetworkCredential("student.hanak@gmail.com", "02087378Pe");
-                smtp.EnableSsl = true;
-                smtp.Send(mail);
-            }
-            
-           
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
     }
 }

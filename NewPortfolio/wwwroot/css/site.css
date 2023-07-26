@@ -52,6 +52,8 @@ header {
     z-index: 100;
 }
 
+
+
 .navlist {
     display: flex;
 }
@@ -437,8 +439,6 @@ h2 {
 .account-profile-board {
     margin: 0 10%;
     padding: 5px;
-    /* border: 1px solid black; 
-     background: #23817d; */
 }
 
 
@@ -461,7 +461,7 @@ h2 {
     margin-top: 5px;
     border: 1px solid black;
 }
-    /* komentáøe èlánkù*/
+
     .div-comment h5 {
         text-decoration: underline;
         color: rgb(0, 19, 128);
@@ -740,8 +740,6 @@ table, th, td {
     .account-profile-board {
         margin: 0 1%;
         padding: 5px;
-        /* border: 1px solid black; 
-         background: #23817d; */
         width: 90%;
     }
 
@@ -750,7 +748,7 @@ table, th, td {
         margin: 150px 10%;
         display: flex;
         justify-content: space-between;
-        /* background:green; */
+      
     }
 
     .form-group {
@@ -1001,7 +999,7 @@ table, th, td {
             font-size: .8rem;
             position: absolute;
             top: 70%;
-            width: 150px;
+            width: 190px;
             right: 0;
             height: 330px;
             display: flex;

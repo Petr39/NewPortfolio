@@ -16,21 +16,21 @@ namespace NewPortfolio.Controllers
         private readonly SignInManager<AppUser> signInManager;
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly ApplicationDbContext context;
-        private readonly IEmailSender emailSender;
+       
         
 
         public AccountController(UserManager<AppUser> userManager,
                SignInManager<AppUser> signInManager,
                IWebHostEnvironment webHostEnvironment,
-               ApplicationDbContext context,
-               IEmailSender emailSender
+               ApplicationDbContext context
+             
               )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.webHostEnvironment = webHostEnvironment;
             this.context = context;
-            this.emailSender = emailSender;
+          
             
          
         }
@@ -125,7 +125,7 @@ namespace NewPortfolio.Controllers
                                 var user = new AppUser { UserName = model.Email, Email = model.Email, NickName = model.NickNameUser };
                                 var result = await userManager.CreateAsync(user, model.Password);
                            
-                                    //await emailSender.SendEmailAsync(model.Email,"ups","Ahoj test");
+                                   
                            
                                     if (result.Succeeded)
                                     {

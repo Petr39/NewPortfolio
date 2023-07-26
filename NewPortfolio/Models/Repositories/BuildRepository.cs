@@ -15,14 +15,13 @@ namespace NewPortfolio.Models.Repositories
 
         public BuildRepository(ApplicationDbContext context)
         {
-                this.context = context; 
+             this.context = context; 
         }
 
 
         public void Create(Build build)
         {
             context.Add(build);
-            
         }
 
         public void Delete(int id)
@@ -45,8 +44,6 @@ namespace NewPortfolio.Models.Repositories
             var applicationDbContext = context.Builds.Where(c => c.BuildPostId == id);
             return await applicationDbContext.ToListAsync();
         }
-
-       
 
         public void Update(Build build)
         {

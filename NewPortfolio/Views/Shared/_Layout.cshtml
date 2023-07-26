@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Diablo 4 LazarusWill" />
-    <meta name="keywords" content="Diablo 4, LazarusWill, lazarus will" />
+    <meta name="keywords" content="Diablo 4, LazarusWill, fórum" />
     <title>@ViewData["Title"] - LazarusWill</title>
     <link rel="shortcut icon" href="~/images/euro (1).png" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -23,40 +23,23 @@
             <a class="logo" href="">LazarusWill<small>.CZ</small></a>
             <i class="ri-youtube-line"></i>
         </div>
-
         <ul class="navlist">
             <li><a asp-area="" asp-controller="Home" asp-action="Index">Domů</a></li>
             <li><a asp-area="" asp-controller="Articles" asp-action="Index">Články</a></li>   
-            <li><a asp-area="" asp-controller="BuildPosts" asp-action="Index">Buildy</a></li>
-            <li><a asp-area="" asp-controller="Items" asp-action="Index">Itemy</a></li>
+            <li><a asp-area="" asp-controller="BuildPosts" asp-action="Index">Sestavy <small>postav</small></a></li>
+            <li><a asp-area="" asp-controller="Items" asp-action="Index">Věci <small>postav</small></a></li>
             <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
-           
-          
             <li>
-                <a href="/Account/Administration">
-                @if (User.Identity.IsAuthenticated)
-                {
-                  @*  <a asp-area="" asp-controller="Humen" asp-action="Index">Humans</a>*@
-                }
-
-                else
-                {
-                    <a style="display: none" asp-area="" asp-controller="" asp-action="">Human</a>
-                }
-                </a>
-            </li>
-           
-            <li>
-                <a href="/Account/Administration">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <span >Účet</span>
-                    }
-                    else
-                    {
-                        <span>Přihlásit</span>
-                    }
-                </a>
+              <a href="/Account/Administration">
+                 @if (User.Identity.IsAuthenticated)
+                 {
+                     <span>Účet</span>
+                 }
+                 else
+                 {
+                     <span>Přihlásit</span>
+                 }
+              </a>
             </li>
         </ul>
         <div class="bx bx-menu" id="menu-icon"></div>
