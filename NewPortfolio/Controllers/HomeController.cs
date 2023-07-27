@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using NewPortfolio.Models;
-using NewPortfolio.Models.Repositories;
 using System.Diagnostics;
 
 namespace NewPortfolio.Controllers
