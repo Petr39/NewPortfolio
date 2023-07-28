@@ -266,6 +266,7 @@ namespace NewPortfolio.Controllers
             var folderPath = Path.Combine(webHostEnvironment.WebRootPath, "ImagesThumb");
             uniqueFileName = new Guid().ToString() + "_" + file.FileName;
             var filePath = Path.Combine(folderPath, uniqueFileName);
+
             using (FileStream fs = System.IO.File.Create(filePath))
             {
                 file.CopyTo(fs);
@@ -279,7 +280,7 @@ namespace NewPortfolio.Controllers
         #region API CALLS
 
         [HttpGet]
-        public IActionResult GetAll()
+        public  IActionResult GetAll()
         {
             var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
             return Json(new { data = applicationDbContext });

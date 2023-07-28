@@ -1,0 +1,30 @@
+﻿@model NewPortfolio.Models.Game
+
+
+@{
+    ViewData["title"] = "Vytvořit hru";
+}
+
+<section class="section-index-articles">
+    <div class="section-hero">
+
+        <form method="post" asp-controller="Game">
+            <div>
+                <label asp-for="Id" hidden></label>
+                <input asp-for="Id" hidden/>
+            </div>
+            <div>
+                <label asp-for="GameName"></label>
+                <input asp-for="GameName" />
+                <span asp-validation-for="GameName"></span>
+            </div>
+            <div>
+                <button type="submit" class="btn-use btn-succes width-btn">Vytvořit</button>
+            </div>
+
+        </form>
+
+
+
+    </div>
+</section>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Game>
+
+@{
+    ViewData["title"] = "Hry";
+}
+
+
+<section class="section-index-articles">
+    <div class="section-hero">
+        <div class="articles">
+
+     
+        <table>
+            <thead>
+              <tr class="articles-tr">
+                  <th class="articles-th">
+                      Nzev hry
+                  </th>
+                         
+                 <th></th>
+                  
+              </tr>
+               
+               
+            </thead>
+            <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr class="articles-tr-down">
+                            <th>
+                                <a asp-action="ShowAll"asp-route-id="@item.Id" >@item.GameName</a>
+                            </th>
+                            <th >
+                            <a asp-action="EditGame" class="btn-use btn-edit" asp-route-id="@item.Id">Editovat</a>
+                            <a asp-action="DeleteGame" class="btn-use btn-danger" asp-route-id="@item.Id">Smazat</a>
+
+                            </th>
+                        </tr>
+                    }
+            </tbody>
+        </table>
+       
+
+        <a asp-action="AddGame" class="btn-use btn-succes width-btn">Vytvořit novou hru</a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,30 @@
+﻿@model NewPortfolio.Models.Game
+
+@{
+    ViewData["Title"] = "Editace hry";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="section-index-articles">
+    <div class="section-hero">
+        <form asp-action="EditGame" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="GameName" class="control-label"></label>
+                <input asp-for="GameName" class="form-control" />
+                <span asp-validation-for="GameName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Uložit" class="btn-use btn-succes width-btn" />
+            </div>
+        </form>
+    </div>
+
+</section>
+
+<div>
+    <a asp-action="ShowAll" class="btn-use btn-edit width-btn">Zpět</a>
+</div>
+

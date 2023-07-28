@@ -23,5 +23,7 @@ namespace NewPortfolio.Data
 
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<Game> Games { get; set; }  
+
     } 
 }

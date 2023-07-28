@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using NewPortfolio.Data;
+using NewPortfolio.Interfaces;
 using NewPortfolio.Models;
-using NewPortfolio.Models.Repositories;
+using NewPortfolio.Repositories;
 
 namespace NewPortfolio
 {
@@ -18,7 +19,9 @@ namespace NewPortfolio
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
-           
+
+            builder.Services.AddTransient<IGame,GameRepository>();
+
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(options =>

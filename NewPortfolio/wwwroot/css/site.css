@@ -191,6 +191,13 @@ header {
     background: var(--bg-body);
 }
 
+small{
+    font-size: .6rem;
+    color: black;
+}
+
+
+
 .small-text {
     font-size: .6rem;
     font-weight: 100;
