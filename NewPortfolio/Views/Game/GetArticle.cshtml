@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Article>
+
+
+<section class="section-index-articles">
+    <div class="section-hero">
+    
+            <table>
+                <thead>
+                    <tr class="articles-tr">
+                        <th class="articles-th">
+                            Titulek
+                        </th>
+
+                        <th>Popisek</th>
+                        <th>Obsah článku</th>
+
+                    </tr>
+
+
+                </thead>
+   
+
+    <tbody>
+
+        @foreach(var item in Model)
+        {
+            <tr class="articles-tr-down">
+                <th>
+                    <a asp-action="Details" asp-controller="Articles" asp-route-id="@item.Id">@item.Title</a>
+                </th>
+                <th>
+                  @item.Description
+                </th>
+                <th>
+                    @item.Content
+                    
+                </th>
+            </tr>
+
+            
+
+        }
+    </tbody>
+    </table>
+    </div>
+</section>

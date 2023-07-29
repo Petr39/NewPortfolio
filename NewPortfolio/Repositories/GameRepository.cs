@@ -21,7 +21,6 @@ namespace NewPortfolio.Repositories
         public async Task Create(Game game)
         {
             await _context.AddAsync(game);
-            
         }
 
         public void Delete(int id)
@@ -45,20 +44,21 @@ namespace NewPortfolio.Repositories
             return gamesList;
         }
 
+        public IEnumerable<Article> GetArticle(int id)
+        {
+            var gameArticle = _context.Article.Where(a => a.Game.Id==id).ToList();
+            return gameArticle;
+        }
+
         public void Save(Game game)
         {
             _context.SaveChanges();
         }
 
-      
-
         public async Task Update(Game game)
         {
             _context.Update(game);
             await _context.SaveChangesAsync();
-          
         }
-
-        
     }
 }

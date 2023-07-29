@@ -70,5 +70,11 @@ namespace NewPortfolio.Models
         [Display(Name = "Vyberte svoji třídu")]
         public virtual BuildPost? BuildPost { get; set; }
 
+        [Display(Name ="Vyberte hru")]
+        public virtual IEnumerable<Game>? Games { get; set; } 
+
+
+        public int GameId { get; set; }
+
     }
 }

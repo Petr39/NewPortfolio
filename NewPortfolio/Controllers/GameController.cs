@@ -80,5 +80,11 @@ namespace NewPortfolio.Controllers
 
             return RedirectToAction("ShowAll");
         }
+
+        [HttpGet]
+        public IActionResult GetArticle(int id)
+        {
+            return View(_gameRepos.GetArticle(id));
+        }
     }
 }

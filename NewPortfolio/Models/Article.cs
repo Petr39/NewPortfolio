@@ -84,7 +84,13 @@ namespace NewPortfolio.Models
             
         public virtual IEnumerable<ArticlePost>? ArticlePosts { get; set; }
 
-        
-     
+        [ForeignKey("GameId")]
+        public Game? Game { get; set; }
+
+        /// <summary>
+        /// Id hry
+        /// </summary>
+        public int? GameId { get; set; }
+
     }
 }

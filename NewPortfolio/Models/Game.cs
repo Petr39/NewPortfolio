@@ -13,5 +13,6 @@ namespace NewPortfolio.Models
         public string GameName { get; set; }
 
 
+        public virtual IEnumerable<Article>? Articles { get; set; }
     }
 }

@@ -18,7 +18,6 @@ namespace NewPortfolio.Interfaces
 
         void Save(Game game);
 
-  
-        
+        IEnumerable<Article> GetArticle(int id);
     }
 }

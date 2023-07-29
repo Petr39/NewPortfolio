@@ -109,6 +109,8 @@ namespace NewPortfolio.Controllers
         public IActionResult Create()
         {
             ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["GameId"] = new SelectList(_context.Games, "Id", "GameName");
+
             return View();
         }
         //private List<SelectListItem> BuildPosted()
@@ -122,9 +124,11 @@ namespace NewPortfolio.Controllers
         [Authorize]         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content,Title,Description")] CreatePostVM article)
+        public async Task<IActionResult> Create([Bind("Id,Content,Title,Description,GameId")] CreatePostVM article)
         {
-             var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
+
+
+            var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
 
             //Ověření, že titulek není stejný jako popisek
             if (article.Title.ToLower() == article.Description.ToLower())
@@ -138,7 +142,7 @@ namespace NewPortfolio.Controllers
                 var post = new Article();
                                    
                    post.Id = article.Id;
-                   post.Title = article.Title;
+                   post.Title = article.Title; 
                    post.Description = article.Description;
                    post.Content = article.Content;
                    post.AppUserId = userLog.Id;
@@ -146,13 +150,16 @@ namespace NewPortfolio.Controllers
                    post.ImageUrl = userLog.Path;
                    post.Credits = userLog.Credit;
                    post.DateOfRegister = userLog.DateOfRegister.ToString("dd.MM.yyyy");
+                   post.GameId=article.GameId;
                 
                              
+       
                    await _context.Article!.AddAsync(post);
                    await _context.SaveChangesAsync();
                 TempData["success"] = "Článek přidán";
                 return RedirectToAction(nameof(Index));
             }
+                 ViewData["GameId"] = new SelectList(_context.Games, "Id", "Id", article.GameId);
             return View();
         }
 
