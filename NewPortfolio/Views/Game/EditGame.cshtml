@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Editace hry";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
 
 
@@ -17,14 +17,12 @@
                 <span asp-validation-for="GameName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Uložit" class="btn-use btn-succes width-btn" />
+                <input type="submit" value="Uložit" class="btn-use btn-succes" />
+                <a asp-action="ShowAll" class="btn-use btn-edit">Zpět</a>
             </div>
         </form>
     </div>
-
 </section>
 
-<div>
-    <a asp-action="ShowAll" class="btn-use btn-edit width-btn">Zpět</a>
-</div>
+
 

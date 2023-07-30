@@ -386,7 +386,7 @@ h2 {
 
 
 .form-control {
-    width: 250px;
+    width: auto;
     background: #ffffff;
 }
 
@@ -415,6 +415,7 @@ h2 {
     display: flex;
     padding: 5px;
     justify-content: space-between;
+    max-width:200px; 
 }
 
 .account div {
@@ -908,15 +909,15 @@ table, th, td {
 }
 
 
-/*pro mobily*/
+
 @media (max-width: 990px) {
     #menu-icon {
         display: block;
     }
 
-    #hidden {
+    /*#hidden {
         display: none;
-    }
+    }*/
 
     .div-credit {
         margin: auto;
@@ -949,7 +950,6 @@ table, th, td {
         margin-top: 80px;
         padding: 0 2%;
     }
-
 
 
 
@@ -1031,6 +1031,11 @@ table, th, td {
         width: 100%;
         height: auto;
     }
+
+    #hidden {
+        display: none;
+    }
+
 
     .section-index,
     .section-index-tiny {

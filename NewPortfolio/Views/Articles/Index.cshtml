@@ -2,21 +2,18 @@
 @using X.PagedList;
 @using X.PagedList.Mvc.Core;
 
-
-
 @{
     ViewData["Title"] = "Seznam článků";
 }
 <section class="section-index-articles">
-    <div class="section-hero">
-        <h5>Články o hře Diablo 4</h5>
+    <div class="section-hero">     
         <form asp-controller="Articles" asp-action="Index" method="get">
             <div>
                 <select id="inputSearch" name="searchby">
-                    <option selected value="">Vyhledat podle...</option>
-                    <option value="title">Titulek</option>
-                    <option value="description">Popisek</option>
-                </select>
+                      <option selected value="">Vyhledat podle...</option>
+                      <option value="title">Titulek</option>
+                      <option value="description">Popisek</option>
+                  </select>
                 <input name="searchfor" id="inputSearch"/>
                 <button class="btn-use btn-edit" type="submit" id="inputSearch">Najít</button>
             <a class="btn-use btn-edit" type="button" asp-controller="Articles" asp-action="Index">Smazat</a>
@@ -74,7 +71,7 @@
                                    </div>
                                    <div>
                                       <p>Příspěvky:@item.ApplicationUser.CountPost</p>
-                                       <p>Registrován:@item.ApplicationUser.DateOfRegister.ToString("dd.MM.yyyy")</p>
+                                       <p>Registrován:@item.ApplicationUser.DateOfRegister.ToString("dd.M.yyyy")</p>
                                    </div>
                                </div>
                            </div>

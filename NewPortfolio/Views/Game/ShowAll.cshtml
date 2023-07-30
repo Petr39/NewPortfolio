@@ -26,22 +26,27 @@
             <tbody>
                     @foreach (var item in Model)
                     {
-
                         <tr class="articles-tr-down">
                             <th>
                                 <a asp-action="GetArticle"asp-route-id="@item.Id" >@item.GameName</a>
                             </th>
                             <th >
-                               <a asp-action="EditGame" class="btn-use btn-edit" asp-route-id="@item.Id">Editovat</a>
-                               <a asp-action="DeleteGame" class="btn-use btn-danger" asp-route-id="@item.Id">Smazat</a>
+                                @if (User.IsInRole("admin"))
+                                { 
+                                    <a asp-action="EditGame" class="btn-use btn-edit" asp-route-id="@item.Id">Editovat</a>
+                                    <a asp-action="DeleteGame" class="btn-use btn-danger" asp-route-id="@item.Id">Smazat</a>
+                                }
                            </th>
                         </tr>
                     }
             </tbody>
         </table>
        
-
-        <a asp-action="AddGame" class="btn-use btn-succes width-btn">Vytvořit novou hru</a>
+            @if (User.IsInRole("admin"))
+            {
+                
+            }
+               <a asp-action="AddGame" class="btn-use btn-succes width-btn">Vytvořit novou hru</a>
         </div>
     </div>
 </section>

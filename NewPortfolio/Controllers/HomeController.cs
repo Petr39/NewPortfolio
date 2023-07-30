@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using NewPortfolio.Models;
 using System.Diagnostics;
 
@@ -10,15 +11,12 @@ namespace NewPortfolio.Controllers
     /// </summary>
     public class HomeController : Controller
     {
-
-       
         /// <summary>
         /// Základní a zároveň úvodní stránka
         /// </summary>
         /// <returns></returns>
         public IActionResult Index()
         {
-          
             return View();
         }
 

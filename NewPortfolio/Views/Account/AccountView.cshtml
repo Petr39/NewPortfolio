@@ -31,7 +31,14 @@
  </div>
     <div class="vertical">
         <a asp-action="Index" asp-controller="Articles" class="btn-use btn-edit width-btn">Zpět</a>
-        <a asp-action="Index" asp-controller="Messages" asp-route-id="@Model.Id" class="btn-use btn-detail width-btn">Ukaž zprávy</a>
-        <a asp-action="Create" asp-controller="Messages" asp-route-id="@Model.Id" class="btn-use btn-detail width-btn">Poslat zprávu</a>
+       
+     
+        @if (User.Identity.Name==Model.UserName)
+        {
+           <a asp-action="Index" asp-controller="Messages" asp-route-id="@Model.Id" class="btn-use btn-detail width-btn">Ukaž zprávy</a>
+        }
+       
+           <a asp-action="Create" asp-controller="Messages" asp-route-id="@Model.Id" class="btn-use btn-detail width-btn">Poslat zprávu</a>
+       
     </div>
 </section>

@@ -1,17 +1,17 @@
 ﻿@model NewPortfolio.Models.Article
 
 @{
-    ViewData["Title"] = "Details";
-}
+    ViewData["Title"] = $"Podčlánky článku: {Model.Description}";
+    }
 
 <section class="section-index">
     <div class="section-hero">
         <div class="account-layout-content">
             <div class="account-view">
-                <div class="account-img">
-                    <img src="@Html.DisplayFor(model=>model.ApplicationUser.Path)" width="40" height="40" />
+               <div class="account-img">
+                    <img src="@Model.ApplicationUser.Path" width="40" height="40" />
                 </div>
-                @*<div class="account-content">
+                <div class="account-content">
                     <div>
                         <div class="account-nickname">
                             <a asp-action="AccountView" asp-controller="Account" asp-route-id="@Model.ApplicationUser.Id"> <h6>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h6></a>
@@ -20,16 +20,16 @@
                     </div>
                     <div class="pf">
                         <a asp-action="ViewSendCredit" asp-controller="Account" asp-route-id="@Model.AppUserId">
-                            @Html.DisplayFor(model=>model.ApplicationUser.Credit)
+                            @Model.ApplicationUser.Credit
                             <img src="/images/euro.png" />
                         </a>
                     </div>
 
                     <div>
-                        <p>Příspěvky:@Html.DisplayFor(model=>model.ApplicationUser.CountPost)</p>
-                        <p>Registrován:@Html.DisplayFor(model=>model.DateOfRegister)</p>
+                        <p>Příspěvky:@Model.ApplicationUser.CountPost</p>
+                        <p>Registrován:@Model.ApplicationUser.DateOfRegister.ToString("dd.M.yyyy")</p>
                     </div>
-                </div>*@
+                </div>
             </div>           
             <div class="account-text">
                 <div>

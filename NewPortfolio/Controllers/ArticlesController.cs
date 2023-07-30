@@ -133,6 +133,7 @@ namespace NewPortfolio.Controllers
         public async Task<IActionResult> Create([Bind("Id,Content,Title,Description,GameId")] CreatePostVM article)
         {
 
+            ViewData["GameId"] = new SelectList(_context.Games, "Id", "Id",article.GameId);
 
             var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
 
@@ -144,23 +145,33 @@ namespace NewPortfolio.Controllers
 
             if (ModelState.IsValid)
             {
-                userLog.CountPost += 1;
-                var post = new Article();
-                    post.Id = article.Id;
-                    post.Title = article.Title; 
-                    post.Description = article.Description;
-                    post.Content = article.Content;
-                    post.AppUserId = userLog.Id;
-                             
-                       
-                   await _context.Article!.AddAsync(post);
-                   await _context.SaveChangesAsync();
+                try
+                {
+                    userLog.CountPost += 1;
+                    var post = new Article()
+                    {
+                        Id = article.Id,
+                        Title = article.Title,
+                        Description = article.Description,
+                        Content = article.Content,
+                        AppUserId = userLog.Id,
+                        GameId = article.GameId,
+                    };
+
+                    await _context.Article!.AddAsync(post);
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+
+                    throw new Exception("Vytvoření Article se nepovedlo -  CreatePostVM article");
+                }
+                  
                 TempData["success"] = "Článek přidán";
                 return RedirectToAction(nameof(Index));
             }
                
 
-                ViewData["GameId"] = new SelectList(_context.Games, "Id", "Id",article.GameId);
             
             return View();
         }
