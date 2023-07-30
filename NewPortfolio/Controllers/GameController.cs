@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NewPortfolio.Interfaces;
 using NewPortfolio.Models;
 
 namespace NewPortfolio.Controllers
 {
+   
     public class GameController : Controller
     {
 
@@ -15,12 +17,17 @@ namespace NewPortfolio.Controllers
             _gameRepos = gameRepos;
         }
 
+
+        /// <summary>
+        /// Vypsání všech her
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ShowAll()
         {
             return View(_gameRepos.GetAll());
         }
 
-
+        [Authorize]
         [HttpGet]
         public IActionResult AddGame()
         {
@@ -28,6 +35,13 @@ namespace NewPortfolio.Controllers
             return View(game);
         }
 
+
+        /// <summary>
+        /// Přidá hru do seznamu
+        /// </summary>
+        /// <param name="game"></param>
+        /// <returns></returns>
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddGame(Game game)
         {
@@ -40,7 +54,7 @@ namespace NewPortfolio.Controllers
             return View();
         }
 
-
+        [Authorize]
         [HttpGet]
         public IActionResult EditGame(int id)
         {
@@ -48,7 +62,13 @@ namespace NewPortfolio.Controllers
             return View(game);
         }
 
+        /// <summary>
+        /// Upraví hru
+        /// </summary>
+        /// <param name="game"></param>
+        /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> EditGame(Game game)
         {
             if (ModelState.IsValid)
@@ -61,16 +81,25 @@ namespace NewPortfolio.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult DeleteGame(int id)
         {
             var game = _gameRepos.Find(id);
             return View(game);
         }
 
-
+        /// <summary>
+        /// Smaže daný typ hry
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public IActionResult DeleteGamePost(int id)
         {
+            if (id == null || id==0)
+                return RedirectToAction("ShowAll");
+
             if (ModelState.IsValid)
             {
                 _gameRepos.Delete(id);
@@ -82,9 +111,10 @@ namespace NewPortfolio.Controllers
         }
 
         [HttpGet]
+        
         public IActionResult GetArticle(int id)
         {
-            return View(_gameRepos.GetArticle(id));
+            return View(_gameRepos.GetArticleList(id));
         }
     }
 }

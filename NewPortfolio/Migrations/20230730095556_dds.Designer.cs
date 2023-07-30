@@ -12,8 +12,8 @@ using NewPortfolio.Data;
 namespace NewPortfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230729093206_postGameId")]
-    partial class postGameId
+    [Migration("20230730095556_dds")]
+    partial class dds
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

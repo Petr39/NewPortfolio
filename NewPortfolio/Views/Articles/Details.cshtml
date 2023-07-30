@@ -11,7 +11,7 @@
                 <div class="account-img">
                     <img src="@Html.DisplayFor(model=>model.ApplicationUser.Path)" width="40" height="40" />
                 </div>
-                <div class="account-content">
+                @*<div class="account-content">
                     <div>
                         <div class="account-nickname">
                             <a asp-action="AccountView" asp-controller="Account" asp-route-id="@Model.ApplicationUser.Id"> <h6>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h6></a>
@@ -29,7 +29,7 @@
                         <p>Příspěvky:@Html.DisplayFor(model=>model.ApplicationUser.CountPost)</p>
                         <p>Registrován:@Html.DisplayFor(model=>model.DateOfRegister)</p>
                     </div>
-                </div>
+                </div>*@
             </div>           
             <div class="account-text">
                 <div>

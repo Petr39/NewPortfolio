@@ -1,28 +1,23 @@
 ﻿@model NewPortfolio.Models.Build
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Smazání sestavení postavy";
 }
 
 <section class="section-index-articles">
     <div class="section-hero">
 
-<h3>Opravdu smazat build?</h3>
+<h3>Opravdu smazat sestavu postavy?</h3>
 <div>
-    <h4>Build</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+       
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BuildPost)
-        </dt>
+      
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BuildPost.Id)
+            <input asp-for="@Model.BuildPost.Id" hidden/>
         </dd>
     </dl>
     

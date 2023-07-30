@@ -258,15 +258,6 @@ namespace NewPortfolio.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("CountPost")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Credits")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DateOfRegister")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(12)
@@ -274,12 +265,6 @@ namespace NewPortfolio.Migrations
 
                     b.Property<int?>("GameId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NickName")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()

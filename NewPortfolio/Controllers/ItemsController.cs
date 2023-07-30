@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NewPortfolio.Data;
 using NewPortfolio.Models;
@@ -123,9 +115,9 @@ namespace NewPortfolio.Controllers
                     item.PathItem = @"\images\Items\" + fileName;
                     ViewData["img"] = item.PathItem;
 
+                     await _context.Items.AddAsync(item);
                     await _context.SaveChangesAsync();
-                   _context.Add(item);
-                    TempData["success"] = $"Předmět {item.DescriptionItem} přidán";
+                    TempData["success"] = $"Předmět {item.NameItem} přidán";
                    return RedirectToAction(nameof(Index));
                 }
             

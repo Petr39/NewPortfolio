@@ -8,10 +8,13 @@
                 <thead>
                     <tr class="articles-tr">
                         <th class="articles-th">
-                            Titulek
+                            Popisek
                         </th>
 
-                        <th>Popisek</th>
+                        <th>
+
+                            Titulek
+                        </th>
                         <th>Obsah článku</th>
 
                     </tr>
@@ -26,10 +29,10 @@
         {
             <tr class="articles-tr-down">
                 <th>
-                    <a asp-action="Details" asp-controller="Articles" asp-route-id="@item.Id">@item.Title</a>
+                    <a asp-action="Details" asp-controller="Articles" asp-route-id="@item.Id">@item.Description</a>
                 </th>
                 <th>
-                  @item.Description
+                  @item.Title
                 </th>
                 <th>
                     @item.Content

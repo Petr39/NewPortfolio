@@ -32,7 +32,7 @@ namespace NewPortfolio.Repositories
 
         public Game Find(int id)
         {
-            var game = _context.Games.FirstOrDefault(g=>g.Id==id);
+            var game = _context.Games.Include(i=>i.Articles).FirstOrDefault(g=>g.Id==id);
             if(game!=null)
                 return game;
             return null;
@@ -44,7 +44,7 @@ namespace NewPortfolio.Repositories
             return gamesList;
         }
 
-        public IEnumerable<Article> GetArticle(int id)
+        public IEnumerable<Article> GetArticleList(int id)
         {
             var gameArticle = _context.Article.Where(a => a.Game.Id==id).ToList();
             return gameArticle;

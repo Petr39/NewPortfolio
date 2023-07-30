@@ -32,7 +32,6 @@
                         <th id="hidden" class="articles-th">
                             Titulek
                         </th>
-                        
                         <th class="articles-th">
                             Vytvořil
                         </th>
@@ -50,33 +49,32 @@
                     @foreach(var item in Model)
                     {
                     <tr class="articles-tr-down">
-                            <th>
-                                <a class="text-decoration" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem=>item.Description)</a>
-                            </th>
-                            <th id="hidden" class="articles-th">
+                         <th>
+                             <a class="text-decoration" asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem=>item.Description)</a>
+                         </th>
+                         <th id="hidden" class="articles-th">
                             @Html.DisplayFor(model=>item.Title)
                         </th>
                          <th>
                            <div class="account-view">
                                <div class="account-img">
-                                   <img src="@Html.DisplayFor(model=>item.ApplicationUser.Path)" width="40" height="40" />
+                                  <img src="@item.ApplicationUser.Path" width="40" height="40" />
                                </div>
                                <div class="account-content">
                                    <div>
                                        <div class="account-nickname">
-                                                <a asp-action="AccountView" asp-controller="Account" asp-route-id="@item.ApplicationUser.Id"><h6>@Html.DisplayFor(model=>item.ApplicationUser.NickName)</h6></a>
-                                               <p><img class="img-comment" src="/images/email.png" /></p>
+                                          <a asp-action="AccountView" asp-controller="Account" asp-route-id="@item.ApplicationUser.Id"><h6>@item.ApplicationUser.NickName</h6></a>
+                                          <p><img class="img-comment" src="/images/email.png" /></p>
                                        </div>
                                    </div>
                                    <div class="pf">
-                                       <a asp-action="ViewSendCredit" asp-controller="Account" asp-route-id="@item.AppUserId">@Html.DisplayFor(model=>item.ApplicationUser.Credit)
+                                       <a asp-action="ViewSendCredit" asp-controller="Account" asp-route-id="@item.AppUserId">@item.ApplicationUser.Credit
                                          <img src="/images/euro.png" />
                                        </a>
                                    </div>
-                                  
                                    <div>
-                                       <p>Příspěvky:@Html.DisplayFor(model=>item.ApplicationUser.CountPost)</p>
-                                       <p>Registrován:@Html.DisplayFor(model=>item.DateOfRegister)</p>
+                                      <p>Příspěvky:@item.ApplicationUser.CountPost</p>
+                                       <p>Registrován:@item.ApplicationUser.DateOfRegister.ToString("dd.MM.yyyy")</p>
                                    </div>
                                </div>
                            </div>
@@ -88,8 +86,8 @@
                         @if (this.Context.User.IsInRole("admin"))
                         {
                          <th id="btn-hidden" class="nav-list-button">
-                                    <a class="btn-use btn-danger width-btn" asp-action="Delete" asp-route-id="@item.Id"><i class="ri-chat-delete-line"></i></a>
-                                    <a class="btn-use btn-edit width-btn" asp-action="Edit" asp-route-id="@item.Id"><i class="ri-pencil-line"></i></a>
+                           <a class="btn-use btn-danger width-btn" asp-action="Delete" asp-route-id="@item.Id"><i class="ri-chat-delete-line"></i></a>
+                           <a class="btn-use btn-edit width-btn" asp-action="Edit" asp-route-id="@item.Id"><i class="ri-pencil-line"></i></a>
                          </th>
                         }
                     </tr>

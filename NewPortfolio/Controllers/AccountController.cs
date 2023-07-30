@@ -184,12 +184,18 @@ namespace NewPortfolio.Controllers
                 if (logUser.Credit >= 1000 && logUser.NickName!=user.NickName && user.NickName!=null && !(user.NickName.Length <=3))
                 {
                     if (!NickNameExist(user.NickName))
-                    {
-                        logUser.NickName = user.NickName;
+                    {                        
+                        var message = CreditSendMessage(1000,logUser,logUser,"za změnu přezdívky");
+                        logUser.NickName= user.NickName;
                         logUser.Credit -=1000;
+                        await context.Messages.AddAsync(message);
                         await userManager.UpdateAsync(logUser);
                    }
+                    else
+                    {
                     AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Přezdívka je už obsazena" }));
+
+                    }
                     return View(logUser);
                 }
                 if (file != null)
@@ -269,13 +275,15 @@ namespace NewPortfolio.Controllers
                 {
                      var targetUser = await userManager.FindByIdAsync(user.TargetUserId);
                      var sourceUser = await userManager.FindByIdAsync(user.SourceUserId);
+                     user.Amount = Math.Abs(user.Amount);                    
+
                         if(sourceUser.Credit >= user.Amount)
                         {
-                            var message = CreditSendMessage(user.Amount,sourceUser, targetUser);
-                            sourceUser.Credit -=  user.Amount;
+                            var message = CreditSendMessage(user.Amount,sourceUser, targetUser,null);
+                            sourceUser.Credit -= user.Amount;
                             targetUser.Credit +=  user.Amount;
-                            await  userManager.UpdateAsync(sourceUser);
-                            await  userManager.UpdateAsync(targetUser);
+                              await  userManager.UpdateAsync(sourceUser);
+                              await  userManager.UpdateAsync(targetUser);
                             await context.Messages.AddAsync(message);
                             await context.SaveChangesAsync();
                             TempData["success"] = $"Kredit uživateli {targetUser.NickName} odeslán";
@@ -287,8 +295,7 @@ namespace NewPortfolio.Controllers
                 }
                 catch (Exception)
                 {
-                    
-                    throw;
+                    throw new Exception("Nastal problém s posíláním kreditu");
                 }
             }
             return RedirectToAction("Administration");
@@ -319,7 +326,7 @@ namespace NewPortfolio.Controllers
         /// <param name="userName"></param>
         /// <param name="userNameRecived"></param>
         /// <returns></returns>
-        private Message CreditSendMessage(int credit, AppUser userName, AppUser userNameRecived)
+        private  Message CreditSendMessage(int credit, AppUser userName, AppUser userNameRecived, string? otherMessage)
         {
             var message = new Message();
             if(userName!=null && userNameRecived != null)
@@ -328,14 +335,26 @@ namespace NewPortfolio.Controllers
                 message.UserId = userName.Id;
                 message.MessageHead = userName.NickName;
                 message.UserName = userNameRecived.NickName;
-               
-                message.MessageBody = credit switch
+
+                if (otherMessage == string.Empty)
                 {
-                    > 1 and < 5 => $"Poslány {credit} kredity",
-                    > 4 => $"Posláno {credit} kreditů",
-                    _   => $"Poslán {credit} kredit"
-                };
-              return message;
+                    message.MessageBody = credit switch
+                    {
+                        > 1 and < 5 => $"Poslány {credit} kredity",
+                        > 4 => $"Posláno {credit} kreditů",
+                        _ => $"Poslán {credit} kredit"
+                    };
+                    return message;
+                }
+
+                   message.MessageBody = credit switch
+                   {
+                       > 1 and < 5 => $"Poslány {credit} kredity {otherMessage}",
+                       > 4 => $"Posláno {credit} kreditů {otherMessage}",
+                       _ => $"Poslán {credit} kredit {otherMessage}"
+                   };
+                   return message;
+
             }
             return message;
         }

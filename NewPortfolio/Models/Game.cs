@@ -9,7 +9,7 @@ namespace NewPortfolio.Models
 
         [Required]
         [StringLength(20)]
-        [Display(Name ="Název hry")]
+        [Display(Name = "Název hry")]
         public string GameName { get; set; }
 
 

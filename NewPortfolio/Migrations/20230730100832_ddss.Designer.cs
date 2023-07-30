@@ -12,8 +12,8 @@ using NewPortfolio.Data;
 namespace NewPortfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230727121109_games")]
-    partial class games
+    [Migration("20230730100832_ddss")]
+    partial class ddss
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -260,25 +260,13 @@ namespace NewPortfolio.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("CountPost")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Credits")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DateOfRegister")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(12)
                         .HasColumnType("nvarchar(12)");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NickName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("GameId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -288,6 +276,8 @@ namespace NewPortfolio.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
+
+                    b.HasIndex("GameId");
 
                     b.ToTable("Article");
                 });
@@ -374,7 +364,8 @@ namespace NewPortfolio.Migrations
 
                     b.Property<string>("GameName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -499,7 +490,13 @@ namespace NewPortfolio.Migrations
                         .WithMany()
                         .HasForeignKey("AppUserId");
 
+                    b.HasOne("NewPortfolio.Models.Game", "Game")
+                        .WithMany("Articles")
+                        .HasForeignKey("GameId");
+
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("Game");
                 });
 
             modelBuilder.Entity("NewPortfolio.Models.ArticlePost", b =>
@@ -544,6 +541,11 @@ namespace NewPortfolio.Migrations
             modelBuilder.Entity("NewPortfolio.Models.BuildPost", b =>
                 {
                     b.Navigation("Builds");
+                });
+
+            modelBuilder.Entity("NewPortfolio.Models.Game", b =>
+                {
+                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

@@ -37,9 +37,9 @@
                  <label asp-for="NickName" hidden class="control-label"></label>
                  <input asp-for="NickName" hidden class="form-control" />
              </div> 
-            <div>
-                 <label asp-for="GameId"></label>
-                 <select asp-for="GameId" class="form-control" asp-items="ViewBag.GameId">
+            <div class="form-group">
+                 <label asp-for="Games"></label>
+                 <select asp-for="GameId"  asp-items="ViewBag.GameId">
                      <option disabled selected>--Vyberte hru--</option>
                  </select>
              </div>
