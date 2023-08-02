@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NewPortfolio.Migrations
 {
-    public partial class dds : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -255,11 +255,6 @@ namespace NewPortfolio.Migrations
                     Title = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NickName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Credits = table.Column<int>(type: "int", nullable: true),
-                    DateOfRegister = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CountPost = table.Column<int>(type: "int", nullable: true),
                     GameId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>

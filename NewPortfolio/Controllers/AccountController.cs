@@ -131,8 +131,8 @@ namespace NewPortfolio.Controllers
                                     {
                                         await signInManager.SignInAsync(user, isPersistent: false);
                                         return string.IsNullOrWhiteSpace(returnUrl) ?
-                                    RedirectToAction("Index", "Home") :
-                                    RedirectToLocal(returnUrl);
+                                        RedirectToAction("Index", "Home") :
+                                        RedirectToLocal(returnUrl);
                                     }
                                 AddErrors(result);
                             }

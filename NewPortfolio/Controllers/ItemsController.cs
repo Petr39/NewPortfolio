@@ -18,8 +18,7 @@ namespace NewPortfolio.Controllers
 
         public ItemsController(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment)
         {
-            _context = context; 
-          
+            _context = context;
             _webHostEnvironment = webHostEnvironment;
         }
 
@@ -67,7 +66,6 @@ namespace NewPortfolio.Controllers
         }
 
         [AllowAnonymous]
-
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Items == null)
@@ -166,7 +164,7 @@ namespace NewPortfolio.Controllers
                     }
                     else
                     {
-                        throw;
+                        throw new Exception("Problém s editací - Item");
                     }
                 }
                 return RedirectToAction(nameof(Index));

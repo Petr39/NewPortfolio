@@ -61,5 +61,10 @@ namespace NewPortfolio.Models
         /// </summary>
         public int? GameId { get; set; }
 
+        [ForeignKey("GenreId")]
+        public Genre? Genre { get; set; }
+
+        public int? GenreId { get; set; }
+      
     }
 }

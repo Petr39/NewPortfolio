@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using NewPortfolio.Data;
 using NewPortfolio.Interfaces;
 using NewPortfolio.Models;
 
@@ -10,11 +12,15 @@ namespace NewPortfolio.Controllers
     {
 
         private readonly IGame _gameRepos;
+        private readonly IGenre _genre;
+        private readonly ApplicationDbContext _context;
 
 
-        public GameController(IGame gameRepos)
+        public GameController(IGame gameRepos, IGenre genre, ApplicationDbContext context)
         {
             _gameRepos = gameRepos;
+            _genre = genre; 
+            _context= context;
         }
 
 
@@ -32,6 +38,7 @@ namespace NewPortfolio.Controllers
         public IActionResult AddGame()
         {
             var game = new Game();
+            ViewData["GenreId"] = new SelectList(_context.Genres,"Id", "NameGenre");
             return View(game);
         }
 
@@ -45,6 +52,8 @@ namespace NewPortfolio.Controllers
         [HttpPost]
         public async Task<IActionResult> AddGame(Game game)
         {
+
+            ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "NameGenre",game.GenreId);
             if (ModelState.IsValid)
             {
                 await _gameRepos.Create(game);

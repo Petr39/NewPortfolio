@@ -740,7 +740,12 @@ table, th, td {
         transition: .3s;
     }
 
-
+    .section-index-articles {
+        position: absolute;
+        margin-top: 100px;
+        padding: 1% 12%;
+        width: 100%;
+    }
 
     .account-profile-board {
         margin: 0 1%;
@@ -816,6 +821,13 @@ table, th, td {
     .bt-size {
         width: 100px;
     }
+
+    .section-index-articles {
+        position: absolute;
+        margin-top: 100px;
+        padding: 1% 12%;
+        width: 100%;
+    }
 }
 
 @media (max-width: 1340px) {
@@ -825,6 +837,12 @@ table, th, td {
         height: auto;
     }
 
+    .section-index-articles {
+        position: absolute;
+        margin-top: 100px;
+        padding: 1% 1%;
+        width: 100%;
+    }
 
 
     .section-index,
@@ -905,6 +923,13 @@ table, th, td {
     .section-index-tiny {
         flex-direction: column;
         gap: 1rem;
+    }
+
+    .section-index-articles {
+        position: absolute;
+        margin-top: 100px;
+        padding: 1% 1%;
+        width: 100%;
     }
 }
 

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Genre>
+
+@{
+    ViewData["title"] = "Seznam žánrů";
+}
+
+<section class="section-index-articles">
+    <div class="section-hero">
+
+      <table class="">
+          <thead>
+                <tr class="articles-tr">
+              <th>Název</th>
+          </tr>
+          </thead>
+      <tbody>
+         
+       @foreach (var item in Model)
+        {
+                    <tr class="articles-tr-down">
+                <th>
+                    @item.NameGenre
+                    @item.Games
+              
+                </th>
+            </tr>
+        }
+        
+      </tbody>
+        <a asp-action="CreateGenre" class="btn-use btn-succes">Vytvořit nový žánr</a>
+        <a asp-action="ViewAllGenres" class="btn-use btn-edit">Zpět žánry</a>
+
+      </table>
+    </div>
+</section>
+

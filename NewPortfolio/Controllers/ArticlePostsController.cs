@@ -107,8 +107,43 @@ namespace NewPortfolio.Controllers
             }
             return View();
         }
-       
-      
+
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            var article= new ArticlePost();
+            if (id != null)
+            {
+                 article=_context.ArticlePosts.FirstOrDefault(x => x.Id == id);
+            }
+            return View(article);
+        }
+
+        public IActionResult Edit(int? id, ArticlePostVM articlePost)
+        {
+
+            var user = _userManager.Users.FirstOrDefault(u=>u.UserName == User.Identity!.Name);
+
+            if(ModelState.IsValid && user != null)
+            {
+               var articlePostAdd = new ArticlePost()
+               {
+                   ArticleId = articlePost.ArticleId,
+                   Post = articlePost.Post,
+                   Id=articlePost.Id,
+                   DateTime = DateTime.Now,
+                   UserName=user.NickName,
+                   AppUserId= user.Id,
+               };
+
+                _context.Update(articlePostAdd);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(articlePost);
+        }
 
 
        /// <summary>

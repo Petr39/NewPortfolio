@@ -73,8 +73,12 @@ namespace NewPortfolio.Models
         [Display(Name ="Vyberte hru")]
         public virtual IEnumerable<Game>? Games { get; set; } 
 
+        public virtual IEnumerable<Genre>? Genres { get; set; } 
+
 
         public int GameId { get; set; }
+
+        public int GenreId { get; set; }
 
     }
 }

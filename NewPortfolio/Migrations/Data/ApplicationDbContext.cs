@@ -25,5 +25,8 @@ namespace NewPortfolio.Data
 
         public DbSet<Game> Games { get; set; }  
 
+        public DbSet<Genre> Genres { get; set; }
+
+
     } 
 }

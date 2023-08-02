@@ -1,0 +1,32 @@
+﻿@model Genre
+
+@{
+    ViewData["title"] = "Vytvořit žánr";
+}
+
+<section class="section-index-articles">
+    <div class="section-hero">
+        <form asp-action="CreateGenre"  method="post">
+            <div>
+                <label asp-for="NameGenre"></label>
+                 <input asp-for="NameGenre"/>
+            </div>
+            <div>
+                <label asp-for="Articles"></label>
+                <select asp-items="ViewBag.Article">
+                    <option disabled selected>--Vyber--</option>
+                </select>
+            </div>
+            <div>
+                <label asp-for="Games"></label>
+                <select asp-items="ViewBag.game">
+                    <option disabled selected>--Vyber--</option>
+                </select>
+            </div>
+           <input type="submit" class="btn-use btn-succes" value="Uložit"/>
+        </form>
+   </div>
+</section>
+
+
+

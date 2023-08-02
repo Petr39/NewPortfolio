@@ -33,7 +33,14 @@
             </div>           
             <div class="account-text">
                 <div>
+                        <a asp-action="GetArticle" asp-controller="Game" asp-route-id="@Model.GameId" class="btn-use btn-detail">
+                               @Model.Game?.GameName
+                       </a>
+                   <hr />
+                    <div>
                    @Html.DisplayFor(model => model.Content)
+                    </div>
+                 
                 </div>
             </div>
         </div>
@@ -56,14 +63,15 @@
                                 <div>
                                     <a asp-action="Delete" class="btn-use btn-danger" asp-controller="ArticlePosts" asp-route-id="@item.Id"><i class="ri-chat-delete-line"></i></a>
                                 </div>
-                            }
                                 <div>
                                     <a asp-action="Edit" class="btn-use btn-danger" asp-controller="ArticlePosts" asp-route-id="@item.Id"><i class="ri-pencil-line"></i></a>
                                 </div>
+                            }
                             </div>
                        </div>
                        <div>
                             @item.Post
+                            
                        </div>
                         
                     </div>

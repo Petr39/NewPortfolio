@@ -63,7 +63,9 @@ namespace NewPortfolio.Models
         /// </summary>
         public virtual IEnumerable<Message>? Messages { get; set; }
 
-        
+
+       
+
     }
 
     

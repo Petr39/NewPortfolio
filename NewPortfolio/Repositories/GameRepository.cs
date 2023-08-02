@@ -17,7 +17,7 @@ namespace NewPortfolio.Repositories
 
         public GameRepository(ApplicationDbContext context)
         {
-            _context = context;
+                _context = context;
                _db=_context.Set<object>();
              
         }
@@ -45,9 +45,6 @@ namespace NewPortfolio.Repositories
         public IEnumerable<Game> GetAll()
         {
             var gamesList = _context.Games.ToList();
-
-         //  gamesList = gamesList.Select(f=>f.GameName.Contains(c (int))) OrderBy(u=>u.GameName).ToList();
-
             return gamesList;
         }
 

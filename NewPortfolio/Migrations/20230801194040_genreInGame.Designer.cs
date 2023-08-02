@@ -12,8 +12,8 @@ using NewPortfolio.Data;
 namespace NewPortfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230730095556_dds")]
-    partial class dds
+    [Migration("20230801194040_genreInGame")]
+    partial class genreInGame
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -260,15 +260,6 @@ namespace NewPortfolio.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int?>("CountPost")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Credits")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DateOfRegister")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(12)
@@ -277,11 +268,8 @@ namespace NewPortfolio.Migrations
                     b.Property<int?>("GameId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NickName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("GenreId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -293,6 +281,8 @@ namespace NewPortfolio.Migrations
                     b.HasIndex("AppUserId");
 
                     b.HasIndex("GameId");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Article");
                 });
@@ -382,9 +372,31 @@ namespace NewPortfolio.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
+                    b.Property<int?>("GenreId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("GenreId");
+
                     b.ToTable("Games");
+                });
+
+            modelBuilder.Entity("NewPortfolio.Models.Genre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("NameGenre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genres");
                 });
 
             modelBuilder.Entity("NewPortfolio.Models.Item", b =>
@@ -509,9 +521,15 @@ namespace NewPortfolio.Migrations
                         .WithMany("Articles")
                         .HasForeignKey("GameId");
 
+                    b.HasOne("NewPortfolio.Models.Genre", "Genre")
+                        .WithMany("Articles")
+                        .HasForeignKey("GenreId");
+
                     b.Navigation("ApplicationUser");
 
                     b.Navigation("Game");
+
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("NewPortfolio.Models.ArticlePost", b =>
@@ -534,6 +552,15 @@ namespace NewPortfolio.Migrations
                         .IsRequired();
 
                     b.Navigation("BuildPost");
+                });
+
+            modelBuilder.Entity("NewPortfolio.Models.Game", b =>
+                {
+                    b.HasOne("NewPortfolio.Models.Genre", "Genre")
+                        .WithMany("Games")
+                        .HasForeignKey("GenreId");
+
+                    b.Navigation("Genre");
                 });
 
             modelBuilder.Entity("NewPortfolio.Models.Message", b =>
@@ -561,6 +588,13 @@ namespace NewPortfolio.Migrations
             modelBuilder.Entity("NewPortfolio.Models.Game", b =>
                 {
                     b.Navigation("Articles");
+                });
+
+            modelBuilder.Entity("NewPortfolio.Models.Genre", b =>
+                {
+                    b.Navigation("Articles");
+
+                    b.Navigation("Games");
                 });
 #pragma warning restore 612, 618
         }

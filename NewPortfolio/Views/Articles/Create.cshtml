@@ -29,19 +29,15 @@
                 <textarea asp-for="Content" class="text-area"></textarea>
                 <span asp-validation-for="Content" class="text-danger"></span>
               </div>
-          @* 
-               <div class="form-group" >
-                <label asp-for="AppUserId" hidden class="control-label"></label>
-                <input asp-for="AppUserId" hidden class="form-control" />
-              </div>
-             <div class="form-group">
-                 <label asp-for="NickName" hidden class="control-label"></label>
-                 <input asp-for="NickName" hidden class="form-control" />
-             </div> *@
             <div class="form-group">
                  <label asp-for="Games"></label>
                  <select asp-for="GameId"  asp-items="ViewBag.GameId">
                      <option disabled selected>--Vyberte hru--</option>
+                 </select>
+            
+                 <label asp-for="Genres"></label>
+                 <select asp-for="GenreId" asp-items="ViewBag.GenreId">
+                     <option disabled selected>--Vyberte žánr--</option>
                  </select>
              </div>
             <div class="form-group">

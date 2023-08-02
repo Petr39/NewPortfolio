@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NewPortfolio.Models
 {
@@ -12,7 +14,14 @@ namespace NewPortfolio.Models
         [Display(Name = "Název hry")]
         public string GameName { get; set; }
 
+     
 
         public virtual IEnumerable<Article>? Articles { get; set; }
+
+        [ForeignKey("GenreId")]
+        public Genre? Genre { get; set; }
+
+        public int? GenreId { get; set; }
+
     }
 }

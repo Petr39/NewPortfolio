@@ -7,7 +7,6 @@
 
 <section class="section-index-articles">
     <div class="section-hero">
-
         <form method="post" asp-controller="Game">
             <div>
                 <label asp-for="Id" hidden></label>
@@ -19,12 +18,15 @@
                 <span asp-validation-for="GameName"></span>
             </div>
             <div>
+                <label asp-for="Genre"></label>
+                <select asp-for="GenreId" asp-items="ViewBag.GenreId">
+                    <option disabled selected>--Vyber--</option>
+                </select>
+            </div>
+            <div>
                 <button type="submit" class="btn-use btn-succes width-btn">Vytvořit</button>
             </div>
 
         </form>
-
-
-
     </div>
 </section>

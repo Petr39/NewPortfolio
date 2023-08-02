@@ -12,8 +12,8 @@ using NewPortfolio.Data;
 namespace NewPortfolio.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230730100832_ddss")]
-    partial class ddss
+    [Migration("20230801180622_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -94,6 +94,7 @@ namespace NewPortfolio.Controllers
            
             var article = await _context.Article
                 .Include(a => a.ApplicationUser).Include(c=>c.ArticlePosts)
+                .Include(c=>c.Game)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (article == null)
             {
@@ -114,10 +115,9 @@ namespace NewPortfolio.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
+               ViewData["AppUserId"] = new SelectList(_context.Users, "Id", "Id");
                ViewData["GameId"] = new SelectList(_context.Games, "Id", "GameName");
-      
-
+               ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "NameGenre");
             return View();
         }
 
