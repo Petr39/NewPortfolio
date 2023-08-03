@@ -23,5 +23,7 @@ namespace NewPortfolio.Models
 
         public int? GenreId { get; set; }
 
+
+        public virtual IEnumerable<Item>? Items { get; set; }    
     }
 }

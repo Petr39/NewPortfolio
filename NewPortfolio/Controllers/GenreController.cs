@@ -35,7 +35,7 @@ namespace NewPortfolio.Controllers
         {
 
             var articles = _context.Article.ToList();
-            ViewData["article"] = new SelectList(_context.Article, "Id", "Description");
+            //ViewData["article"] = new SelectList(_context.Article, "Id", "Description");
             ViewData["game"] = new SelectList(_context.Games, "Id", "GameName");
 
             var obj=new Genre();
@@ -46,6 +46,9 @@ namespace NewPortfolio.Controllers
         public IActionResult CreateGenre(Genre genre)
         {
             ViewData["article"] = new SelectList(_context.Games, "Id", "GameName", genre.Games);
+            //Ostranění mezer a zvětšení 
+            genre.NameGenre=genre.NameGenre.Trim().ToUpper();
+
             if (ModelState.IsValid)
             {
                 _genre.Create(genre);

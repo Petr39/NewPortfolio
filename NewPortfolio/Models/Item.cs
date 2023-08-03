@@ -33,7 +33,12 @@ namespace NewPortfolio.Models
         [Display(Name ="Vyberte obrázek")]
         private  IFormFile? FormFile { get; set; }
 
-      
+
+        [Display(Name ="Název hry")]
+        [ForeignKey("GameId")]
+        public Game? Game { get; set; }
+
+        public int? GameId { get; set; }
 
     }
 }

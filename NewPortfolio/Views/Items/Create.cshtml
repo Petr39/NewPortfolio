@@ -24,12 +24,14 @@
                     <div>
                         <img src=@ViewData["img"] class="avatar" />
                     </div>
+                    <div>
+                        <select asp-for="GameId" asp-items="@ViewBag.GameId">
+                            <option disabled selected>--Vyberte hru--</option>
+                        </select>
+                    </div>
                   <label for="">Vyberte Avatara velikosti max 4kB</label>
                   <input type="file" name="file" asp-for="PathItem" />            
                   <span asp-validation-for="PathItem" class="text-danger"></span>
-                </div>
-                <div>
-                   
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Vytvořit" class="btn-use btn-succes" />

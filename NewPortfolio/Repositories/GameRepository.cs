@@ -11,7 +11,7 @@ namespace NewPortfolio.Repositories
 
         private readonly ApplicationDbContext _context;
         private readonly DbSet<object> _db;
-
+           
 
      
 

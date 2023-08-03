@@ -33,9 +33,19 @@
             </div>           
             <div class="account-text">
                 <div>
+                    @if (Model.Game is not null )
+                    {
                         <a asp-action="GetArticle" asp-controller="Game" asp-route-id="@Model.GameId" class="btn-use btn-detail">
-                               @Model.Game?.GameName
-                       </a>
+                                   @Model.Game?.GameName
+                        </a>
+                        
+                    }
+                    @if(Model.Genre is not null)
+                    {
+                       <a asp-action="ViewAllGenres" asp-controller="Genre" asp-route-id="@Model.GenreId" class="btn-use btn-detail">
+                              @Model.Genre?.NameGenre
+                          </a>
+                    }
                    <hr />
                     <div>
                    @Html.DisplayFor(model => model.Content)
@@ -64,7 +74,7 @@
                                     <a asp-action="Delete" class="btn-use btn-danger" asp-controller="ArticlePosts" asp-route-id="@item.Id"><i class="ri-chat-delete-line"></i></a>
                                 </div>
                                 <div>
-                                    <a asp-action="Edit" class="btn-use btn-danger" asp-controller="ArticlePosts" asp-route-id="@item.Id"><i class="ri-pencil-line"></i></a>
+                                        <a asp-action="Edit" class="btn-use btn-danger" asp-controller="ArticlePosts" asp-route-id="@item.Id"><i class="ri-pencil-line"></i></a>
                                 </div>
                             }
                             </div>

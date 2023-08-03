@@ -95,6 +95,7 @@ namespace NewPortfolio.Controllers
             var article = await _context.Article
                 .Include(a => a.ApplicationUser).Include(c=>c.ArticlePosts)
                 .Include(c=>c.Game)
+                .Include(c=>c.Genre)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (article == null)
             {
@@ -130,11 +131,11 @@ namespace NewPortfolio.Controllers
         [Authorize]         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content,Title,Description,GameId")] CreatePostVM article)
+        public async Task<IActionResult> Create([Bind("Id,Content,Title,Description,GameId,GenreId")] CreatePostVM article)
         {
 
-            ViewData["GameId"] = new SelectList(_context.Games, "Id", "Id",article.GameId);
-
+            ViewData["GameId"] = new SelectList(_context.Games, "Id", "GameName", article.GameId);
+            ViewData["GenreId"] = new SelectList(_context.Genres, "Id", "NameGenre", article.GenreId);
             var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
 
             //Ověření, že titulek není stejný jako popisek
@@ -156,6 +157,7 @@ namespace NewPortfolio.Controllers
                         Content = article.Content,
                         AppUserId = userLog.Id,
                         GameId = article.GameId,
+                        GenreId = article.GenreId,
                     };
 
                     await _context.Article!.AddAsync(post);

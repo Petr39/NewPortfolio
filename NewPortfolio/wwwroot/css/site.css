@@ -58,16 +58,16 @@ header {
     display: flex;
 }
 
-.navlist a {
-    color: Black;
-    margin-left: 1rem;
-    font-size: 1.3rem;
-}
+    .navlist a {
+        color: Black;
+        margin-left: 1rem;
+        font-size: 1.3rem;
+    }
 
-.navlist a:hover {
-    border-bottom: 2px solid var(--bg-body);
-        
-}
+        .navlist a:hover {
+            border-bottom: 2px solid var(--bg-body);
+        }
+
 .pagination {
     display: flex;
 }
@@ -188,7 +188,7 @@ header {
     background: var(--bg-body);
 }
 
-small{
+small {
     font-size: .6rem;
     color: black;
 }
@@ -415,7 +415,7 @@ h2 {
     display: flex;
     padding: 5px;
     justify-content: space-between;
-    max-width:200px; 
+    max-width: 200px;
 }
 
 .account div {
@@ -645,7 +645,10 @@ table, th, td {
     border-collapse: collapse;
 }
 
-
+.tbl-items {
+    text-align: center;
+    background: var(--bg-article);
+}
 
 .p-index {
     color: white;
@@ -758,7 +761,6 @@ table, th, td {
         margin: 150px 10%;
         display: flex;
         justify-content: space-between;
-      
     }
 
     .form-group {
@@ -895,18 +897,16 @@ table, th, td {
     }
 
     .div-contact {
-        position: absolute;
-        left: 0px;
         width: 100%;
+        margin: 0 5px;
+        align-items: center;
     }
 
         .div-contact h5 {
             text-align: center;
         }
 
-        .div-contact a {
-            margin-left: 5rem;
-        }
+
 
     .img-div,
     .img-div-muay {

@@ -26,27 +26,13 @@
 
 
 <div>
-    <table id="tblData" width="100%">
-
-       @* <thead>
-            <tr>
-
-                <th>
-
-                </th>
-                        @if (User.IsInRole("admin"))
-                        {
-                            <th>
-                            </th>
-                        }
-            </tr>
-        </thead>*@
-
+    <table id="tblData" width="100%" class="tbl-items">
         <tbody>
             @foreach (var item in Model) {
                 <tr>
                     <td width="10%">
                         @Html.DisplayFor(modelItem => item.NameItem)
+               
                     </td>
                    <td width="10%">
                      <div>
@@ -54,15 +40,19 @@
                      </div>
                    </td>
                    <td>
+                      <p>
+                         Sekce her: @Html.DisplayFor(model=>item.Game.GameName)
+
+                      </p>  
                        @Html.DisplayFor(modelItem=>item.DescriptionItem)
                    </td>
 
                         @if (User.IsInRole("admin"))
                             {
-                        <td>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn-use btn-danger">Smazat</a>
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn-use btn-edit">Editovat</a>
-                        </td>
+                              <td width="10%" >
+                                          <a asp-action="Delete" asp-route-id="@item.Id" class="btn-use btn-danger"><i class="ri-chat-delete-line"></i></a>
+                                          <a asp-action="Edit" asp-route-id="@item.Id" class="btn-use btn-edit"><i class="ri-pencil-line"></i></a>
+                              </td>
                             }
                            
             </tr>}

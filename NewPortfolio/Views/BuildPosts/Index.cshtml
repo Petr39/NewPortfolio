@@ -3,18 +3,20 @@
 
 
 @{
-    ViewData["Title"] = "Seznam sestav";
+    ViewData["Title"] = "Návody";
 }
 <section class="section-index-articles">
     <div class="section-hero">
+
+<h3>Zde můžete tvořit návody do her, poznatky, buildy..</h3>
 <p>
-    <a asp-action="Create" class="btn-use btn-succes">Vytvořit novou třídu</a>
+    <a asp-action="Create" class="btn-use btn-succes">Vytvořit sekci návodů</a>
 </p>
 <table class="table">
     <thead>
                 <tr class="articles-tr">
             <th colspan="2">
-                Název buildu
+                Sekce
             </th>
         
         </tr>
@@ -26,9 +28,9 @@
                 <a asp-controller="Builds" asp-action="Index" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.BuildName)</a>
             </td>
                 @if(User.IsInRole("admin")){
-            <td>
-                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn-use btn-danger">Smazat</a>
-                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn-use btn-edit">Editovat</a>
+            <td width="10%">
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn-use btn-danger"><i class="ri-chat-delete-line"></i></a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn-use btn-edit"><i class="ri-pencil-line"></i></a>
             </td>
                 }
         </tr>

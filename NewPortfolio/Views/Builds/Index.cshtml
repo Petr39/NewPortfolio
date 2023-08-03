@@ -24,9 +24,9 @@
             @if (User.IsInRole("admin"))
             {
                 <td>
-                   <a asp-action="Edit" asp-route-id="@item.Id" class="btn-use btn-edit">Editovat</a> 
-                   <a asp-action="Details" asp-route-id="@item.Id" class="btn-use btn-detail">Detaily</a> 
-                   <a asp-action="Delete" asp-route-id="@item.Id" class="btn-use btn-danger">Smazat</a>
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn-use btn-edit"><i class="ri-pencil-line"></i></a>
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn-use btn-detail"><i class="ri-feedback-line"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn-use btn-danger"><i class="ri-chat-delete-line"></i></a>
                </td>
             }
         </tr>

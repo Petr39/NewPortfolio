@@ -6,6 +6,7 @@ using System.Diagnostics;
 namespace NewPortfolio.Controllers
 {
 
+
     /// <summary>
     /// Základ pro pohledy
     /// </summary>

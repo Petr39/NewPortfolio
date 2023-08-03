@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using NewPortfolio.Data;
 using NewPortfolio.Models;
@@ -49,18 +50,18 @@ namespace NewPortfolio.Controllers
         {
             if (searchby == "nameitem" && searchfor != null)
             {
-                var applicationDbContexta = _context.Items.Where(s => s.NameItem.ToLower().Contains(searchfor.ToLower()));
+                var applicationDbContexta = _context.Items.Include(c => c.Game).Where(s => s.NameItem.ToLower().Contains(searchfor.ToLower()));
 
                 return  applicationDbContexta.ToList();
             }
 
             if (searchby == "description" && searchfor != null)
             {
-                var applicationDbContexta = _context.Items.Where(s => s.DescriptionItem.ToLower().Contains(searchfor.ToLower()));
+                var applicationDbContexta = _context.Items.Include(c=>c.Game).Where(s => s.DescriptionItem.ToLower().Contains(searchfor.ToLower()));
 
                 return applicationDbContexta.ToList();
             }
-            var app = _context.Items.ToList();
+            var app = _context.Items.Include(c => c.Game).ToList();
             return app;    
             
         }
@@ -88,14 +89,16 @@ namespace NewPortfolio.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+            ViewData["GameId"] = new SelectList(_context.Games, "Id", "GameName");
             return View();
         }
 
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NameItem,PathItem,DescriptionItem")] Item item, IFormFile? file)
+        public async Task<IActionResult> Create([Bind("Id,NameItem,PathItem,DescriptionItem,GameId")] Item item, IFormFile? file)
         {
+            ViewData["GameId"] = new SelectList(_context.Games, "Id", "GameName", item.GameId);
             if (ModelState.IsValid)
             {
 

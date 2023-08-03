@@ -23,5 +23,7 @@ namespace NewPortfolio.Models
         /// Id článku
         /// </summary>
         public int ArticleId { get; set; }
+
+        
     }
 }

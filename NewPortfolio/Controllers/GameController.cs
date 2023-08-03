@@ -39,6 +39,7 @@ namespace NewPortfolio.Controllers
         {
             var game = new Game();
             ViewData["GenreId"] = new SelectList(_context.Genres,"Id", "NameGenre");
+            
             return View(game);
         }
 
