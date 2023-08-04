@@ -7,26 +7,27 @@
 
 <section class="section-index-articles">
     <div class="section-hero">
-        <form method="post" asp-controller="Game">
+        <form method="post" asp-controller="Game" class="form-group">
             <div>
-                <label asp-for="Id" hidden></label>
-                <input asp-for="Id" hidden/>
+              <div class="form-group">
+                  <label asp-for="Id" hidden></label>
+                  <input asp-for="Id" hidden/>
+              </div>
+                  <div class="form-group">
+                  <label asp-for="GameName" ></label>
+                      <input asp-for="GameName" class="form-control" />
+                      <span asp-validation-for="GameName" class="form-control"></span>
+              </div>
+                  <div class="form-group">
+                      <label asp-for="@Model.Genre.NameGenre"></label>
+                      <select class="form-control" asp-for="GenreId" asp-items="ViewBag.GenreId">
+                      <option disabled selected>--Vyber--</option>
+                  </select>
+              </div>
+                  <div class="form-group">
+                  <button type="submit" class="btn-use btn-succes width-btn">Vytvořit</button>
+              </div>
             </div>
-            <div>
-                <label asp-for="GameName"></label>
-                <input asp-for="GameName" />
-                <span asp-validation-for="GameName"></span>
-            </div>
-            <div>
-                <label asp-for="Genre"></label>
-                <select asp-for="GenreId" asp-items="ViewBag.GenreId">
-                    <option disabled selected>--Vyber--</option>
-                </select>
-            </div>
-            <div>
-                <button type="submit" class="btn-use btn-succes width-btn">Vytvořit</button>
-            </div>
-
         </form>
     </div>
 </section>

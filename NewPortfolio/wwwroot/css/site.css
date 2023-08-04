@@ -17,7 +17,11 @@ body {
     color: gold;
 }
 
-
+h5{
+    color:burlywood;
+    font-size:1rem;
+    padding-left: 20px;
+}
 
 :root {
     --bg-header: #0e497a;
@@ -64,9 +68,9 @@ header {
         font-size: 1.3rem;
     }
 
-        .navlist a:hover {
-            border-bottom: 2px solid var(--bg-body);
-        }
+       .navlist a:hover {
+           border-bottom: 2px solid var(--bg-body);
+       }
 
 .pagination {
     display: flex;
@@ -484,8 +488,9 @@ h2 {
 }
 
     .div-comment-first p {
-        font-weight: 300;
+        font-weight: 400;
         font-size: .8rem;
+        color: black;
     }
 
 .pf {
@@ -538,7 +543,6 @@ h2 {
 
 .btn-use {
     text-align: center;
-    /*  float: right;*/
     color: white;
     font-size: .8rem;
     font-weight: 100;
@@ -546,14 +550,14 @@ h2 {
     margin: .1rem;
     border: 1px solid transparent;
 }
-
-
-    .btn-use:hover {
-        cursor: pointer;
-        opacity: 50%;
-        border: 1px solid rgb(59, 131, 160);
-    }
-
+  
+  
+   .btn-use:hover {
+       cursor: pointer;
+       opacity: 50%;
+       border: 1px solid rgb(59, 131, 160);
+   }
+  
 .btn-succes {
     background: var(--btn-succes)
 }

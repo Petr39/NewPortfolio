@@ -14,14 +14,14 @@
                 <div class="account-content">
                     <div>
                         <div class="account-nickname">
-                            <a asp-action="AccountView" asp-controller="Account" asp-route-id="@Model.ApplicationUser.Id"> <h6>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h6></a>
-                            <p><img class="img-comment" src="/images/email.png" /></p>
+                          <a asp-action="AccountView" asp-controller="Account" asp-route-id="@Model.ApplicationUser.Id"> <h6>@Html.DisplayFor(model=>model.ApplicationUser.NickName)</h6></a>
+                          <p><img class="img-comment" src="/images/email.png" /></p>
                         </div>
                     </div>
                     <div class="pf">
                         <a asp-action="ViewSendCredit" asp-controller="Account" asp-route-id="@Model.AppUserId">
-                            @Model.ApplicationUser.Credit
-                            <img src="/images/euro.png" />
+                          @Model.ApplicationUser.Credit
+                          <img src="/images/euro.png" />
                         </a>
                     </div>
 
@@ -36,21 +36,20 @@
                     @if (Model.Game is not null )
                     {
                         <a asp-action="GetArticle" asp-controller="Game" asp-route-id="@Model.GameId" class="btn-use btn-detail">
-                                   @Model.Game?.GameName
+                           @Model.Game?.GameName
                         </a>
                         
                     }
                     @if(Model.Genre is not null)
                     {
                        <a asp-action="ViewAllGenres" asp-controller="Genre" asp-route-id="@Model.GenreId" class="btn-use btn-detail">
-                              @Model.Genre?.NameGenre
-                          </a>
+                           @Model.Genre?.NameGenre
+                       </a>
                     }
                    <hr />
                     <div>
-                   @Html.DisplayFor(model => model.Content)
+                       @Html.DisplayFor(model => model.Content)
                     </div>
-                 
                 </div>
             </div>
         </div>
@@ -63,7 +62,8 @@
                 {
                      <div class="div-comment">
                           <div class="div-comment-first">
-                            <h5><a asp-action="AccountView" asp-controller="Account" asp-route-id="@item.AppUserId">@item.UserName</a>  <a asp-action="Index"><img class="img-comment" src="/images/email.png"></a></h5>
+                            <h5><a asp-action="AccountView" asp-controller="Account" asp-route-id="@item.AppUserId">@item.UserName</a> 
+                                <a asp-action="Index"><img class="img-comment" src="/images/email.png"></a></h5>
                          
                             <div>
                                <p>@item.DateTime</p>
@@ -81,9 +81,7 @@
                        </div>
                        <div>
                             @item.Post
-                            
                        </div>
-                        
                     </div>
                 }
             </tbody>

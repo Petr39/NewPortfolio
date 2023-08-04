@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<NewPortfolio.Models.Build>
 
 @{
-    ViewData["Title"] = "Buildy";
+    ViewData["Title"] = "Návody";
 }
 <section class="section-index-articles">
     <div class="section-hero">
 <p>
-    <a asp-action="Create" class="btn-use btn-succes">Vytvořit build</a>
+    <a asp-action="Create" class="btn-use btn-succes">Vytvořit</a>
 </p>
 <table class="table">
     <thead>
@@ -24,9 +24,9 @@
             @if (User.IsInRole("admin"))
             {
                 <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn-use btn-edit"><i class="ri-pencil-line"></i></a>
-                                <a asp-action="Details" asp-route-id="@item.Id" class="btn-use btn-detail"><i class="ri-feedback-line"></i></a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn-use btn-danger"><i class="ri-chat-delete-line"></i></a>
+                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn-use btn-edit"><i class="ri-pencil-line"></i></a>
+                 <a asp-action="Details" asp-route-id="@item.Id" class="btn-use btn-detail"><i class="ri-feedback-line"></i></a>
+                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn-use btn-danger"><i class="ri-chat-delete-line"></i></a>
                </td>
             }
         </tr>
