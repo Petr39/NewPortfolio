@@ -1,5 +1,7 @@
 ﻿@model NewPortfolio.Models.Article
 
+
+
 @{
     ViewData["Title"] = $"Podčlánky článku: {Model.Description}";
     }
@@ -53,7 +55,7 @@
                 </div>
             </div>
         </div>
-        <table>
+        <table >
             <thead>
                 
             </thead>
@@ -64,9 +66,8 @@
                           <div class="div-comment-first">
                             <h5><a asp-action="AccountView" asp-controller="Account" asp-route-id="@item.AppUserId">@item.UserName</a> 
                                 <a asp-action="Index"><img class="img-comment" src="/images/email.png"></a></h5>
-                         
                             <div>
-                               <p>@item.DateTime</p>
+                            <p>@item.DateTime</p>
 
                             @if (User.IsInRole("admin"))
                             {
@@ -74,7 +75,7 @@
                                     <a asp-action="Delete" class="btn-use btn-danger" asp-controller="ArticlePosts" asp-route-id="@item.Id"><i class="ri-chat-delete-line"></i></a>
                                 </div>
                                 <div>
-                                        <a asp-action="Edit" class="btn-use btn-danger" asp-controller="ArticlePosts" asp-route-id="@item.Id"><i class="ri-pencil-line"></i></a>
+                                    <a asp-action="Edit" class="btn-use btn-danger" asp-controller="ArticlePosts" asp-route-id="@item.Id"><i class="ri-pencil-line"></i></a>
                                 </div>
                             }
                             </div>
@@ -86,6 +87,7 @@
                 }
             </tbody>
         </table>
+        
         <div>
             <a class="btn-use btn-edit" asp-action="Index">Zpět</a>
             <a class="btn-use btn-succes" asp-action="Create" asp-controller="ArticlePosts" asp-route-id="@Model.Id">Přidat komentář</a>

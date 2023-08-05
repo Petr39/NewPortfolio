@@ -60,12 +60,25 @@ namespace NewPortfolio.Controllers
         {
             ViewData["ReturnUrl"] = returnUrl;
 
+            var user = await userManager.FindByNameAsync(model.Email);
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
+            }
 
             if (!ModelState.IsValid)
                 return View(model);
 
            //Přihlásí uživatele
             var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+
+            if (!await userManager.IsEmailConfirmedAsync(user))
+            {
+                ModelState.AddModelError("", "You need to confirm your email.");
+                return View(model);
+            }
+
 
             if (result.Succeeded)
             {
@@ -124,9 +137,6 @@ namespace NewPortfolio.Controllers
                           {
                                 var user = new AppUser { UserName = model.Email, Email = model.Email, NickName = model.NickNameUser };
                                 var result = await userManager.CreateAsync(user, model.Password);
-                           
-                                   
-                           
                                     if (result.Succeeded)
                                     {
                                         await signInManager.SignInAsync(user, isPersistent: false);
@@ -141,7 +151,7 @@ namespace NewPortfolio.Controllers
                     }
                     AddErrors(IdentityResult.Failed(new IdentityError() { Description = $"Email {model.Email} je již zaregistrován" }));
             }
-            TempData["error"] = "Nepovrdili jste pravidla fóra";
+            TempData["error"] = "Nepotvrdili jste pravidla fóra";
             return View(model);
         }
 
@@ -157,9 +167,7 @@ namespace NewPortfolio.Controllers
             {
                 ViewData["credit"] = logUser.Credit;
                 ViewData["img"] = logUser.Path;
-               
             }
-              
             return View();
         }
 
@@ -366,10 +374,10 @@ namespace NewPortfolio.Controllers
         /// <returns></returns>
         private bool NickNameExist(string nickName)
         {
-            bool userExist=true;
+            //   bool userExist=true;
             if (userManager.Users.Any(u => u.NickName == nickName))
-                return userExist;
-            return !userExist;            
+                return true;
+            return false;            
         }
 
         #region Helpers

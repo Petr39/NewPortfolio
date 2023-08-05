@@ -31,7 +31,7 @@ namespace NewPortfolio
                 options.Password.RequireNonAlphanumeric = false;
                 options.SignIn.RequireConfirmedAccount = false;
                 options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true;
             }).AddEntityFrameworkStores<ApplicationDbContext>();
 
 

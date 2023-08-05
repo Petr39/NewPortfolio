@@ -14,9 +14,6 @@ using X.PagedList;
 
 namespace NewPortfolio.Controllers
 {
-
-
-    
     /// <summary>
     /// Příspěvky uživatelům
     /// </summary>
@@ -29,7 +26,6 @@ namespace NewPortfolio.Controllers
         public ArticlesController(ApplicationDbContext context,
                UserManager<AppUser> userManager,
                IWebHostEnvironment webHostEnvironment
-               
               )
         {
             _context = context;
@@ -54,13 +50,11 @@ namespace NewPortfolio.Controllers
         /// <returns></returns>
         private List<Article> GetAllArticles(string searchby, string searchfor)
         {
-
             if (searchby == "title" && searchfor != null)
             {
                 var applicationDbContexta = _context.Article.Include(a => a.ApplicationUser)
                     .Where(s => s.Title.ToLower()
                     .Contains(searchfor.ToLower()));
-
                 return applicationDbContexta.ToList();
             }
 
@@ -70,37 +64,28 @@ namespace NewPortfolio.Controllers
                   
                     .Where(s => s.Description.ToLower()
                     .Contains(searchfor.ToLower()));
-                
-
                 return applicationDbContexta.ToList();
             }
-
-            var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
-
-            
-
+                var applicationDbContext = _context.Article.Include(a => a.ApplicationUser);
             return applicationDbContext.ToList();
         }
         [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Article == null)
-            {
-                return NotFound();
-            }
-
-
+                 return NotFound();
             
-           
             var article = await _context.Article
-                .Include(a => a.ApplicationUser).Include(c=>c.ArticlePosts)
-                .Include(c=>c.Game)
-                .Include(c=>c.Genre)
+                .Include(a => a.ApplicationUser)
+                .Include(c => c.ArticlePosts)
+                .Include(c => c.Game)
+                .Include(c => c.Genre)
                 .FirstOrDefaultAsync(m => m.Id == id);
+         
+
             if (article == null)
-            {
                 return NotFound();
-            }
+            
 
             return View(article);
         }
@@ -148,6 +133,8 @@ namespace NewPortfolio.Controllers
             {
                 try
                 {
+
+                    //Vložení článku
                     userLog.CountPost += 1;
                     var post = new Article()
                     {
@@ -165,16 +152,11 @@ namespace NewPortfolio.Controllers
                 }
                 catch (Exception)
                 {
-
                     throw new Exception("Vytvoření Article se nepovedlo -  CreatePostVM article");
                 }
-                  
                 TempData["success"] = "Článek přidán";
                 return RedirectToAction(nameof(Index));
             }
-               
-
-            
             return View();
         }
 
@@ -199,7 +181,7 @@ namespace NewPortfolio.Controllers
         [Authorize]   
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Title,Description,AppUserId, NickName")] Article article)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,Title,Description,AppUserId,NickName")] Article article)
         {
             var userLog = _userManager.Users.FirstOrDefault(x => x.UserName == User.Identity!.Name);
        
@@ -294,7 +276,6 @@ namespace NewPortfolio.Controllers
                 file.CopyTo(fs);
                 file.CopyToAsync(fs);
             }
-
             return uniqueFileName;
         }
 
