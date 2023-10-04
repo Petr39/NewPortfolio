@@ -76,20 +76,7 @@ namespace NewPortfolio
 
 
 
-            //using (var scope = app.Services.CreateScope())
-            //{
-            //    RoleManager<IdentityRole> spravceRoli = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-            //    UserManager<AppUser> spravceUzivatelu = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-
-            //    spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
-            //    AppUser uzivatel = spravceUzivatelu.FindByEmailAsync("admin@seznam.cz").Result;
-            //    spravceUzivatelu.AddToRoleAsync(uzivatel, "admin").Wait();
-
-            //    //spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
-            //    //AppUser uzivatel2 = spravceUzivatelu.FindByEmailAsync("petr.valosek@post.cz").Result;
-            //    //spravceUzivatelu.AddToRoleAsync(uzivatel2, "admin").Wait();
-
-            //}
+          
             app.Run();
         }
     }
