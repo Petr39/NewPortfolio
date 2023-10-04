@@ -70,11 +70,11 @@ namespace NewPortfolio
             //    UserManager<AppUser> spravceUzivatelu = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
 
             //    spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
-            //    AppUser uzivatel = spravceUzivatelu.FindByEmailAsync("admin@seznam.cz").Result;
+            //    AppUser uzivatel = spravceUzivatelu.FindByEmailAsync("anyemial").Result;
             //    spravceUzivatelu.AddToRoleAsync(uzivatel, "admin").Wait();
 
             //    spravceRoli.CreateAsync(new IdentityRole("admin")).Wait();
-            //    AppUser uzivatel2 = spravceUzivatelu.FindByEmailAsync("petr.valosek@post.cz").Result;
+            //    AppUser uzivatel2 = spravceUzivatelu.FindByEmailAsync("anyemail").Result;
             //    spravceUzivatelu.AddToRoleAsync(uzivatel2, "admin").Wait();
 
             //}
